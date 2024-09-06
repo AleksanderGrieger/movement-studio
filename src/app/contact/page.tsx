@@ -1,5 +1,9 @@
-import { Header } from "@/components/layout/Header";
+import { LocalizationContent } from "@/src/components/contents/LocalizationContent";
 
 export default function Contact() {
-  return <></>;
+  return (
+    <>
+      <LocalizationContent />
+    </>
+  );
 }

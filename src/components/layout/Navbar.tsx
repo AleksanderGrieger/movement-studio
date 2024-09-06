@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-// import Logo from "@/public/assets/images/logo-nav.svg";
-// import FooterLogo from "@/public/assets/images/logo-footer.svg";
-import Logo from "../../../public/vercel.svg";
-import FooterLogo from "../../../public/vercel.svg";
+import Logo from "@/public/assets/imagess/logo-color.svg";
+import FooterLogo from "@/public/assets/imagess/logo-black.svg";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CloseIcon } from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
@@ -17,23 +15,20 @@ import {
   offer,
   aboutUs,
   contact,
-} from "@/constants/routing";
+} from "@/src/constants/routing";
 
 export const Navbar = () => {
   const pathname = usePathname();
   const [isMobileNavEnabled, setMobileNavEnabled] = useState(false);
-  const [isDropdownEnabled, setDropdownEnabled] = useState(false);
+  const linkToInstagram = process.env.INSTAGRAM_LINK ?? "/";
+  const linkToFacebook = process.env.FACEBOOK_LINK ?? "/";
 
   const changeColorIfActive = (path: string): string => {
-    return pathname === `/${path}/` ? "active" : "";
+    return pathname === path ? "active" : "";
   };
 
   const toggleMobileNavbar = () => {
     setMobileNavEnabled(!isMobileNavEnabled);
-  };
-
-  const toggleDropdown = (isEnabled: boolean) => {
-    setDropdownEnabled(isEnabled);
   };
 
   return (
@@ -72,43 +67,6 @@ export const Navbar = () => {
           </div>
         </div>
         <ul className="list-vertical">
-          <li
-            onMouseOver={() => toggleDropdown(true)}
-            onMouseOut={() => toggleDropdown(false)}
-          >
-            {/* <Link
-              href={services}
-              className={`nav-services ${changeColorIfActive(services)}`}
-            >
-              {t("services")}
-            </Link> */}
-            {/* <div
-              className={`services-dropdown ${
-                isDropdownEnabled ? "dropdown-active" : ""
-              }`}
-            >
-              <div className="services-dropdown-inner">
-                <ul>
-                  <li>
-                    <Link
-                      href={furnitureComponents}
-                      className={changeColorIfActive(furnitureComponents)}
-                    >
-                      {t("furnitureComponents")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={furnitureBodies3D}
-                      className={changeColorIfActive(furnitureBodies3D)}
-                    >
-                      {t("furnitureBodies3D")}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div> */}
-          </li>
           <li>
             <Link href={offer} className={changeColorIfActive(offer)}>
               Oferta
@@ -137,18 +95,17 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="three columns">
-        <div className="nav-buttons">
-          <Link
-            href={contact}
-            //   className={changeColorIfActive(contact)}
-            className="button"
-          >
-            K
+        <div
+          className={
+            isMobileNavEnabled ? "nav-buttons mobile-active" : "nav-buttons"
+          }
+        >
+          <Link href={linkToInstagram} target="_blank">
+            <div className="instagram-icon"></div>
           </Link>
-          {/* <LocaleSwitcher /> */}
-          {/* <Link href={contact} className="button button-sign button-signup">
-            {contact}
-          </Link> */}
+          <Link href={linkToFacebook} target="_blank">
+            <div className="facebook-icon"></div>
+          </Link>
         </div>
       </div>
     </nav>

@@ -359,10 +359,10 @@ export const scheduleList: TableProps[] = [
         col1: "18:00",
         col2: "Latino solo dorosli",
       },
-      {
-        col1: "19:00",
-        col2: "Taniec towarzyski dorośli pary",
-      },
+      // {
+      //   col1: "19:00",
+      //   col2: "Taniec towarzyski dorośli pary",
+      // },
     ],
   },
   {

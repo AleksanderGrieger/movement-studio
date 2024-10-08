@@ -611,7 +611,8 @@ h2.specialists-header {
 }
 .specialists-cards {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: space-around;
 }
 .specialists-cards > .specialist-card {
   position: relative;
@@ -630,16 +631,20 @@ h2.specialists-header {
   transform: translate(-50%, -50%);
   border-radius: 50%;
 }
-.specialists-cards > .specialist-card:nth-of-type(1)::before {
+.specialists-cards > #Karolina.specialist-card::before {
   background: url("../../public/assets/imagess/karolina.png") no-repeat center center;
   background-size: 249px;
 }
-.specialists-cards > .specialist-card:nth-of-type(2)::before {
+.specialists-cards > #Hanna.specialist-card::before {
   background: url("../../public/assets/imagess/hania.png") no-repeat center center;
   background-size: 249px;
 }
-.specialists-cards > .specialist-card:nth-of-type(3)::before {
+.specialists-cards > #Milena.specialist-card::before {
   background: url("../../public/assets/imagess/milena.png") no-repeat center center;
+  background-size: 249px;
+}
+.specialists-cards > #Magdalena.specialist-card::before {
+  background: url("../../public/assets/imagess/magda.png") no-repeat center center;
   background-size: 249px;
 }
 .specialists-cards > .specialist-card > .specialist-card-person-info-container {

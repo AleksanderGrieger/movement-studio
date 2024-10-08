@@ -110,6 +110,11 @@ export const offers: OfferItemProps[] = [
           "Zajęcia sportowe jako uzupełnienie treningu oraz dla wszystkich dzieci w celu rozwoju koordynacji ruchowej, równowagi oraz poprawy ogólnej kondycji fizycznej.",
       },
       {
+        highlight: "Teen Movement:",
+        description:
+          "Zbliża się szkolna dyskoteka, bal ósmoklasisty, połowinki, studniówka? A może chcesz po prostu spędzić miło czas z rówieśnikami i nauczyć się tańczyć. Poznasz tu podstawy tańców latino oraz tańca użytkowego, dzięki którym poczujesz się swobodnie na parkiecie i przetańczysz całą noc.",
+      },
+      {
         highlight: "Baby Movement:",
         description:
           "Wyjątkowe zajęcia dla rodziców z dziećmi w wieku 6m do 18m. Zajęcia prowadzone w bliskim kontakcie z rodzicem, czyli w chuście lub nosidle. Wyjątkowy czas spędzony razem z dzieckim, a za razem trening taneczny dla rodzica.",
@@ -137,7 +142,7 @@ export const offers: OfferItemProps[] = [
           " Czyli trening funkcjonalny i rozciąganie, wzmacnianie całego ciała, połączone z treningiem kardio, prowadzone przez fizjoterapeutę i wykwalifikowanego trenera przygotowania motorycznego.",
       },
       {
-        highlight: "Fire Dance:",
+        highlight: "Power Dance:",
         description:
           "Trening w rytm muzyki, czyli spalamy kalorie tańcząc. Taneczne kardio z elementami fitnessu, ćwiczeń wzmacniających i rozciągających.",
       },
@@ -282,15 +287,15 @@ export const pricelists: TableProps[] = [
         col2: "40 zł / 140 zł",
       },
       {
-        col1: "Body workout + stretching (75min / 4x w miesiącu)",
-        col2: "45 zł / 140zł",
+        col1: "Body workout + stretching (60min / 4x w miesiącu)",
+        col2: "40 zł / 140zł",
       },
       {
         col1: "Sexy dance (60 min / 4x w miesiącu)",
         col2: "40 zł / 140 zł",
       },
       {
-        col1: "Fire dance (60 min / 4x w miesiącu)",
+        col1: "Power dance (60 min / 4x w miesiącu)",
         col2: "40 zł / 140zł",
       },
     ],
@@ -328,7 +333,7 @@ export const pricelists: TableProps[] = [
         col2: "30 zł",
       },
       {
-        col1: "Urodzinki (10 osób)",
+        col1: "Urodzinki (2h, 10 osób)",
         col2: "700 zł i każde kolejne dziecko 40 zł",
       },
       {
@@ -382,7 +387,11 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "18:00",
-        col2: "Body workout + stretching (75 min)",
+        col2: "Body workout + stretching", // (75 min)",
+      },
+      {
+        col1: "19:00",
+        col2: "Power Dance",
       },
     ],
   },
@@ -399,11 +408,29 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "18:00",
-        col2: "Pary użytkowy dorośli",
+        // col2: "Pary użytkowy dorośli",
+        col2: "Teen Movement",
       },
       {
         col1: "19:00",
         col2: "Sexy dance",
+      },
+    ],
+  },
+  {
+    title: "SOBOTA w Kołobrzegu",
+    rows: [
+      {
+        col1: "10:00",
+        col2: "Baby Movement",
+      },
+      {
+        col1: "10:30",
+        col2: "Senior Movement",
+      },
+      {
+        col1: "11:15",
+        col2: "Latino + caribbean dzieci",
       },
     ],
   },

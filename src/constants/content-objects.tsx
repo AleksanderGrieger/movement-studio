@@ -258,6 +258,10 @@ export const pricelists: TableProps[] = [
         col2: "40 zł / 280 zł",
       },
       {
+        col1: "Teen Movement (2x 60min w tyg / 8x w miesiącu)",
+        col2: "40 zł / 280 zł",
+      },
+      {
         col1: "Latino I caribbean mini kids (45 min / 4x w miesiącu)",
         col2: "35 zł / 120 zł",
       },
@@ -266,8 +270,8 @@ export const pricelists: TableProps[] = [
         col2: "40 zł / 140 zł",
       },
       {
-        col1: "Dance mix 5+ / 10+ (45 min / 4x w miesiącu)",
-        col2: "35 zł / 120 zł",
+        col1: "Dance mix 3+ (45 min / 4x w miesiącu)",
+        col2: "30 zł / 100 zł",
       },
       {
         col1: "Sport kids (60 min / 4x w miesiącu)",
@@ -353,6 +357,10 @@ export const scheduleList: TableProps[] = [
     title: "WTOREK",
     rows: [
       {
+        col1: "15:30",
+        col2: "Baby Movement (30 min)",
+      },
+      {
         col1: "16:15",
         col2: "Towarzyski dzieci",
       },
@@ -362,24 +370,20 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "18:00",
-        col2: "Latino solo dorosli",
+        col2: "Teen Movement",
       },
-      // {
-      //   col1: "19:00",
-      //   col2: "Taniec towarzyski dorośli pary",
-      // },
+      {
+        col1: "19:00",
+        col2: "Latino solo dorośli",
+      },
     ],
   },
   {
     title: "ŚRODA",
     rows: [
       {
-        col1: "15:30",
-        col2: "Baby Movement (30 min)",
-      },
-      {
         col1: "16:15",
-        col2: "Dance mix 3-6 lat",
+        col2: "Dance mix 3+ lat (30 min)",
       },
       {
         col1: "17:00",

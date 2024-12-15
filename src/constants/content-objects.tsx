@@ -95,7 +95,7 @@ export const offers: OfferItemProps[] = [
           "Zajęcia z tańca towarzyskiego w parach obejmują naukę tańców standardowych i latynoamerykańskich. Grupa z nastawieniem na udział w profesjonalnych turniejach tańca.",
       },
       {
-        highlight: "Zajęcia Latin & Caribbean:",
+        highlight: "Zajęcia Latino Solo Kids:",
         description:
           "Zajęcia dedykowane są solistom, nauka tańców takich jak salsa, bachata czy jive. Grupa z nastawieniem na udział w profesjonalnych turniejach tańca.",
       },
@@ -262,7 +262,7 @@ export const pricelists: TableProps[] = [
         col2: "40 zł / 280 zł",
       },
       {
-        col1: "Latino I caribbean mini kids (45 min / 4x w miesiącu)",
+        col1: "Latino solo kids (45 min / 4x w miesiącu)",
         col2: "35 zł / 120 zł",
       },
       {
@@ -408,7 +408,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "17:15",
-        col2: "Latino carribean mini kids",
+        col2: "Latino solo kids",
       },
       {
         col1: "18:00",
@@ -434,7 +434,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "11:15",
-        col2: "Latino + caribbean dzieci",
+        col2: "Latino solo kids",
       },
     ],
   },

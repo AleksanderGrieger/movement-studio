@@ -366,11 +366,11 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "17:15",
-        col2: "Podstawy baletu dzieci",
+        col2: "Taniec współczesny dzieci",
       },
       {
         col1: "18:00",
-        col2: "Teen Movement",
+        col2: "Kurs taniec towarzyski pary dorośli - nabór",
       },
       {
         col1: "19:00",

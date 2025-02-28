@@ -151,6 +151,11 @@ export const offers: OfferItemProps[] = [
         description:
           "Zajęcia w formie krótkich, prostych choreografii do najpopularniejszych utworów polskiej muzyki rozrywkowej w połączeniu z elementami folkloru i nie tylko.",
       },
+      {
+        highlight: "Ladies Style:",
+        description:
+          "Zajęcia stworzone z myślą o kobietach, które pragną wyrazić siebie poprzez ruch oraz pragną nauczyć się różnych stylów tańca. Latino, jazz, commercial oraz elementy tańca klasycznego i współczesnego - to doskonała okazja do połączenia tańca z zabawą.",
+      },
     ],
   },
   {
@@ -259,7 +264,7 @@ export const pricelists: TableProps[] = [
       },
       {
         col1: "Teen Movement (2x 60min w tyg / 8x w miesiącu)",
-        col2: "40 zł / 280 zł",
+        col2: "40 zł / 140 zł",
       },
       {
         col1: "Latino solo kids (45 min / 4x w miesiącu)",
@@ -292,15 +297,19 @@ export const pricelists: TableProps[] = [
       },
       {
         col1: "Body workout + stretching (60min / 4x w miesiącu)",
-        col2: "40 zł / 140zł",
-      },
-      {
-        col1: "Sexy dance (60 min / 4x w miesiącu)",
         col2: "40 zł / 140 zł",
       },
       {
+        col1: "Sexy dance (60 min / 4x w miesiącu)",
+        col2: "50 zł / 180 zł",
+      },
+      {
         col1: "Power dance (60 min / 4x w miesiącu)",
-        col2: "40 zł / 140zł",
+        col2: "40 zł / 140 zł",
+      },
+      {
+        col1: "PAKIET 1+1 (pakiet łączony na dowolne wybrane zajęcia np. Power Dance + Sexy Dance - na cały miesiąc)",
+        col2: "230 zł",
       },
     ],
   },
@@ -308,8 +317,8 @@ export const pricelists: TableProps[] = [
     title: "Zajęcia dla dorosłych pary",
     rows: [
       {
-        col1: "Towarzyski pary (8 x 60 min)",
-        col2: "280 zł",
+        col1: "Towarzyski pary (4 x 60 min)",
+        col2: "250 zł",
       },
       {
         col1: "Taniec użytkowy",
@@ -329,12 +338,20 @@ export const pricelists: TableProps[] = [
         col2: "700 zł / 5 x 45 min",
       },
       {
-        col1: "Lekcje indywidualne (45min)",
+        col1: "Lekcje indywidualne (45 min)",
         col2: "130 zł",
       },
       {
         col1: "Latinoteka",
         col2: "30 zł",
+      },
+      {
+        col1: "Cardio (50 min / 4x w miesiącu)",
+        col2: "30 zł / 120 zł",
+      },
+      {
+        col1: "ABS (30 min)",
+        col2: "20 zł",
       },
       {
         col1: "Urodzinki (2h, 10 osób)",
@@ -354,6 +371,19 @@ export const pricelists: TableProps[] = [
 
 export const scheduleList: TableProps[] = [
   {
+    title: "PONIEDZIAŁEK",
+    rows: [
+      {
+        col1: "9:00",
+        col2: "Cardio (50min)",
+      },
+      {
+        col1: "10:00",
+        col2: "Abs - Turbo Trening Brzucha (30 min)",
+      },
+    ],
+  },
+  {
     title: "WTOREK",
     rows: [
       {
@@ -370,7 +400,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "18:00",
-        col2: "Kurs taniec towarzyski pary dorośli - nabór",
+        col2: "Body workout + stretching",
       },
       {
         col1: "19:00",
@@ -391,7 +421,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "18:00",
-        col2: "Body workout + stretching", // (75 min)",
+        col2: "Ladies Style",
       },
       {
         col1: "19:00",
@@ -417,24 +447,32 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "19:00",
-        col2: "Sexy dance",
+        col2: "Sexy dance (1.5h)",
       },
     ],
   },
   {
-    title: "SOBOTA w Kołobrzegu",
+    title: "PONIEDZIAŁEK w Kołobrzegu - Factory Resort (ul. Kasprowicza 10)",
     rows: [
+      // {
+      //   col1: "10:00",
+      //   col2: "Baby Movement",
+      // },
+      // {
+      //   col1: "10:30",
+      //   col2: "Senior Movement",
+      // },
+      // {
+      //   col1: "11:15",
+      //   col2: "Latino solo kids",
+      // },
       {
-        col1: "10:00",
-        col2: "Baby Movement",
+        col1: "19:00",
+        col2: "Latino solo",
       },
       {
-        col1: "10:30",
-        col2: "Senior Movement",
-      },
-      {
-        col1: "11:15",
-        col2: "Latino solo kids",
+        col1: "20:00",
+        col2: "Taniec Towarzyski Dla Par",
       },
     ],
   },

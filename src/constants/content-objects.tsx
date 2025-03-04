@@ -267,12 +267,12 @@ export const pricelists: TableProps[] = [
         col2: "40 zł / 140 zł",
       },
       {
-        col1: "Latino solo kids (45 min / 4x w miesiącu)",
-        col2: "35 zł / 120 zł",
+        col1: "Latino solo kids (60 min / 4x w miesiącu)",
+        col2: "40 zł / 140 zł",
       },
       {
-        col1: "Podstawy baletu (60min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
+        col1: "Taniec współczesny (45 min / 4x w miesiącu)",
+        col2: "35 zł / 120 zł",
       },
       {
         col1: "Dance mix 3+ (45 min / 4x w miesiącu)",
@@ -441,8 +441,7 @@ export const scheduleList: TableProps[] = [
         col2: "Latino solo kids",
       },
       {
-        col1: "18:00",
-        // col2: "Pary użytkowy dorośli",
+        col1: "18:15",
         col2: "Teen Movement",
       },
       {

@@ -15,6 +15,7 @@ import {
   offer,
   aboutUs,
   contact,
+  programs,
 } from "@/src/constants/routing";
 
 export const Navbar = () => {
@@ -90,6 +91,11 @@ export const Navbar = () => {
           <li>
             <Link href={contact} className={changeColorIfActive(contact)}>
               Kontakt
+            </Link>
+          </li>
+          <li>
+            <Link href={programs} className={changeColorIfActive(programs)}>
+              Programy
             </Link>
           </li>
         </ul>

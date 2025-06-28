@@ -11,6 +11,9 @@ import LatinoDisco from "@/public/assets/imagess/latino-disco.png";
 import FirstDance from "@/public/assets/imagess/first-dance.png";
 import MaidenVortex from "@/public/assets/imagess/maiden-vortex.png";
 import Birthday from "@/public/assets/imagess/birthday.png";
+import FioPoster1 from "@/public/assets/imagess/project-fio-poster-1.png";
+import FioPoster2 from "@/public/assets/imagess/project-fio-poster-2.png";
+import SpolecznikPoster1 from "@/public/assets/imagess/project-spolecznik-poster-1.png";
 import { TextButton } from "../components/buttons/TextButton";
 import { aboutUs, contact, offer, pricelist, schedule } from "./routing";
 import { TableProps } from "../components/contents/Table";
@@ -473,6 +476,137 @@ export const scheduleList: TableProps[] = [
         col1: "20:00",
         col2: "Taniec Towarzyski Dla Par",
       },
+    ],
+  },
+];
+
+export const fioProgram: OfferItemProps[] = [
+  {
+    image: FioPoster1,
+    title: "Program - FIO",
+    description: ",,Roztańczony Białogard - zajęcia taneczno- sportowe’’ Rządowy Program Fundusz Inicjatyw Obywatelskich NOWE FIO na lata 2021-2030",
+    imgOnLeft: false,
+    list: [
+      {
+        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+      },
+      {
+        description:"Projekt 'Roztańczony Białogard - zajęcia taneczno-sportowe' jest skierowany do dzieci, młodzieży i dorosłych (w tym seniorów) z terenu powiatu białogardzkiego.",
+      },
+      {
+        description:"Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021-2030.",
+      },
+    ],
+  },
+  {
+    image: FioPoster2,
+    title: "",
+    imgOnLeft: true,
+    list: [
+      {
+        description:"Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+      },
+      {
+        description:"W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych.",
+      },
+      {
+        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+      },
+    ]
+  },
+];
+
+export const fioProgramsSchedule: TableProps[] = [
+  {
+    title: "02.07.2025 - ŚRODA",
+    rows: [
+      {
+        col1: "17:00 - 18:00",
+        col2: "Dla seniorów",
+      },
+      {
+        col1: "18:00-19:00",
+        col2: "Dla dorosłych - Ladies style",
+      },
+      {
+        col1: "19:00-20:00",
+        col2: "Dla dorosłych - Power dance",
+      },
+    ],
+  },
+  {
+    title: "25-26.08.2025 - PONIEDZIAŁEK i WTOREK",
+    rows: [
+      {
+        col1: "9:00 - 9:30",
+        col2: "Dla dzieci w wieku przedszkolnym - Mix taneczny",
+      },
+      {
+        col1: "9:30 - 12:00",
+        col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
+      },
+      {
+        col1: "19:00 - 20:00",
+        col2: "Dla dorosłych - Power dance",
+      },
+    ],
+  },
+];
+
+export const spolecznikProgram: OfferItemProps[] = [
+  {
+    image: SpolecznikPoster1,
+    title: "Program - Społecznik",
+    description: ",,Roztańczony Białogard - warsztaty taneczno- sportowe’’ SPOŁECZNIK NA 5! PROGRAM WSPIERANIA INICJATYW ODDOLNYCH NA LATA 2025-2029",
+    imgOnLeft: false,
+    list: [
+      {
+        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+      },
+      {
+        description:"Projekt ,,Roztańczony Białogard - warsztaty taneczno- sportowe’’ skierowany jest do dzieci i młodzieży uczących się w szkołach podstawowych i przedszkolach na terenie powiatu białogardzkiego.",
+      },
+      {
+        description:"Głównym celem projektu jest zachęcenie dzieci i młodzieży do aktywności fizycznej, integracja w grupie rówieśników, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+      },
+      {
+        description:"W ramach projektu przeprowadzone zostanę nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli.",
+      },
+      {
+        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+      },
+      {
+        description:",,Program zainicjowany przez Marszałka Województwa Zachodniopomorskiego’’ #PomorzeZachodnie #PomorzeZachodnieNews @PomorzeZachodnie @PomorzeZachodnieNews @SpołecznikNa5! #KARRSA #SpołecznikNa5! @KARRSA",
+      },
+    ],
+  },
+];
+
+export const spolecznikProgramsSchedule: TableProps[] = [
+  {
+    title: "27-29.08.2025 - ŚRODA - PIĄTEK",
+    rows: [
+      {
+        col1: "9:00 - 9:30",
+        col2: "Dla dzieci w wieku przedszkolnym - Mix taneczny",
+      },
+      {
+        col1: "9:30 - 12:00",
+        col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
+      }
+    ],
+  },
+  {
+    title: "12-14.09.2025 - PIĄTEK - NIEDZIELA",
+    rows: [
+      {
+        col1: "9:00 - 9:30",
+        col2: "Dla dzieci w wieku przedszkolnym - Mix taneczny",
+      },
+      {
+        col1: "9:30 - 12:00",
+        col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
+      }
     ],
   },
 ];

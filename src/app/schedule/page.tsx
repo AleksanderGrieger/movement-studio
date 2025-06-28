@@ -4,11 +4,11 @@ import { scheduleList } from "@/src/constants/content-objects";
 export default function Schedule() {
   return (
     <>
-      {scheduleList.map((pricelist, index) => (
+      {scheduleList.map((schedule, index) => (
         <Table
           key={index}
-          title={pricelist.title}
-          rows={pricelist.rows}
+          title={schedule.title}
+          rows={schedule.rows}
           dividerOnLeft={true}
         />
       ))}

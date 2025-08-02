@@ -1,0 +1,83 @@
+.specialistCard {
+  position: relative;
+  width: 384px;
+  height: 676px;
+  padding: 144px 30px 46px;
+  background: #d626be2b;
+}
+
+.specialistCard::before {
+  content: "";
+  position: absolute;
+  width: 249px;
+  height: 249px;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.specialistCard:nth-of-type(1)::before {
+  background: url("../../../../public/assets/imagess/karolina.png") no-repeat
+    center center;
+  background-size: 249px;
+}
+
+.specialistCard:nth-of-type(2)::before {
+  background: url("../../../../public/assets/imagess/hania.png") no-repeat
+    center center;
+  background-size: 249px;
+}
+
+.specialistCard:nth-of-type(3)::before {
+  background: url("../../../../public/assets/imagess/milena.png") no-repeat
+    center center;
+  background-size: 249px;
+}
+
+.specialistCard:nth-of-type(4)::before {
+  background: url("../../../../public/assets/imagess/magda.png") no-repeat
+    center center;
+  background-size: 249px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoContainer > span {
+  display: block;
+}
+
+.name {
+  color: #ffffff;
+  text-align: center;
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 34px;
+  margin-bottom: 5px;
+}
+
+.profession {
+  text-align: center;
+  font-weight: 300;
+  line-height: 23px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.description {
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+@media (max-width: 1079px) {
+  .specialistCard {
+    height: auto;
+  }
+}

@@ -1,0 +1,11 @@
+.cardsWrapper {
+  padding-top: 130px;
+  padding-bottom: 60px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: 190px;
+  column-gap: 190px;
+  flex-wrap: wrap;
+}

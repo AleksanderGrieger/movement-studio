@@ -1,17 +1,16 @@
 import { SpecialistCard } from "./SpecialistCard";
+import styles from "./SpecialistsContent.module.css";
 
 export const SpecialistsContent = () => {
   return (
     // todo poprosic o same zdjecia - nie grafiki i fajnie jakby Karolina tez miala na bialym tle
     <>
-      <div className="container container-specialists">
-        <div className="specialists-cards">
+      <div className="container">
+        <div className={styles.cardsWrapper}>
           <SpecialistCard
-            id="Karolina"
             name="Karolina Bobryk-Kopcińska"
-            department="ZAWODOWA TANCERKA"
-          >
-            <p className="specialist-card-description">
+            profession="ZAWODOWA TANCERKA"
+            description="
               Tancerka międzynarodowej klasy tanecznej ‚S’ w tańcach
               latynoamerykańskich. Mistrzyni Polski w formacji tanecznej,
               półfinalistka Mistrzostw Świata formacji, wielokrotna Mistrzyni
@@ -20,34 +19,24 @@ export const SpecialistsContent = () => {
               Wytrenowała Mistrzynie Polski, Świata i Europy Federacji WADF. Z
               wykształcenia magister fizjoterapii specjalizująca się w terapii
               wad w postawie ciała oraz skoliozy oraz terapeutka integracji
-              sensorycznej.
-            </p>
-          </SpecialistCard>
+              sensorycznej."
+          />
           <SpecialistCard
-            id="Hanna"
             name="Hanna Maciejewska"
-            department="ZAWODOWA TANCERKA"
-          >
-            <p className="specialist-card-description">
+            profession="ZAWODOWA TANCERKA"
+            description="
               Tancerka najwyższej międzynarodowej klasy tanecznej ‚S’ w tańcach
               standardowych i latynoamerykańskich. Mistrzyni Polski w tańcach
               standardowych na Otwartych Mistrzostwach Polski, II Vicemistrzyni
               Polski w 10 tańcach, wielokrotna finalistka Mistrzostw Polski,
               półfinalistka Pucharu Europy w 10 tańcach. Magister wychowania
               fizycznego oraz oligofrenopedagog. Instruktor sportu tanecznego,
-              trener personalny oraz trener osób z niepełnosprawnościami.
-            </p>
-          </SpecialistCard>
-        </div>
-      </div>
-      <div className="container container-specialists">
-        <div className="specialists-cards">
+              trener personalny oraz trener osób z niepełnosprawnościami."
+          />
           <SpecialistCard
-            id="Milena"
             name="Milena Chomicz"
-            department="ZAWODOWA TANCERKA"
-          >
-            <p className="specialist-card-description">
+            profession="ZAWODOWA TANCERKA"
+            description="
               Instruktor i Choreograf tańca ludowego oraz tańca
               charakterystycznego. Tancerka z 26 letnim stażem tanecznym.
               Wychowanka Zespołu Tanecznego „Algi” w Kołobrzegu, w którym
@@ -57,15 +46,12 @@ export const SpecialistsContent = () => {
               młodzieżą oraz dorosłymi. Od 15 lat przygotowuje również polonezy
               studniówkowe w szkołach średnich. Kocha taniec ludowy, to jej
               życiowa pasja, miłością darzy też taniec współczesny, towarzyski
-              oraz high heels
-            </p>
-          </SpecialistCard>
+              oraz high heels"
+          />
           <SpecialistCard
-            id="Magdalena"
             name="Magdalena Łopucka"
-            department="ZAWODOWA TANCERKA"
-          >
-            <p className="specialist-card-description">
+            profession="ZAWODOWA TANCERKA"
+            description="
               Tancerka z 25 letnim stażem. Z wykształcenia choreograf tańca,
               nauczyciel i trener odżywiania. W swojej karierze wyszkoliła już
               kilka pokoleń polskich tancerzy, którzy prężnie rozwijają swoje
@@ -76,9 +62,8 @@ export const SpecialistsContent = () => {
               współczesnym, salsie, bachacie i autorskim projekcie POWER DANCE -
               czyli połączeniu tańca z elementami fitnessowymi, który nie tylko
               zadowoli miłośników energicznych choreografii, ale również tych,
-              którzy chcą spalać kalorie i wymodelować sylwetkę.
-            </p>
-          </SpecialistCard>
+              którzy chcą spalać kalorie i wymodelować sylwetkę."
+          />
         </div>
       </div>
     </>

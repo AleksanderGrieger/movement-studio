@@ -1,0 +1,16 @@
+.description {
+  font-size: 2.2rem;
+  line-height: 30px;
+}
+
+@media (max-width: 1079px) {
+  .experienceContent {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 799px) {
+  .experienceContent {
+    padding: 4rem 0;
+  }
+}

@@ -40,9 +40,7 @@ export const OfferItem = ({
         <div className="why-us-text-container">
           <h2 className="why-us-header">{title}</h2>
           {description && (
-            <p className="source-of-format-text u-font-weight-400">
-              {description}
-            </p>
+            <p className="source-of-format-text">{description}</p>
           )}
           {list && (
             <ul>

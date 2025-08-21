@@ -1,4 +1,4 @@
-import { OfferItemProps } from "../components/contents/OfferItem";
+import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
 import MainOffer from "@/public/assets/imagess/offer-main-page.png";
 import MainSchedule from "@/public/assets/imagess/schedule-main-page.png";
 import MainPricelist from "@/public/assets/imagess/pricelist-main-page.png";
@@ -456,18 +456,6 @@ export const scheduleList: TableProps[] = [
   {
     title: "PONIEDZIAŁEK w Kołobrzegu - Factory Resort (ul. Kasprowicza 10)",
     rows: [
-      // {
-      //   col1: "10:00",
-      //   col2: "Baby Movement",
-      // },
-      // {
-      //   col1: "10:30",
-      //   col2: "Senior Movement",
-      // },
-      // {
-      //   col1: "11:15",
-      //   col2: "Latino solo kids",
-      // },
       {
         col1: "19:00",
         col2: "Latino solo",
@@ -484,17 +472,21 @@ export const fioProgram: OfferItemProps[] = [
   {
     image: FioPoster1,
     title: "Program - FIO",
-    description: ",,Roztańczony Białogard - zajęcia taneczno- sportowe’’ Rządowy Program Fundusz Inicjatyw Obywatelskich NOWE FIO na lata 2021-2030",
+    description:
+      ",,Roztańczony Białogard - zajęcia taneczno- sportowe’’ Rządowy Program Fundusz Inicjatyw Obywatelskich NOWE FIO na lata 2021-2030",
     imgOnLeft: false,
     list: [
       {
-        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+        description:
+          "Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
       },
       {
-        description:"Projekt 'Roztańczony Białogard - zajęcia taneczno-sportowe' jest skierowany do dzieci, młodzieży i dorosłych (w tym seniorów) z terenu powiatu białogardzkiego.",
+        description:
+          "Projekt 'Roztańczony Białogard - zajęcia taneczno-sportowe' jest skierowany do dzieci, młodzieży i dorosłych (w tym seniorów) z terenu powiatu białogardzkiego.",
       },
       {
-        description:"Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021-2030.",
+        description:
+          "Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021-2030.",
       },
     ],
   },
@@ -504,15 +496,18 @@ export const fioProgram: OfferItemProps[] = [
     imgOnLeft: true,
     list: [
       {
-        description:"Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+        description:
+          "Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
       },
       {
-        description:"W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych.",
+        description:
+          "W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych.",
       },
       {
-        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+        description:
+          "Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
       },
-    ]
+    ],
   },
 ];
 
@@ -557,26 +552,33 @@ export const spolecznikProgram: OfferItemProps[] = [
   {
     image: SpolecznikPoster1,
     title: "Program - Społecznik",
-    description: ",,Roztańczony Białogard - warsztaty taneczno- sportowe’’ SPOŁECZNIK NA 5! PROGRAM WSPIERANIA INICJATYW ODDOLNYCH NA LATA 2025-2029",
+    description:
+      ",,Roztańczony Białogard - warsztaty taneczno- sportowe’’ SPOŁECZNIK NA 5! PROGRAM WSPIERANIA INICJATYW ODDOLNYCH NA LATA 2025-2029",
     imgOnLeft: false,
     list: [
       {
-        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+        description:
+          "Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
       },
       {
-        description:"Projekt ,,Roztańczony Białogard - warsztaty taneczno- sportowe’’ skierowany jest do dzieci i młodzieży uczących się w szkołach podstawowych i przedszkolach na terenie powiatu białogardzkiego.",
+        description:
+          "Projekt ,,Roztańczony Białogard - warsztaty taneczno- sportowe’’ skierowany jest do dzieci i młodzieży uczących się w szkołach podstawowych i przedszkolach na terenie powiatu białogardzkiego.",
       },
       {
-        description:"Głównym celem projektu jest zachęcenie dzieci i młodzieży do aktywności fizycznej, integracja w grupie rówieśników, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+        description:
+          "Głównym celem projektu jest zachęcenie dzieci i młodzieży do aktywności fizycznej, integracja w grupie rówieśników, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
       },
       {
-        description:"W ramach projektu przeprowadzone zostanę nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli.",
+        description:
+          "W ramach projektu przeprowadzone zostanę nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli.",
       },
       {
-        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+        description:
+          "Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
       },
       {
-        description:",,Program zainicjowany przez Marszałka Województwa Zachodniopomorskiego’’ #PomorzeZachodnie #PomorzeZachodnieNews @PomorzeZachodnie @PomorzeZachodnieNews @SpołecznikNa5! #KARRSA #SpołecznikNa5! @KARRSA",
+        description:
+          ",,Program zainicjowany przez Marszałka Województwa Zachodniopomorskiego’’ #PomorzeZachodnie #PomorzeZachodnieNews @PomorzeZachodnie @PomorzeZachodnieNews @SpołecznikNa5! #KARRSA #SpołecznikNa5! @KARRSA",
       },
     ],
   },
@@ -593,7 +595,7 @@ export const spolecznikProgramsSchedule: TableProps[] = [
       {
         col1: "9:30 - 12:00",
         col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
-      }
+      },
     ],
   },
   {
@@ -606,7 +608,7 @@ export const spolecznikProgramsSchedule: TableProps[] = [
       {
         col1: "9:30 - 12:00",
         col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
-      }
+      },
     ],
   },
 ];

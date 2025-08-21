@@ -80,6 +80,10 @@
     margin-bottom: 4rem;
   }
 
+  .imageWrapper {
+    width: 100%;
+  }
+
   .imageWrapper img {
     margin-bottom: 1rem;
   }

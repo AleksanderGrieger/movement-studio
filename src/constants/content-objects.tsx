@@ -259,114 +259,154 @@ export const offers: OfferItemProps[] = [
 
 export const pricelists: TableProps[] = [
   {
-    title: "Zajęcia dla dzieci",
+    title: "Cennink Białogard",
     rows: [
       {
-        col1: "Taniec towarzyski początkujący (2x 60min w tyg / 8x w miesiącu)",
-        col2: "40 zł / 280 zł",
+        col1: "ZAJĘCIA DLA DZIECI BIAŁOGARD",
+        col2: "CENA",
+        highlighted: true,
       },
       {
-        col1: "Teen Movement (2x 60min w tyg / 8x w miesiącu)",
-        col2: "40 zł / 140 zł",
+        col1: "Taniec towarzyski nabór (1x 45min w tyg)",
+        col2: "140 zł",
       },
       {
-        col1: "Latino solo kids (60 min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
+        col1: "Taniec towarzyski gr sportowa (2x 1h 15min w tyg)",
+        col2: "300 zł",
       },
       {
-        col1: "Taniec współczesny (45 min / 4x w miesiącu)",
-        col2: "35 zł / 120 zł",
+        col1: "Nabór latino solo kids (1x 45 min w tyg)",
+        col2: "140 zł",
       },
       {
-        col1: "Dance mix 3+ (45 min / 4x w miesiącu)",
-        col2: "30 zł / 100 zł",
-      },
-      {
-        col1: "Sport kids (60 min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
-      },
-      {
-        col1: "Baby Movement",
-        col2: "35 zł / 30 min",
-      },
-    ],
-  },
-  {
-    title: "Zajęcia dla dorosłych solo",
-    rows: [
-      {
-        col1: "Latino solo (60 min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
-      },
-      {
-        col1: "Body workout + stretching (60min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
-      },
-      {
-        col1: "Sexy dance (60 min / 4x w miesiącu)",
-        col2: "50 zł / 180 zł",
-      },
-      {
-        col1: "Power dance (60 min / 4x w miesiącu)",
-        col2: "40 zł / 140 zł",
-      },
-      {
-        col1: "PAKIET 1+1 (pakiet łączony na dowolne wybrane zajęcia np. Power Dance + Sexy Dance - na cały miesiąc)",
-        col2: "230 zł",
-      },
-    ],
-  },
-  {
-    title: "Zajęcia dla dorosłych pary",
-    rows: [
-      {
-        col1: "Towarzyski pary (4 x 60 min)",
-        col2: "250 zł",
-      },
-      {
-        col1: "Taniec użytkowy",
+        col1: "Latino solo kids gr sportowa (2x 1h w tyg)",
         col2: "280 zł",
       },
+      {
+        col1: "Nabór taniec współczesny (1x 45min w tyg)",
+        col2: "140 zł",
+      },
+      {
+        col1: "Taniec współczesny gr sportowa (2x 1h w tyg)",
+        col2: "280 zł",
+      },
+      {
+        col1: "Sport kids (dla dzieci uczęszczających na zajęcia stałe - 10 zł za jedne zajęcia)",
+        col2: "140 zł",
+      },
     ],
   },
   {
-    title: "Dodatkowo",
     rows: [
       {
-        col1: "Pierwszy taniec",
-        col2: "150 zł / 45 min",
+        col1: "ZAJĘCIA DLA DOROSŁYCH BIAŁOGARD",
+        col2: "CENA",
+        highlighted: true,
       },
       {
-        col1: "Pakiet pierwszy taniec",
-        col2: "700 zł / 5 x 45 min",
+        col1: "Latino solo (1x 1h w tyg)",
+        col2: "140 zł",
       },
       {
-        col1: "Lekcje indywidualne (45 min)",
+        col1: "Ladies style (1x 1h w tyg)",
+        col2: "140 zł",
+      },
+      {
+        col1: "Power dance (1x 1h w tyg)",
+        col2: "140 zł",
+      },
+    ],
+  },
+  {
+    rows: [
+      {
+        col1: "INNE",
+        col2: "CENA",
+        highlighted: true,
+      },
+      {
+        col1: "Lekcje indywidualne (zawodnicy) 45 min",
         col2: "130 zł",
       },
       {
-        col1: "Latinoteka",
-        col2: "30 zł",
+        col1: "Pierwszy taniec (45 min)",
+        col2: "150 zł",
       },
       {
-        col1: "Cardio (50 min / 4x w miesiącu)",
-        col2: "30 zł / 120 zł",
+        col1: "Pierwszy taniec pakiet (5x 45 min)",
+        col2: "700 zł",
+      },
+    ],
+  },
+  {
+    title: "Cennink Kołobrzeg",
+    rows: [
+      {
+        col1: "ZAJĘCIA DLA DZIECI KOŁOBRZEG",
+        col2: "CENA",
+        highlighted: true,
       },
       {
-        col1: "ABS (30 min)",
-        col2: "20 zł",
+        col1: "Nabór taniec współczesny (1x 45 min w tyg)",
+        col2: "140 zł",
       },
       {
-        col1: "Urodzinki (2h, 10 osób)",
-        col2: "700 zł i każde kolejne dziecko 40 zł",
+        col1: "Taniec współczesny 7-12 lat gr sportowa (2x 1h w tyg, klasyka 1x 45min w tyg, 2x 1h w miesiącu impro, 2x 1h w miesiącu akrobatyka)",
+        col2: "300 zł",
       },
       {
-        col1: "Pojedyncze wejście",
-        col2: "35 zl / 45 min  |  40 zł / 60 min",
+        col1: "Akrobatyka (2x 1h w miesiącu)",
+        col2: "120 zł",
       },
       {
-        col1: "Pakiet VIP imienny - nieograniczona ilość wejść w miesiącu, na zajęcia solo. ",
-        col2: "300 zł / miesięcznie",
+        col1: "Taniec współczesny gr sport (1x 2h w tyg motoryka, 1x 2h w tyg technika, 1x 45min w tyg klasyka, 2x 1h w miesiącu impro, 2x 1h w miesiącu akrobatyka)",
+        col2: "400 zł",
+      },
+      {
+        col1: "Nabór latino solo kids (1x 45 min w tyg)",
+        col2: "140 zł",
+      },
+    ],
+  },
+  {
+    rows: [
+      {
+        col1: "ZAJĘCIA DLA DOROSŁYCH KOŁOBRZEG",
+        col2: "CENA",
+        highlighted: true,
+      },
+      {
+        col1: "Latino solo basic (1x 1h w tyg)",
+        col2: "140 zł",
+      },
+      {
+        col1: "Latino solo masters (1x 1h w tyg)",
+        col2: "140 zł",
+      },
+      {
+        col1: "Ladies style (1x 1h w tyg)",
+        col2: "140 zł",
+      },
+    ],
+  },
+  {
+    rows: [
+      {
+        col1: "INNE",
+        col2: "CENA",
+        highlighted: true,
+      },
+      {
+        col1: "Lekcje indywidualne (zawodnicy) 45 min",
+        col2: "130 zł",
+      },
+      {
+        col1: "Pierwszy taniec (45 min)",
+        col2: "150 zł",
+      },
+      {
+        col1: "Pierwszy taniec pakiet (5x 45 min)",
+        col2: "700 zł",
       },
     ],
   },
@@ -374,107 +414,145 @@ export const pricelists: TableProps[] = [
 
 export const scheduleList: TableProps[] = [
   {
-    title: "PONIEDZIAŁEK",
-    rows: [
-      {
-        col1: "9:00",
-        col2: "Cardio (50min)",
-      },
-      {
-        col1: "10:00",
-        col2: "Abs - Turbo Trening Brzucha (30 min)",
-      },
-    ],
+    title: "BIAŁOGARD - SEZON 2025/26",
+    rows: [],
   },
   {
-    title: "WTOREK",
+    title: "Poniedziałek",
     rows: [
       {
-        col1: "15:30",
-        col2: "Baby Movement (30 min)",
-      },
-      {
         col1: "16:15",
-        col2: "Towarzyski dzieci",
+        col2: "Nabór taniec towarzyski",
       },
       {
-        col1: "17:15",
-        col2: "Taniec współczesny dzieci",
+        col1: "17:00",
+        col2: "Taniec współczesny (gr sportowa)",
       },
       {
         col1: "18:00",
-        col2: "Body workout + stretching",
+        col2: "Taniec towarzyski (gr sportowa)",
       },
       {
-        col1: "19:00",
+        col1: "19:15",
+        col2: "Latino solo kids (gr sportowa)",
+      },
+      {
+        col1: "20:15",
         col2: "Latino solo dorośli",
       },
     ],
   },
   {
-    title: "ŚRODA",
+    title: "Wtorek",
+    rows: [
+      {
+        col1: "18:00",
+        col2: "Ladies style dorośli",
+      },
+    ],
+  },
+  {
+    title: "Środa",
     rows: [
       {
         col1: "16:15",
-        col2: "Dance mix 3+ lat (30 min)",
+        col2: "Nabór taniec współczesny",
       },
       {
         col1: "17:00",
-        col2: "Sport kids",
+        col2: "Taniec współczesny (gr sportowa)",
       },
       {
         col1: "18:00",
-        col2: "Ladies Style",
+        col2: "Sport kids",
       },
       {
         col1: "19:00",
-        col2: "Power Dance",
+        col2: "Power Dance dorośli",
       },
     ],
   },
   {
-    title: "CZWARTEK",
+    title: "Czwartek",
     rows: [
       {
         col1: "16:15",
-        col2: "Towarzyski dzieci",
+        col2: "Nabór latino solo kids",
       },
       {
-        col1: "17:15",
-        col2: "Latino solo kids",
+        col1: "17:00",
+        col2: "Latino solo kids (gr sportowa)",
       },
       {
-        col1: "18:15",
-        col2: "Teen Movement",
-      },
-      {
-        col1: "19:00",
-        col2: "Sexy dance (1.5h)",
+        col1: "18:00",
+        col2: "Taniec towarzyski (gr sportowa)",
       },
     ],
   },
   {
-    title: "PONIEDZIAŁEK w Kołobrzegu - Factory Resort (ul. Kasprowicza 10)",
+    title: "KOŁOBRZEG - SEZON 2025/26 - Factory Resort (ul. Kasprowicza 10)",
+    rows: [],
+  },
+  {
+    title: "Wtorek",
     rows: [
-      // {
-      //   col1: "10:00",
-      //   col2: "Baby Movement",
-      // },
-      // {
-      //   col1: "10:30",
-      //   col2: "Senior Movement",
-      // },
-      // {
-      //   col1: "11:15",
-      //   col2: "Latino solo kids",
-      // },
+      {
+        col1: "16:30",
+        col2: "Nabór latino solo kids",
+      },
+      {
+        col1: "17:15",
+        col2: "Latino solo Masters dorośli",
+      },
+      {
+        col1: "18:15",
+        col2: "Modern / Jazz 7-12 lat",
+      },
+      {
+        col1: "19:15",
+        col2: "Trening motoryczny (gr sportowa)",
+      },
+    ],
+  },
+  {
+    title: "Środa",
+    rows: [
+      {
+        col1: "18:00",
+        col2: "Ladies style podstawowy",
+      },
       {
         col1: "19:00",
-        col2: "Latino solo",
+        col2: "Akrobatyka - 2 razy w miesiącu w SP7",
+      },
+      {
+        col1: "19:00",
+        col2: "Impro (gr sportowa) - 2 razy w miesiącu (wszystkie grupy tanec współczesny)",
       },
       {
         col1: "20:00",
-        col2: "Taniec Towarzyski Dla Par",
+        col2: "Latino solo Basic dorośli",
+      },
+    ],
+  },
+  {
+    title: "Czwartek",
+    rows: [
+      {
+        col1: "16:15",
+        col2: "Nabór tanec współczesny",
+      },
+      {
+        col1: "17:15",
+        col2: "Modern / Jazz 7-12 lat",
+      },
+      {
+        col1: "18:15",
+        col2: "Klasyka (gr sportowa)",
+      },
+      {
+        col1: "19:00",
+        col2: "Technika modern / jazz (gr sportowa)",
       },
     ],
   },
@@ -484,17 +562,21 @@ export const fioProgram: OfferItemProps[] = [
   {
     image: FioPoster1,
     title: "Program - FIO",
-    description: ",,Roztańczony Białogard - zajęcia taneczno- sportowe’’ Rządowy Program Fundusz Inicjatyw Obywatelskich NOWE FIO na lata 2021-2030",
+    description:
+      ",,Roztańczony Białogard - zajęcia taneczno- sportowe’’ Rządowy Program Fundusz Inicjatyw Obywatelskich NOWE FIO na lata 2021-2030",
     imgOnLeft: false,
     list: [
       {
-        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+        description:
+          "Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
       },
       {
-        description:"Projekt 'Roztańczony Białogard - zajęcia taneczno-sportowe' jest skierowany do dzieci, młodzieży i dorosłych (w tym seniorów) z terenu powiatu białogardzkiego.",
+        description:
+          "Projekt 'Roztańczony Białogard - zajęcia taneczno-sportowe' jest skierowany do dzieci, młodzieży i dorosłych (w tym seniorów) z terenu powiatu białogardzkiego.",
       },
       {
-        description:"Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021-2030.",
+        description:
+          "Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021-2030.",
       },
     ],
   },
@@ -504,15 +586,18 @@ export const fioProgram: OfferItemProps[] = [
     imgOnLeft: true,
     list: [
       {
-        description:"Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+        description:
+          "Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
       },
       {
-        description:"W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych.",
+        description:
+          "W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych.",
       },
       {
-        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+        description:
+          "Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
       },
-    ]
+    ],
   },
 ];
 
@@ -557,26 +642,33 @@ export const spolecznikProgram: OfferItemProps[] = [
   {
     image: SpolecznikPoster1,
     title: "Program - Społecznik",
-    description: ",,Roztańczony Białogard - warsztaty taneczno- sportowe’’ SPOŁECZNIK NA 5! PROGRAM WSPIERANIA INICJATYW ODDOLNYCH NA LATA 2025-2029",
+    description:
+      ",,Roztańczony Białogard - warsztaty taneczno- sportowe’’ SPOŁECZNIK NA 5! PROGRAM WSPIERANIA INICJATYW ODDOLNYCH NA LATA 2025-2029",
     imgOnLeft: false,
     list: [
       {
-        description:"Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
+        description:
+          "Nieodpłatne warsztaty taneczno-sportowe #RoztańczonyBiałogard",
       },
       {
-        description:"Projekt ,,Roztańczony Białogard - warsztaty taneczno- sportowe’’ skierowany jest do dzieci i młodzieży uczących się w szkołach podstawowych i przedszkolach na terenie powiatu białogardzkiego.",
+        description:
+          "Projekt ,,Roztańczony Białogard - warsztaty taneczno- sportowe’’ skierowany jest do dzieci i młodzieży uczących się w szkołach podstawowych i przedszkolach na terenie powiatu białogardzkiego.",
       },
       {
-        description:"Głównym celem projektu jest zachęcenie dzieci i młodzieży do aktywności fizycznej, integracja w grupie rówieśników, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
+        description:
+          "Głównym celem projektu jest zachęcenie dzieci i młodzieży do aktywności fizycznej, integracja w grupie rówieśników, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
       },
       {
-        description:"W ramach projektu przeprowadzone zostanę nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli.",
+        description:
+          "W ramach projektu przeprowadzone zostanę nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli.",
       },
       {
-        description:"Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
+        description:
+          "Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną S.",
       },
       {
-        description:",,Program zainicjowany przez Marszałka Województwa Zachodniopomorskiego’’ #PomorzeZachodnie #PomorzeZachodnieNews @PomorzeZachodnie @PomorzeZachodnieNews @SpołecznikNa5! #KARRSA #SpołecznikNa5! @KARRSA",
+        description:
+          ",,Program zainicjowany przez Marszałka Województwa Zachodniopomorskiego’’ #PomorzeZachodnie #PomorzeZachodnieNews @PomorzeZachodnie @PomorzeZachodnieNews @SpołecznikNa5! #KARRSA #SpołecznikNa5! @KARRSA",
       },
     ],
   },
@@ -593,7 +685,7 @@ export const spolecznikProgramsSchedule: TableProps[] = [
       {
         col1: "9:30 - 12:00",
         col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
-      }
+      },
     ],
   },
   {
@@ -606,7 +698,7 @@ export const spolecznikProgramsSchedule: TableProps[] = [
       {
         col1: "9:30 - 12:00",
         col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
-      }
+      },
     ],
   },
 ];

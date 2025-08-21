@@ -1,5 +1,5 @@
 export interface TableProps {
-  title: string;
+  title?: string;
   rows: RowItem[];
   dividerOnLeft?: boolean;
 }
@@ -7,6 +7,7 @@ export interface TableProps {
 export interface RowItem {
   col1: string;
   col2: string;
+  highlighted?: boolean;
 }
 
 export default function Table({
@@ -16,11 +17,14 @@ export default function Table({
 }: TableProps) {
   return (
     <div className="container container-padding-top-65 container-padding-bottom-30">
-      <h2>{title}</h2>
+      {title && <h2>{title}</h2>}
       <div className="table">
         {rows.map((row, index) => {
           return (
-            <div className="row" key={index}>
+            <div
+              className={row.highlighted ? "row highlighted-row" : "row"}
+              key={index}
+            >
               <div
                 className={
                   dividerOnLeft ? "six columns col1" : "eight columns col1"

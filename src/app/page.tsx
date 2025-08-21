@@ -1,4 +1,4 @@
-import { OfferItem } from "../components/contents/OfferItem";
+import { OfferItem } from "../components/contents/OfferItem/OfferItem";
 import { contents } from "../constants/content-objects";
 
 export default function Home() {

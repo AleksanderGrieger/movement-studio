@@ -1,4 +1,4 @@
-import { OfferItemProps } from "../components/contents/OfferItem";
+import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
 import MainOffer from "@/public/assets/imagess/offer-main-page.png";
 import MainSchedule from "@/public/assets/imagess/schedule-main-page.png";
 import MainPricelist from "@/public/assets/imagess/pricelist-main-page.png";

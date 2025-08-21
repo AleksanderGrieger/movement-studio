@@ -1,6 +1,11 @@
-import { OfferItem } from "@/src/components/contents/OfferItem";
+import { OfferItem } from "@/src/components/contents/OfferItem/OfferItem";
 import Table from "@/src/components/contents/Table";
-import { fioProgram, fioProgramsSchedule, spolecznikProgram, spolecznikProgramsSchedule } from "@/src/constants/content-objects";
+import {
+  fioProgram,
+  fioProgramsSchedule,
+  spolecznikProgram,
+  spolecznikProgramsSchedule,
+} from "@/src/constants/content-objects";
 
 export default function Programs() {
   return (
@@ -24,7 +29,10 @@ export default function Programs() {
         />
       ))}
       <div className="container">
-        <h3>Zajęcia odbędą się w siedzibie szkoły tańca Movement Studio w Białogardzie, ul. Kochanowskiego 30</h3>
+        <h3>
+          Zajęcia odbędą się w siedzibie szkoły tańca Movement Studio w
+          Białogardzie, ul. Kochanowskiego 30
+        </h3>
       </div>
       {spolecznikProgram.map((program, index) => (
         <OfferItem
@@ -45,7 +53,10 @@ export default function Programs() {
         />
       ))}
       <div className="container">
-        <h3>Warsztaty odbędą się w siedzibie Stowarzyszenia Movement Studio w Białogardzie, przy ul. Kochanowskiego 30.</h3>
+        <h3>
+          Warsztaty odbędą się w siedzibie Stowarzyszenia Movement Studio w
+          Białogardzie, przy ul. Kochanowskiego 30.
+        </h3>
       </div>
     </>
   );

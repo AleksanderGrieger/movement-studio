@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import { ReactNode } from "react";
+import styles from "./OfferItem.module.css";
 
 interface OfferListItem {
   highlight?: string;
@@ -26,22 +27,16 @@ export const OfferItem = ({
   return (
     <div className="container container-padding-top-65">
       <div
-        className={
-          imgOnLeft ? "source-of-format" : "source-of-format row-reverse"
-        }
+        className={`${styles.offerItemWrapper} ${
+          !imgOnLeft && styles.rowReverse
+        }`}
       >
-        <div className="why-us-img">
-          <Image
-            id="source-of-formats-in-services"
-            src={image}
-            alt="source of formats in services section image"
-          />
+        <div className={styles.imageWrapper}>
+          <Image src={image} alt={`${title} image`} />
         </div>
-        <div className="why-us-text-container">
-          <h2 className="why-us-header">{title}</h2>
-          {description && (
-            <p className="source-of-format-text">{description}</p>
-          )}
+        <div className={styles.textContainer}>
+          <h2>{title}</h2>
+          {description && <p>{description}</p>}
           {list && (
             <ul>
               {list.map((item, index) => {

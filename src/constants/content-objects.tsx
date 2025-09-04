@@ -35,7 +35,7 @@ export const contents: OfferItemProps[] = [
     image: MainSchedule,
     title: "GRAFIK",
     description:
-      "Nie wiesz kiedy wybrać się na zajęcia? Tu znajdziesz pełny, godzinowy grafik zajęć, obowiazujący od października 2024r.",
+      "Nie wiesz kiedy wybrać się na zajęcia? Tu znajdziesz pełny, godzinowy grafik zajęć na sezon 2025 / 2026 r.",
     imgOnLeft: true,
     extraContent: (
       <TextButton link={schedule} classNames="link">
@@ -490,7 +490,8 @@ export const scheduleList: TableProps[] = [
     ],
   },
   {
-    title: "KOŁOBRZEG - SEZON 2025/26 - Factory Resort (ul. Kasprowicza 10)",
+    title:
+      "KOŁOBRZEG - SEZON 2025/26 -  ul. Mazowiecka 29, klatka B. Wejście od strony ul. Wielkopolskiej",
     rows: [],
   },
   {

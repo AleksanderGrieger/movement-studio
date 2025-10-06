@@ -426,7 +426,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "17:00",
-        col2: "Taniec współczesny (gr sportowa)",
+        col2: "Latino solo kids (gr sportowa)",
       },
       {
         col1: "18:00",
@@ -434,7 +434,7 @@ export const scheduleList: TableProps[] = [
       },
       {
         col1: "19:15",
-        col2: "Latino solo kids (gr sportowa)",
+        col2: "Taniec współczesny (gr sportowa)",
       },
       {
         col1: "20:15",
@@ -531,7 +531,7 @@ export const scheduleList: TableProps[] = [
         col2: "Impro (gr sportowa) - 2 razy w miesiącu (wszystkie grupy tanec współczesny)",
       },
       {
-        col1: "20:00",
+        col1: "20:15",
         col2: "Latino solo Basic dorośli",
       },
     ],
@@ -540,7 +540,7 @@ export const scheduleList: TableProps[] = [
     title: "Czwartek",
     rows: [
       {
-        col1: "16:15",
+        col1: "16:30",
         col2: "Nabór tanec współczesny",
       },
       {

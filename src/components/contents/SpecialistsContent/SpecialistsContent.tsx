@@ -1,5 +1,5 @@
 import { SpecialistCard } from "./SpecialistCard";
-import styles from "./SpecialistsContent.module.css";
+import styles from "./SpecialistsContent.module.scss";
 
 export const SpecialistsContent = () => {
   return (

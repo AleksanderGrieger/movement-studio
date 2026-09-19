@@ -1,4 +1,4 @@
-import styles from "./AboutContent.module.css";
+import styles from "./AboutContent.module.scss";
 
 export const AboutContent = () => {
   return (

@@ -1,4 +1,4 @@
-import styles from "./SpecialistCard.module.css";
+import styles from "./SpecialistCard.module.scss";
 
 interface SpecialistCardProps {
   name: string;

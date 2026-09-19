@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import { ReactNode } from "react";
-import styles from "./OfferItem.module.css";
+import styles from "./OfferItem.module.scss";
 
 interface OfferListItem {
   highlight?: string;

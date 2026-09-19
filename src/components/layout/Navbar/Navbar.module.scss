@@ -1,0 +1,186 @@
+@use "../../../styles/variables" as *;
+
+.nav {
+  padding-top: 26px;
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: 2rem;
+  }
+}
+
+.logoColumn {
+  @media (max-width: $breakpoint-md) {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.logo {
+  width: 224px;
+  height: calc((294px * 20) / 100);
+
+  @media (max-width: $breakpoint-lg) {
+    width: 100%;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 127px;
+    height: calc((210px * 20) / 100);
+  }
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.navMobileHeader {
+  display: none;
+
+  img {
+    width: 127px;
+    height: calc((210px * 20) / 100);
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.mobileMenuButton {
+  display: none;
+  visibility: hidden;
+  color: $color-mobile-nav-text;
+
+  @media (max-width: $breakpoint-md) {
+    display: block;
+    visibility: visible;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      color: #fafafa;
+    }
+  }
+}
+
+.navButtonsColumn {
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.navButtons {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.linkList {
+  list-style-type: none;
+
+  > li {
+    display: inline-block;
+    padding: 12px 8px;
+    margin-left: 16px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    > a {
+      text-decoration: none;
+      color: $color-white;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    > li {
+      padding: 6px 0;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    > li {
+      padding: 12px 8px;
+    }
+  }
+}
+
+.active {
+  color: $color-primary;
+}
+
+.mobileActive {
+  display: block !important;
+  position: absolute;
+  width: 100% !important;
+  height: 450px;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $color-mobile-nav-bg;
+  padding: 2rem;
+  margin-left: 0;
+  border-bottom: 2px solid $color-mobile-nav-border;
+
+  .navMobileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .linkList {
+    margin-top: 2rem;
+
+    > li,
+    > li:first-of-type {
+      display: block;
+      margin-left: 0;
+    }
+
+    li a {
+      color: $color-mobile-nav-text;
+      font-weight: 600;
+
+      &.active {
+        color: $color-primary;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    height: 510px;
+  }
+}
+
+.mobileActiveButtons {
+  filter: invert(1);
+}
+
+.mobileActiveNavButtons {
+  display: block !important;
+  position: absolute;
+  z-index: 1;
+  left: -12px;
+  top: 380px;
+
+  .navButtons {
+    justify-content: flex-start;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    left: 2.8rem;
+    top: 460px;
+  }
+}

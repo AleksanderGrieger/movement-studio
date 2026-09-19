@@ -1,4 +1,3 @@
-import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
 import MainOffer from "@/public/assets/imagess/offer-main-page.png";
 import MainSchedule from "@/public/assets/imagess/schedule-main-page.png";
 import MainPricelist from "@/public/assets/imagess/pricelist-main-page.png";
@@ -14,9 +13,10 @@ import Birthday from "@/public/assets/imagess/birthday.png";
 import FioPoster1 from "@/public/assets/imagess/project-fio-poster-1.png";
 import FioPoster2 from "@/public/assets/imagess/project-fio-poster-2.png";
 import SpolecznikPoster1 from "@/public/assets/imagess/project-spolecznik-poster-1.png";
-import { TextButton } from "../components/buttons/TextButton";
 import { aboutUs, contact, offer, pricelist, schedule } from "./routing";
-import { TableProps } from "../components/contents/Table";
+import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
+import { TextButton } from "../components/buttons/TextButton/TextButton";
+import { TableProps } from "../components/contents/Table/Table";
 
 export const contents: OfferItemProps[] = [
   {
@@ -25,11 +25,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Tutaj zapoznasz się z naszą ofertą zajęć. Oferujemy zajęcia taneczne i ruchowe w godzinach popołudniowych od wtorku do czwartku.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={offer} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={offer}>Więcej</TextButton>,
   },
   {
     image: MainSchedule,
@@ -37,11 +33,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Nie wiesz kiedy wybrać się na zajęcia? Tu znajdziesz pełny, godzinowy grafik zajęć na sezon 2025 / 2026 r.",
     imgOnLeft: true,
-    extraContent: (
-      <TextButton link={schedule} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={schedule}>Więcej</TextButton>,
   },
   {
     image: MainPricelist,
@@ -49,11 +41,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Tutaj sprawdzisz ceny m.in. karnetów czy pojedynczych wejściówek na zajęcia.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={pricelist} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={pricelist}>Więcej</TextButton>,
   },
   {
     image: MainAboutUs,
@@ -61,11 +49,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Chcesz poznać nas bliżej? Tu znajdziesz informacje o właścicielkach oraz instruktorach studia.",
     imgOnLeft: true,
-    extraContent: (
-      <TextButton link={aboutUs} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={aboutUs}>Więcej</TextButton>,
   },
   {
     image: MainContact,
@@ -73,11 +57,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Masz pytania co do zajęć, grafiku czy po prostu chcesz dowiedzieć się więcej? Tutaj znajdują się różne możliwości kontaktu z naszym studiem.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={contact} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={contact}>Więcej</TextButton>,
   },
 ];
 

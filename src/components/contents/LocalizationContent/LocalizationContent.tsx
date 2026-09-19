@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./LocalizationContent.module.css";
+import styles from "./LocalizationContent.module.scss";
 
 export const LocalizationContent = () => {
   const [isOpen, setIsOpen] = useState(false);

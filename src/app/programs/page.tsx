@@ -1,5 +1,5 @@
 import { OfferItem } from "@/src/components/contents/OfferItem/OfferItem";
-import Table from "@/src/components/contents/Table";
+import Table from "@/src/components/contents/Table/Table";
 import {
   fioProgram,
   fioProgramsSchedule,

@@ -713,13 +713,6 @@ export const specialistCards: SpecialistCardProps[] = [
       "Tancerka najwyższej międzynarodowej klasy tanecznej ‚S’ w tańcach standardowych i latynoamerykańskich. Mistrzyni Polski w tańcach standardowych na Otwartych Mistrzostwach Polski, II Vicemistrzyni Polski w 10 tańcach, wielokrotna finalistka Mistrzostw Polski, półfinalistka Pucharu Europy w 10 tańcach. Magister wychowania fizycznego oraz oligofrenopedagog. Instruktor sportu tanecznego, trener personalny oraz trener osób z niepełnosprawnościami.",
   },
   {
-    name: "Milena Chomicz",
-    image: Milena,
-    profession: "ZAWODOWA TANCERKA",
-    description:
-      "Instruktor i Choreograf tańca ludowego oraz tańca charakterystycznego. Tancerka z 26 letnim stażem tanecznym. Wychowanka Zespołu Tanecznego „Algi” w Kołobrzegu, w którym tańczyła 15 lat oraz wyjeżdżała przez 10 lat w trasy koncertowe do Danii. W ‚Algach’ zdobywała swoje doświadczenie oraz uczyła kolejne pokolenia tancerzy. Prowadząca zajęcia z dziećmi, młodzieżą oraz dorosłymi. Od 15 lat przygotowuje również polonezy studniówkowe w szkołach średnich. Kocha taniec ludowy, to jej życiowa pasja, miłością darzy też taniec współczesny, towarzyski oraz high heels",
-  },
-  {
     name: "Magdalena Łopucka",
     image: Magda,
     profession: "ZAWODOWA TANCERKA",

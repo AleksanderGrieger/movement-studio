@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={fontVariables}>
+    <html lang="pl" data-theme="a" className={fontVariables}>
       <body>
         <main>
           <Header />

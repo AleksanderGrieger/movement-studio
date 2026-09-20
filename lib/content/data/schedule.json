@@ -1,0 +1,221 @@
+{
+  "labels": [
+    { "slug": "dorosli", "name": "Dorośli", "tag": "dorośli", "colorToken": "--label-adults", "order": 1 },
+    { "slug": "dzieci", "name": "Dzieci", "tag": "dzieci", "colorToken": "--label-kids", "order": 2 },
+    { "slug": "nabor", "name": "Nabór", "tag": "nabór", "colorToken": "--label-intake", "order": 3 },
+    { "slug": "sportowa", "name": "Gr. sportowa", "tag": "gr. sportowa", "colorToken": "--label-sport", "order": 4 }
+  ],
+  "weekdays": [
+    { "slug": "poniedzialek", "name": "Poniedziałek", "order": 1 },
+    { "slug": "wtorek", "name": "Wtorek", "order": 2 },
+    { "slug": "sroda", "name": "Środa", "order": 3 },
+    { "slug": "czwartek", "name": "Czwartek", "order": 4 },
+    { "slug": "piatek", "name": "Piątek", "order": 5 },
+    { "slug": "sobota", "name": "Sobota", "order": 6 },
+    { "slug": "niedziela", "name": "Niedziela", "order": 7 }
+  ],
+  "entries": [
+    {
+      "slug": "bg-pon-1615-taniec-towarzyski",
+      "location": "bialogard",
+      "day": "poniedzialek",
+      "start": "16:15",
+      "name": "Taniec towarzyski",
+      "labels": ["dzieci", "nabor"]
+    },
+    {
+      "slug": "bg-pon-1700-latino-solo-kids",
+      "location": "bialogard",
+      "day": "poniedzialek",
+      "start": "17:00",
+      "name": "Latino solo kids",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "bg-pon-1800-taniec-towarzyski",
+      "location": "bialogard",
+      "day": "poniedzialek",
+      "start": "18:00",
+      "name": "Taniec towarzyski",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "bg-pon-1915-taniec-wspolczesny",
+      "location": "bialogard",
+      "day": "poniedzialek",
+      "start": "19:15",
+      "name": "Taniec współczesny",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "bg-pon-2015-latino-solo",
+      "location": "bialogard",
+      "day": "poniedzialek",
+      "start": "20:15",
+      "name": "Latino solo",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "bg-wt-1800-ladies-style",
+      "location": "bialogard",
+      "day": "wtorek",
+      "start": "18:00",
+      "name": "Ladies style",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "bg-sr-1615-taniec-wspolczesny",
+      "location": "bialogard",
+      "day": "sroda",
+      "start": "16:15",
+      "name": "Taniec współczesny",
+      "labels": ["dzieci", "nabor"]
+    },
+    {
+      "slug": "bg-sr-1700-taniec-wspolczesny",
+      "location": "bialogard",
+      "day": "sroda",
+      "start": "17:00",
+      "name": "Taniec współczesny",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "bg-sr-1800-sport-kids",
+      "location": "bialogard",
+      "day": "sroda",
+      "start": "18:00",
+      "name": "Sport kids",
+      "labels": ["dzieci"]
+    },
+    {
+      "slug": "bg-sr-1900-power-dance",
+      "location": "bialogard",
+      "day": "sroda",
+      "start": "19:00",
+      "name": "Power Dance",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "bg-czw-1615-latino-solo-kids",
+      "location": "bialogard",
+      "day": "czwartek",
+      "start": "16:15",
+      "name": "Latino solo kids",
+      "labels": ["dzieci", "nabor"]
+    },
+    {
+      "slug": "bg-czw-1700-latino-solo-kids",
+      "location": "bialogard",
+      "day": "czwartek",
+      "start": "17:00",
+      "name": "Latino solo kids",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "bg-czw-1800-taniec-towarzyski",
+      "location": "bialogard",
+      "day": "czwartek",
+      "start": "18:00",
+      "name": "Taniec towarzyski",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "kg-wt-1630-latino-solo-kids",
+      "location": "kolobrzeg",
+      "day": "wtorek",
+      "start": "16:30",
+      "name": "Latino solo kids",
+      "labels": ["dzieci", "nabor"]
+    },
+    {
+      "slug": "kg-wt-1715-latino-solo-masters",
+      "location": "kolobrzeg",
+      "day": "wtorek",
+      "start": "17:15",
+      "name": "Latino solo Masters",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "kg-wt-1815-modern-jazz",
+      "location": "kolobrzeg",
+      "day": "wtorek",
+      "start": "18:15",
+      "name": "Modern / Jazz 7–12 lat",
+      "labels": ["dzieci"]
+    },
+    {
+      "slug": "kg-wt-1915-trening-motoryczny",
+      "location": "kolobrzeg",
+      "day": "wtorek",
+      "start": "19:15",
+      "name": "Trening motoryczny",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "kg-sr-1800-ladies-style",
+      "location": "kolobrzeg",
+      "day": "sroda",
+      "start": "18:00",
+      "name": "Ladies style podstawowy",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "kg-sr-1900-akrobatyka",
+      "location": "kolobrzeg",
+      "day": "sroda",
+      "start": "19:00",
+      "name": "Akrobatyka",
+      "labels": ["dzieci", "sportowa"],
+      "note": "2× w miesiącu"
+    },
+    {
+      "slug": "kg-sr-1900-impro",
+      "location": "kolobrzeg",
+      "day": "sroda",
+      "start": "19:00",
+      "name": "Impro",
+      "labels": ["dzieci", "sportowa"],
+      "note": "2× w miesiącu"
+    },
+    {
+      "slug": "kg-sr-2015-latino-solo-basic",
+      "location": "kolobrzeg",
+      "day": "sroda",
+      "start": "20:15",
+      "name": "Latino solo Basic",
+      "labels": ["dorosli"]
+    },
+    {
+      "slug": "kg-czw-1630-taniec-wspolczesny",
+      "location": "kolobrzeg",
+      "day": "czwartek",
+      "start": "16:30",
+      "name": "Taniec współczesny",
+      "labels": ["dzieci", "nabor"]
+    },
+    {
+      "slug": "kg-czw-1715-modern-jazz",
+      "location": "kolobrzeg",
+      "day": "czwartek",
+      "start": "17:15",
+      "name": "Modern / Jazz 7–12 lat",
+      "labels": ["dzieci"]
+    },
+    {
+      "slug": "kg-czw-1815-klasyka",
+      "location": "kolobrzeg",
+      "day": "czwartek",
+      "start": "18:15",
+      "name": "Klasyka",
+      "labels": ["dzieci", "sportowa"]
+    },
+    {
+      "slug": "kg-czw-1900-technika-modern-jazz",
+      "location": "kolobrzeg",
+      "day": "czwartek",
+      "start": "19:00",
+      "name": "Technika modern / jazz",
+      "labels": ["dzieci", "sportowa"]
+    }
+  ]
+}

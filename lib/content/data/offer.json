@@ -1,0 +1,154 @@
+[
+  {
+    "slug": "dorosli",
+    "title": "Dla dorosłych",
+    "order": 1,
+    "scheduleFilter": "dorosli",
+    "scheduleFilterLabel": "Zobacz terminy zajęć dla dorosłych",
+    "items": [
+      {
+        "slug": "latino-solo",
+        "title": "Latino Solo",
+        "body": "Samba, cha-cha, rumba, paso doble i jive oraz tańce karaibskie: salsa, bachata, merengue. Dla kobiet i mężczyzn, bez partnera.",
+        "order": 1
+      },
+      {
+        "slug": "ladies-style",
+        "title": "Ladies Style",
+        "body": "Zajęcia dla kobiet, które chcą wyrazić siebie poprzez ruch. Latino, jazz, commercial oraz elementy tańca klasycznego i współczesnego.",
+        "order": 2
+      },
+      {
+        "slug": "power-dance",
+        "title": "Power Dance",
+        "body": "Taneczne kardio z elementami fitnessu, ćwiczeń wzmacniających i rozciągających. Spalamy kalorie w rytm muzyki.",
+        "order": 3
+      },
+      {
+        "slug": "body-workout-stretching",
+        "title": "Body workout + stretching",
+        "body": "Trening funkcjonalny i rozciąganie prowadzone przez fizjoterapeutkę i trenerkę przygotowania motorycznego.",
+        "order": 4
+      },
+      {
+        "slug": "sexy-dance",
+        "title": "Sexy Dance",
+        "body": "Mieszanka najbardziej zmysłowych stylów tanecznych — bez względu na wiek i doświadczenie taneczne.",
+        "order": 5
+      },
+      {
+        "slug": "disco-folk",
+        "title": "Disco Folk",
+        "body": "Krótkie, proste choreografie do najpopularniejszych polskich utworów z elementami folkloru.",
+        "order": 6
+      }
+    ]
+  },
+  {
+    "slug": "pary",
+    "title": "Dla par",
+    "order": 2,
+    "items": [
+      {
+        "slug": "taniec-towarzyski-pary",
+        "title": "Taniec towarzyski",
+        "body": "Tańce standardowe — walc, tango — oraz latynoamerykańskie: cha-cha i rumba. Dla par, które chcą aktywnie spędzać czas razem.",
+        "order": 1
+      },
+      {
+        "slug": "taniec-uzytkowy",
+        "title": "Taniec użytkowy",
+        "body": "Kurs dla osób szykujących się na wesele lub inne przyjęcie. Po nim żaden parkiet nie będzie Wam straszny.",
+        "order": 2
+      },
+      {
+        "slug": "pierwszy-taniec",
+        "title": "Pierwszy taniec",
+        "body": "Choreografia przygotowana pod Waszą piosenkę, z wejściem na parkiet, ukłonem i zakończeniem — dopasowana do układu sali weselnej.",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "slug": "dzieci",
+    "title": "Dla dzieci i młodzieży",
+    "order": 3,
+    "scheduleFilter": "dzieci",
+    "scheduleFilterLabel": "Zobacz terminy zajęć dla dzieci",
+    "items": [
+      {
+        "slug": "dance-mix",
+        "title": "Dance Mix — 3–6 lat",
+        "body": "Zajęcia taneczno-umuzykalniające dla najmłodszych, budujące poczucie rytmu i swobodę ruchu.",
+        "order": 1
+      },
+      {
+        "slug": "taniec-towarzyski-dzieci",
+        "title": "Taniec towarzyski",
+        "body": "Nauka tańców standardowych i latynoamerykańskich w parach. Grupa z nastawieniem na turnieje tańca.",
+        "order": 2
+      },
+      {
+        "slug": "latino-solo-kids",
+        "title": "Latino Solo Kids",
+        "body": "Zajęcia dla solistów — salsa, bachata, jive. Grupa startująca w profesjonalnych turniejach.",
+        "order": 3
+      },
+      {
+        "slug": "podstawy-baletu",
+        "title": "Podstawy baletu",
+        "body": "Klasyka jako osobne zajęcia i jako uzupełnienie treningu innych form tańca.",
+        "order": 4
+      },
+      {
+        "slug": "sport-kids",
+        "title": "Sport Kids",
+        "body": "Zajęcia sportowe rozwijające koordynację, równowagę i ogólną kondycję fizyczną.",
+        "order": 5
+      },
+      {
+        "slug": "teen-movement",
+        "title": "Teen Movement",
+        "body": "Podstawy tańców latino i tańca użytkowego przed dyskoteką, balem ósmoklasisty czy studniówką.",
+        "order": 6
+      },
+      {
+        "slug": "baby-movement",
+        "title": "Baby Movement — 6–18 mies.",
+        "body": "Zajęcia dla rodziców z dziećmi w chuście lub nosidle. Wspólny czas, a przy okazji trening dla rodzica.",
+        "order": 7
+      }
+    ]
+  },
+  {
+    "slug": "na-zamowienie",
+    "title": "Na zamówienie",
+    "order": 4,
+    "items": [
+      {
+        "slug": "urodzinki",
+        "title": "Urodzinki taneczne",
+        "body": "Animator, dekoracja sali i stołu, pamiątkowe zdjęcia. Pakiet dla 10 osób — 700 zł, każda kolejna osoba 40 zł.",
+        "order": 1
+      },
+      {
+        "slug": "wieczor-panienski",
+        "title": "Wieczór panieński",
+        "body": "Sala na wyłączność, warsztat taneczny do wyboru i lampka prosecco na powitanie. Pakiet do 10 osób — 600 zł.",
+        "order": 2
+      },
+      {
+        "slug": "latinoteka",
+        "title": "Latinoteka",
+        "body": "Impreza w rytmach salsy, bachaty, samby i rumby. Terminy podajemy z miesięcznym wyprzedzeniem. Wstęp 30 zł.",
+        "order": 3
+      },
+      {
+        "slug": "wynajem-sali",
+        "title": "Wynajem sali",
+        "body": "Sala z lożą i dwiema szatniami z toaletami — na kursy, szkolenia i imprezy okolicznościowe. Cena ustalana indywidualnie.",
+        "order": 4
+      }
+    ]
+  }
+]

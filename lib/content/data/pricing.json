@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "bialogard-dorosli",
+    "location": "bialogard",
+    "title": "Dorośli",
+    "order": 1,
+    "rows": [
+      { "slug": "bg-latino-solo", "name": "Latino solo", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "bg-ladies-style", "name": "Ladies style", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "bg-power-dance", "name": "Power dance", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" }
+    ]
+  },
+  {
+    "slug": "bialogard-dzieci",
+    "location": "bialogard",
+    "title": "Dzieci",
+    "order": 2,
+    "rows": [
+      { "slug": "bg-tt-nabor", "name": "Taniec towarzyski — nabór", "cadence": "1× 45 min w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "bg-tt-sportowa", "name": "Taniec towarzyski — gr. sportowa", "cadence": "2× 1 h 15 min w tygodniu", "price": 300, "currency": "PLN" },
+      { "slug": "bg-lsk-nabor", "name": "Latino solo kids — nabór", "cadence": "1× 45 min w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "bg-lsk-sportowa", "name": "Latino solo kids — gr. sportowa", "cadence": "2× 1 h w tygodniu", "price": 280, "currency": "PLN" },
+      { "slug": "bg-tw-nabor", "name": "Taniec współczesny — nabór", "cadence": "1× 45 min w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "bg-tw-sportowa", "name": "Taniec współczesny — gr. sportowa", "cadence": "2× 1 h w tygodniu", "price": 280, "currency": "PLN" },
+      { "slug": "bg-sport-kids", "name": "Sport kids", "cadence": "dla dzieci z zajęć stałych — 10 zł za pojedyncze zajęcia", "price": 140, "currency": "PLN" }
+    ]
+  },
+  {
+    "slug": "bialogard-inne",
+    "location": "bialogard",
+    "title": "Inne",
+    "order": 3,
+    "rows": [
+      { "slug": "bg-indywidualne", "name": "Lekcje indywidualne (zawodnicy)", "cadence": "45 min", "price": 130, "currency": "PLN" },
+      { "slug": "bg-pierwszy-taniec", "name": "Pierwszy taniec", "cadence": "45 min", "price": 150, "currency": "PLN" },
+      { "slug": "bg-pierwszy-taniec-pakiet", "name": "Pierwszy taniec — pakiet", "cadence": "5× 45 min", "price": 700, "currency": "PLN" }
+    ]
+  },
+  {
+    "slug": "kolobrzeg-dorosli",
+    "location": "kolobrzeg",
+    "title": "Dorośli",
+    "order": 1,
+    "rows": [
+      { "slug": "kg-latino-solo-basic", "name": "Latino solo basic", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "kg-latino-solo-masters", "name": "Latino solo masters", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "kg-ladies-style", "name": "Ladies style", "cadence": "1× 1 h w tygodniu", "price": 140, "currency": "PLN" }
+    ]
+  },
+  {
+    "slug": "kolobrzeg-dzieci",
+    "location": "kolobrzeg",
+    "title": "Dzieci",
+    "order": 2,
+    "rows": [
+      { "slug": "kg-tw-nabor", "name": "Taniec współczesny — nabór", "cadence": "1× 45 min w tygodniu", "price": 140, "currency": "PLN" },
+      { "slug": "kg-tw-7-12-sportowa", "name": "Taniec współczesny 7–12 lat — gr. sportowa", "cadence": "2× 1 h w tyg., klasyka 1× 45 min, impro i akrobatyka 2× w miesiącu", "price": 300, "currency": "PLN" },
+      { "slug": "kg-tw-sportowa", "name": "Taniec współczesny — gr. sportowa", "cadence": "motoryka i technika po 2 h w tyg., klasyka 45 min, impro i akrobatyka 2× w miesiącu", "price": 400, "currency": "PLN" },
+      { "slug": "kg-akrobatyka", "name": "Akrobatyka", "cadence": "2× 1 h w miesiącu", "price": 120, "currency": "PLN" },
+      { "slug": "kg-lsk-nabor", "name": "Latino solo kids — nabór", "cadence": "1× 45 min w tygodniu", "price": 140, "currency": "PLN" }
+    ]
+  },
+  {
+    "slug": "kolobrzeg-inne",
+    "location": "kolobrzeg",
+    "title": "Inne",
+    "order": 3,
+    "rows": [
+      { "slug": "kg-indywidualne", "name": "Lekcje indywidualne (zawodnicy)", "cadence": "45 min", "price": 130, "currency": "PLN" },
+      { "slug": "kg-pierwszy-taniec", "name": "Pierwszy taniec", "cadence": "45 min", "price": 150, "currency": "PLN" },
+      { "slug": "kg-pierwszy-taniec-pakiet", "name": "Pierwszy taniec — pakiet", "cadence": "5× 45 min", "price": 700, "currency": "PLN" }
+    ]
+  }
+]

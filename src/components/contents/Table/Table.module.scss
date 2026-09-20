@@ -1,0 +1,67 @@
+@use "../../../styles/variables" as *;
+
+.wrapper {
+  padding-top: 65px;
+  padding-bottom: 30px;
+}
+
+.table {
+  > :global(.row) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $color-white;
+    position: relative;
+
+    &:nth-of-type(even) {
+      background-color: rgba($color-gray-dark, 0.25);
+    }
+
+    > :global(.columns) {
+      padding: 20px;
+      margin: 0;
+    }
+  }
+}
+
+.verticalDivider {
+  height: 100%;
+  width: 1px;
+  border-right: 1px solid $color-white;
+  position: absolute;
+  right: 25%;
+  top: 0;
+
+  @media (max-width: $breakpoint-xl) {
+    right: 33%;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    right: 33%;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    right: 50%;
+  }
+}
+
+.dividerLeft {
+  left: 50%;
+}
+
+.highlightedRow {
+  font-size: 3rem;
+
+  .col2 {
+    justify-content: center;
+  }
+}
+
+.col2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.col2Left {
+  justify-content: flex-start;
+}

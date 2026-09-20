@@ -1,0 +1,19 @@
+@use "../../../styles/variables" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.instagramIcon {
+  width: 32px;
+  height: 32px;
+  background: url("../../../../public/assets/imagess/instagram-icon.svg");
+}
+
+.facebookIcon {
+  width: 32px;
+  height: 32px;
+  background: url("../../../../public/assets/imagess/facebook-icon.svg");
+}

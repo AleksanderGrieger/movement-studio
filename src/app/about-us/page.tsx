@@ -1,10 +1,10 @@
-import { ExperienceInAboutContent } from "@/src/components/contents/ExperienceInAboutContent";
-import { SpecialistsContent } from "@/src/components/contents/SpecialistsContent";
+import { AboutContent } from "@/src/components/contents/AboutContent/AboutContent";
+import { SpecialistsContent } from "@/src/components/contents/SpecialistsContent/SpecialistsContent";
 
 export default function About() {
   return (
     <>
-      <ExperienceInAboutContent />
+      <AboutContent />
       <SpecialistsContent />
     </>
   );

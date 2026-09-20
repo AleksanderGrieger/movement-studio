@@ -1,4 +1,3 @@
-import { OfferItemProps } from "../components/contents/OfferItem";
 import MainOffer from "@/public/assets/imagess/offer-main-page.png";
 import MainSchedule from "@/public/assets/imagess/schedule-main-page.png";
 import MainPricelist from "@/public/assets/imagess/pricelist-main-page.png";
@@ -14,9 +13,17 @@ import Birthday from "@/public/assets/imagess/birthday.png";
 import FioPoster1 from "@/public/assets/imagess/project-fio-poster-1.png";
 import FioPoster2 from "@/public/assets/imagess/project-fio-poster-2.png";
 import SpolecznikPoster1 from "@/public/assets/imagess/project-spolecznik-poster-1.png";
-import { TextButton } from "../components/buttons/TextButton";
+import Karolina from "@/public/assets/imagess/karolina.png";
+import Hania from "@/public/assets/imagess/hania.png";
+import Milena from "@/public/assets/imagess/milena.png";
+import Magda from "@/public/assets/imagess/magda.png";
+import Maria from "@/public/assets/imagess/maria.png";
+import Weronika from "@/public/assets/imagess/weronika.png";
 import { aboutUs, contact, offer, pricelist, schedule } from "./routing";
-import { TableProps } from "../components/contents/Table";
+import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
+import { TextButton } from "../components/buttons/TextButton/TextButton";
+import { TableProps } from "../components/contents/Table/Table";
+import { SpecialistCardProps } from "../components/contents/SpecialistsContent/SpecialistCard";
 
 export const contents: OfferItemProps[] = [
   {
@@ -25,11 +32,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Tutaj zapoznasz się z naszą ofertą zajęć. Oferujemy zajęcia taneczne i ruchowe w godzinach popołudniowych od wtorku do czwartku.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={offer} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={offer}>Więcej</TextButton>,
   },
   {
     image: MainSchedule,
@@ -37,11 +40,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Nie wiesz kiedy wybrać się na zajęcia? Tu znajdziesz pełny, godzinowy grafik zajęć na sezon 2025 / 2026 r.",
     imgOnLeft: true,
-    extraContent: (
-      <TextButton link={schedule} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={schedule}>Więcej</TextButton>,
   },
   {
     image: MainPricelist,
@@ -49,11 +48,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Tutaj sprawdzisz ceny m.in. karnetów czy pojedynczych wejściówek na zajęcia.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={pricelist} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={pricelist}>Więcej</TextButton>,
   },
   {
     image: MainAboutUs,
@@ -61,11 +56,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Chcesz poznać nas bliżej? Tu znajdziesz informacje o właścicielkach oraz instruktorach studia.",
     imgOnLeft: true,
-    extraContent: (
-      <TextButton link={aboutUs} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={aboutUs}>Więcej</TextButton>,
   },
   {
     image: MainContact,
@@ -73,11 +64,7 @@ export const contents: OfferItemProps[] = [
     description:
       "Masz pytania co do zajęć, grafiku czy po prostu chcesz dowiedzieć się więcej? Tutaj znajdują się różne możliwości kontaktu z naszym studiem.",
     imgOnLeft: false,
-    extraContent: (
-      <TextButton link={contact} classNames="link">
-        Więcej
-      </TextButton>
-    ),
+    extraContent: <TextButton link={contact}>Więcej</TextButton>,
   },
 ];
 
@@ -701,5 +688,51 @@ export const spolecznikProgramsSchedule: TableProps[] = [
         col2: "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe",
       },
     ],
+  },
+];
+
+export const specialistCards: SpecialistCardProps[] = [
+  {
+    name: "Karolina Bobryk-Kopcińska",
+    image: Karolina,
+    profession: "ZAWODOWA TANCERKA",
+    description:
+      "Tancerka międzynarodowej klasy tanecznej ‚S’ w tańcach latynoamerykańskich. Mistrzyni Polski w formacji tanecznej, półfinalistka Mistrzostw Świata formacji, wielokrotna Mistrzyni Pomorza. Od wielu lat trenerka i instruktorka tańca, specjalizująca się w tańcach latynoamerykańskich oraz karaibskich. Wytrenowała Mistrzynie Polski, Świata i Europy Federacji WADF. Z wykształcenia magister fizjoterapii specjalizująca się w terapii wad w postawie ciała oraz skoliozy oraz terapeutka integracji sensorycznej.",
+  },
+  {
+    name: "Hanna Maciejewska",
+    image: Hania,
+    profession: "ZAWODOWA TANCERKA",
+    description:
+      "Tancerka najwyższej międzynarodowej klasy tanecznej ‚S’ w tańcach standardowych i latynoamerykańskich. Mistrzyni Polski w tańcach standardowych na Otwartych Mistrzostwach Polski, II Vicemistrzyni Polski w 10 tańcach, wielokrotna finalistka Mistrzostw Polski, półfinalistka Pucharu Europy w 10 tańcach. Magister wychowania fizycznego oraz oligofrenopedagog. Instruktor sportu tanecznego, trener personalny oraz trener osób z niepełnosprawnościami.",
+  },
+  {
+    name: "Milena Chomicz",
+    image: Milena,
+    profession: "ZAWODOWA TANCERKA",
+    description:
+      "Instruktor i Choreograf tańca ludowego oraz tańca charakterystycznego. Tancerka z 26 letnim stażem tanecznym. Wychowanka Zespołu Tanecznego „Algi” w Kołobrzegu, w którym tańczyła 15 lat oraz wyjeżdżała przez 10 lat w trasy koncertowe do Danii. W ‚Algach’ zdobywała swoje doświadczenie oraz uczyła kolejne pokolenia tancerzy. Prowadząca zajęcia z dziećmi, młodzieżą oraz dorosłymi. Od 15 lat przygotowuje również polonezy studniówkowe w szkołach średnich. Kocha taniec ludowy, to jej życiowa pasja, miłością darzy też taniec współczesny, towarzyski oraz high heels",
+  },
+  {
+    name: "Magdalena Łopucka",
+    image: Magda,
+    profession: "ZAWODOWA TANCERKA",
+    description:
+      "Tancerka z 25 letnim stażem. Z wykształcenia choreograf tańca, nauczyciel i trener odżywiania. W swojej karierze wyszkoliła już kilka pokoleń polskich tancerzy, którzy prężnie rozwijają swoje umiejętności na arenie światowej. Wielokrotnie uznawana na szczeblach ogólnopolskich i międzynarodowych, lecz to zadowolenie tancerzy na sali treningowej cieszy ją najbardziej. Specjalizuje się w wielu technikach tańca, w szczególności w tańcu współczesnym, salsie, bachacie i autorskim projekcie POWER DANCE - czyli połączeniu tańca z elementami fitnessowymi, który nie tylko zadowoli miłośników energicznych choreografii, ale również tych, którzy chcą spalać kalorie i wymodelować sylwetkę.",
+  },
+  {
+    name: "Maria Murek",
+    image: Maria,
+    profession:
+      "Instruktorka Movement Studio specjalizująca się że w stylach: jazz i modern",
+    description:
+      "Tańczy od 4 roku życia.  Od wielu lat startuje w turniejach tanecznych wielokrotnie wygrywając w konkursach międzynarodowych i ogólnopolskich.  Jej ulubione style to modern, jazz oraz kategoria Performing Art Improvisation czyli improwizacja. Stale doskonali swoje umiejętności pod okiem światowej klasy trenerów i choreografów takich jak Rebecca Davis, Max Ostler, Gianna Martello,Gianina Paolantonio, Brigita Krasovec i wielu innych. Jest czterokrotną laureatką stypendium artystycznego Prezydent Miasta Kołobrzeg.",
+  },
+  {
+    name: "Weronika Wajda",
+    image: Weronika,
+    profession: "Instruktorka tańca współczesnego",
+    description:
+      "Swoją przygodę z tańcem rozpoczęła już w wieku 5 lat i od tamtej pory nieustannie rozwija swoją pasję. Od wielu lat bierze udział w turniejach tanecznych, zdobywając liczne nagrody w konkursach ogólnopolskich i międzynarodowych. Najbliższe jej sercu są style: modern, jazz oraz Performing Art Improvisation inaczej improwizacja, w której może w pełni wyrazić swoją kreatywność i emocje. Umiejętności doskonali pod okiem wybitnych trenerów i choreografów światowej klasy, m.in. Rebecci Davies, Maxa Ostlera, , Cooper Elbourn, Gianniny Paolantonio, czy Brigity Krasovec. Jest również laureatką stypendium artystycznego Prezydenta Miasta Kołobrzeg.",
   },
 ];

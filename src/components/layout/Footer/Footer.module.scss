@@ -1,0 +1,70 @@
+@use "../../../styles/variables" as *;
+
+.footer {
+  font-size: 2.2rem;
+  background-color: $color-black;
+  color: $color-white;
+  font-weight: 400;
+}
+
+.footerInner {
+  padding: 80px 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 4rem 0;
+  }
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.footerLogo {
+  display: block;
+  width: 215px;
+  height: 215px;
+}
+
+.footerInfo {
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > h4 {
+    color: $color-primary;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-right: unset;
+  }
+}
+
+.socialLinks {
+  padding-top: 45px;
+  justify-content: right;
+
+  @media (max-width: $breakpoint-md) {
+    justify-content: center;
+  }
+}
+
+.footerNav {
+  @media (max-width: $breakpoint-md) {
+    margin-top: 4rem;
+  }
+}
+
+.footerHr {
+  @media (max-width: $breakpoint-md) {
+    margin: 2rem 0;
+  }
+}

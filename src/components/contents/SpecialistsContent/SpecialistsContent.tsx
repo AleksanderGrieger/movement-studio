@@ -1,13 +1,18 @@
-import { specialistCards } from "@/src/constants/content-objects";
-import { SpecialistCard } from "./SpecialistCard";
+import { SpecialistCard, SpecialistCardProps } from "./SpecialistCard";
 import styles from "./SpecialistsContent.module.scss";
 
-export const SpecialistsContent = () => {
+interface SpecialistsContentProps {
+  specialistCardsData: SpecialistCardProps[];
+}
+
+export const SpecialistsContent = ({
+  specialistCardsData,
+}: SpecialistsContentProps) => {
   return (
     <>
       <div className="container">
         <div className={styles.cardsWrapper}>
-          {specialistCards.map((card) => (
+          {specialistCardsData.map((card) => (
             <SpecialistCard
               key={card.name}
               name={card.name}

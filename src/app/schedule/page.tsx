@@ -1,5 +1,5 @@
 import Table from "@/src/components/contents/Table/Table";
-import { scheduleList } from "@/src/constants/content-objects";
+import { scheduleList } from "@/lib/content/content-objects";
 
 export default function Schedule() {
   return (

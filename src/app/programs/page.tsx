@@ -5,7 +5,7 @@ import {
   fioProgramsSchedule,
   spolecznikProgram,
   spolecznikProgramsSchedule,
-} from "@/src/constants/content-objects";
+} from "@/lib/content/content-objects";
 
 export default function Programs() {
   return (

@@ -1,5 +1,5 @@
 import { OfferItem } from "@/src/components/contents/OfferItem/OfferItem";
-import { offers } from "@/src/constants/content-objects";
+import { offers } from "@/lib/content/content-objects";
 
 export default function Offer() {
   return (

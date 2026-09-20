@@ -1,5 +1,5 @@
 import Table from "@/src/components/contents/Table/Table";
-import { pricelists } from "@/src/constants/content-objects";
+import { pricelists } from "@/lib/content/content-objects";
 
 export default function Pricelist() {
   return (

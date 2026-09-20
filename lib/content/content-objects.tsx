@@ -19,11 +19,17 @@ import Milena from "@/public/assets/imagess/milena.png";
 import Magda from "@/public/assets/imagess/magda.png";
 import Maria from "@/public/assets/imagess/maria.png";
 import Weronika from "@/public/assets/imagess/weronika.png";
-import { aboutUs, contact, offer, pricelist, schedule } from "./routing";
-import { OfferItemProps } from "../components/contents/OfferItem/OfferItem";
-import { TextButton } from "../components/buttons/TextButton/TextButton";
-import { TableProps } from "../components/contents/Table/Table";
-import { SpecialistCardProps } from "../components/contents/SpecialistsContent/SpecialistCard";
+import {
+  aboutUs,
+  contact,
+  offer,
+  pricelist,
+  schedule,
+} from "../../src/constants/routing";
+import { OfferItemProps } from "../../src/components/contents/OfferItem/OfferItem";
+import { TextButton } from "../../src/components/buttons/TextButton/TextButton";
+import { TableProps } from "../../src/components/contents/Table/Table";
+import { SpecialistCardProps } from "../../src/components/contents/SpecialistsContent/SpecialistCard";
 
 export const contents: OfferItemProps[] = [
   {

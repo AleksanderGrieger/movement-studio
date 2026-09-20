@@ -2,6 +2,7 @@ import "./styles.css";
 import "./globals.scss";
 import "./globals.css";
 import type { Metadata } from "next";
+import { fontVariables } from "../fonts";
 import { Header } from "../components/layout/Header/Header";
 import { Footer } from "../components/layout/Footer/Footer";
 
@@ -16,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
+    <html lang="pl" className={fontVariables}>
       <body>
         <main>
           <Header />

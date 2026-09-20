@@ -99,7 +99,12 @@
   --measure: 62ch;
   --weight-display: 400;
   --weight-body: 400;
-  --weight-strong: 600;
+  /* Deviation from §5.4, which specifies 600. Capsuula ships a single weight
+     (usWeightClass 400) where the prototype's Archivo carried a wght 100-900
+     axis, so 600 would be a browser-synthesized faux bold on every eyebrow,
+     button label and <strong>. Emphasis is carried by letter-spacing, colour
+     and size instead, which is how the rest of the system already works. */
+  --weight-strong: 400;
   --display-variation: normal;
   --display-case: none;
 

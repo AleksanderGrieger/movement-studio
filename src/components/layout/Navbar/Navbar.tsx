@@ -6,7 +6,7 @@ import Logo from "@/public/assets/imagess/logo-color.svg";
 import FooterLogo from "@/public/assets/imagess/logo-black.svg";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { CloseIcon } from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 import {
   home,
@@ -62,7 +62,7 @@ export const Navbar = () => {
             />
           </Link>
           <div className={styles.mobileMenuButton} onClick={toggleMobileNavbar}>
-            <CloseIcon />
+            <IoClose />
           </div>
         </div>
         <ul className={styles.linkList}>

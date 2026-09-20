@@ -1,0 +1,148 @@
+{
+  "navigation": [
+    { "label": "Oferta", "href": "#offer", "scrollSpy": true },
+    { "label": "Grafik", "href": "#schedule", "scrollSpy": true },
+    { "label": "Cennik", "href": "#pricelist", "scrollSpy": true },
+    { "label": "O nas", "href": "#about-us", "scrollSpy": true },
+    { "label": "Kontakt", "href": "#contact", "scrollSpy": true },
+    { "label": "Programy", "href": "/programs/", "scrollSpy": false }
+  ],
+  "header": {
+    "skipLink": "Przejdź do treści",
+    "logoAriaLabel": "Movement Studio — strona główna",
+    "navAriaLabel": "Nawigacja główna",
+    "cta": { "label": "Zadzwoń 577 437 237", "href": "tel:+48577437237" },
+    "menuButton": {
+      "label": "Menu",
+      "openAriaLabel": "Otwórz menu",
+      "closeAriaLabel": "Zamknij menu",
+      "panelAriaLabel": "Menu mobilne"
+    },
+    "themeToggle": {
+      "toLight": { "label": "Jasny", "ariaLabel": "Włącz tryb jasny" },
+      "toDark": { "label": "Ciemny", "ariaLabel": "Włącz tryb ciemny" }
+    }
+  },
+  "hero": {
+    "eyebrow": "Białogard · Kołobrzeg · sezon 2025/26",
+    "headline": [
+      [{ "text": "Taniec, który" }],
+      [{ "text": "zostaje", "emphasis": true }, { "text": " w Tobie" }],
+      [{ "text": "na dłużej" }]
+    ],
+    "lead": "Studio tańca prowadzone przez zawodowe tancerki i trenerki. Zajęcia dla dorosłych, par oraz dzieci — od pierwszych kroków po grupy turniejowe.",
+    "actions": [
+      { "label": "Sprawdź grafik", "href": "#schedule" },
+      { "label": "Zobacz cennik", "href": "#pricelist" }
+    ],
+    "meta": ["Zajęcia od wtorku do czwartku", "Karnety od 140 zł", "Dwie lokalizacje"],
+    "video": {
+      "src": "/assets/video/hero-clip.mp4",
+      "poster": null,
+      "width": 440,
+      "height": 889,
+      "ariaLabel": "Nagranie z występu scenicznego uczennic Movement Studio"
+    },
+    "badge": "Scena 2025"
+  },
+  "marquee": [
+    "Latino Solo",
+    "Ladies Style",
+    "Power Dance",
+    "Taniec towarzyski",
+    "Modern / Jazz",
+    "Pierwszy taniec",
+    "Sport Kids",
+    "Disco Folk",
+    "Akrobatyka",
+    "Teen Movement"
+  ],
+  "facts": [
+    { "term": "Karnet miesięczny", "value": "już od 140 zł", "order": 1 },
+    { "term": "Gdzie tańczymy", "value": "Białogard i Kołobrzeg", "order": 2 },
+    { "term": "Kto prowadzi", "value": "Tancerki klasy „S”", "order": 3 }
+  ],
+  "sections": [
+    {
+      "id": "offer",
+      "number": "01",
+      "eyebrow": "Oferta",
+      "title": "Wybierz swoje zajęcia",
+      "intro": "Prowadzimy zajęcia taneczne i ruchowe w godzinach popołudniowych, od wtorku do czwartku. Część grup ma charakter rekreacyjny, część przygotowuje do turniejów."
+    },
+    {
+      "id": "schedule",
+      "number": "02",
+      "eyebrow": "Grafik",
+      "title": "Kiedy tańczymy",
+      "intro": "Grafik na sezon 2025/26. Wybierz lokalizację — cennik poniżej przełączy się razem z grafikiem."
+    },
+    {
+      "id": "pricelist",
+      "number": "03",
+      "eyebrow": "Cennik",
+      "title": "Ile to kosztuje",
+      "intro": "Ceny karnetów miesięcznych. Bez ukrytych opłat startowych."
+    },
+    {
+      "id": "about-us",
+      "number": "04",
+      "eyebrow": "O nas",
+      "title": "Kto Cię poprowadzi"
+    },
+    {
+      "id": "contact",
+      "number": "05",
+      "eyebrow": "Kontakt",
+      "title": "Zapraszamy"
+    }
+  ],
+  "ui": {
+    "locationToggle": {
+      "scheduleAriaLabel": "Wybór lokalizacji",
+      "pricelistAriaLabel": "Wybór lokalizacji dla cennika",
+      "contactAriaLabel": "Wybór lokalizacji dla kontaktu"
+    },
+    "scheduleFilter": {
+      "legend": "Pokaż",
+      "allLabel": "Wszystkie"
+    },
+    "scheduleNote": [
+      { "text": "Nabór", "emphasis": true },
+      { "text": " to grupa początkująca — zaczynamy od zera. " },
+      { "text": "Gr. sportowa", "emphasis": true },
+      { "text": " to grupa turniejowa z regularnymi treningami. Akrobatyka odbywa się w SP7, impro obejmuje wszystkie grupy tańca współczesnego." }
+    ]
+  },
+  "contact": {
+    "links": [
+      { "label": "+48 577 437 237", "href": "tel:+48577437237" },
+      { "label": "kontakt.movementstudio@gmail.com", "href": "mailto:kontakt.movementstudio@gmail.com" },
+      {
+        "label": "@movementdance_studio",
+        "href": "https://www.instagram.com/movementdance_studio/",
+        "ariaLabel": "Movement Studio na Instagramie",
+        "external": true
+      },
+      {
+        "label": "Movement Studio",
+        "href": "https://www.facebook.com/profile.php?id=61559473568191",
+        "ariaLabel": "Movement Studio na Facebooku",
+        "external": true
+      }
+    ]
+  },
+  "footer": {
+    "navAriaLabel": "Nawigacja w stopce",
+    "logoAriaLabel": "Movement Studio",
+    "nav": [
+      { "label": "Oferta", "href": "#offer", "scrollSpy": false },
+      { "label": "Grafik", "href": "#schedule", "scrollSpy": false },
+      { "label": "Cennik", "href": "#pricelist", "scrollSpy": false },
+      { "label": "O nas", "href": "#about-us", "scrollSpy": false },
+      { "label": "Kontakt", "href": "#contact", "scrollSpy": false },
+      { "label": "Programy", "href": "/programs/", "scrollSpy": false }
+    ],
+    "legal": "© 2026 Movement Studio · ul. Kochanowskiego 30, 78-200 Białogard"
+  }
+}

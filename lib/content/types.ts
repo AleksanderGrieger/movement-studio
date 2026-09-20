@@ -45,10 +45,18 @@ export interface ImageRef {
   alt: string;
 }
 
-/** A video with a poster frame. Muted and decorative; carries no information. */
+/**
+ * A video with a poster frame. Muted and decorative; carries no information.
+ *
+ * `poster` is nullable because the approved hero clip does not exist yet — the
+ * supplied master is an unprocessed 13 MB QuickTime and §1.3's ffmpeg encode
+ * has not been run. Null means the hero renders without a poster rather than
+ * pointing at a missing file; it must not become a reason to block paint on
+ * the video (§12).
+ */
 export interface VideoRef {
   src: string;
-  poster: ImageRef;
+  poster: ImageRef | null;
   width: number;
   height: number;
   /** Describes the footage for assistive tech (§10). */

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FooterLogo from "@/public/assets/imagess/logo-color-circle.svg";
+import FooterLogo from "@/public/assets/images/logo-color-circle.svg";
 import { SocialMediaLinks } from "../../shared/SocialMediaLinks/SocialMediaLinks";
 import styles from "./Footer.module.scss";
 

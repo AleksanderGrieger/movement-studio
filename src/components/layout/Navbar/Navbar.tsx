@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/public/assets/imagess/logo-color.svg";
-import FooterLogo from "@/public/assets/imagess/logo-black.svg";
+import Logo from "@/public/assets/images/logo-color.svg";
+import FooterLogo from "@/public/assets/images/logo-black.svg";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";

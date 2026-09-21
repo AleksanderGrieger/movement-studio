@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "deploy": "next build && next export",
-    "check:content": "tsx scripts/check-content.mts"
+    "check:content": "tsx scripts/check-content.mts",
+    "shoot": "tsx scripts/shoot.mts"
   },
   "dependencies": {
     "next": "^15.5.25",

@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Movement Studio
 
-## Getting Started
+Production site for [movement-studio.pl](https://www.movement-studio.pl) — a
+dance school in Białogard and Kołobrzeg.
 
-First, run the development server:
+Next.js App Router, Tailwind v4, static export to GitHub Pages. Polish
+throughout.
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # static export into out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The build is a static export (`output: "export"`), so there is no server at
+runtime and no `redirects()` support — see `src/app/legacy-redirect.tsx`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Layout
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+lib/content/          the content layer — the only place .json is read
+  types.ts            the contract; see docs/content-layer.md
+  data/*.json         content
+src/app/              routes, and globals.css with the whole token system
+src/components/
+  sections/           home-page sections, Server Components
+  home/               the interactive islands
+  layout/             header, footer, theme toggle
+  brand/              inline logo lockups
+src/fonts/            subsetted woff2 the site ships
+assets-source/        originals that are NOT served (see its README)
+scripts/              the verification gates
+docs/                 design-decisions.md (authoritative) + content-layer.md
+```
 
-## Learn More
+## Checks
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run check:content   # record counts and referential integrity
+npm run check:ui        # interaction spec in a real browser
+npm run check:a11y      # axe, 2 routes x 4 breakpoints x 2 themes
+npm run check:lh        # Lighthouse, median of 3 runs
+npm run shoot           # screenshots at every breakpoint, both themes
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Everything except `check:content` needs a served build:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run build && npx serve out -p 8143
+npm run check:a11y -- --url http://localhost:8143
+```
 
-## Deploy on Vercel
+These drive the system Chrome (Playwright has no mac12-arm64 Chromium build).
+Override with `CHROME_PATH`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Conventions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+See `CLAUDE.md`. The ones that bite if ignored:
+
+- **Nothing outside `lib/content/` imports a `.json` file.**
+- **Design token names are fixed** by `docs/design-decisions.md`.
+- Server Components by default; every `'use client'` is justified in its file
+  header and listed in `docs/content-layer.md`.
+- Theme B overrides **colour only**. Putting a metric in that block makes the
+  theme toggle shift the page under the reader.
+
+## Before deploying
+
+`docs/content-layer.md` §7 lists the open gaps. The two that block a real
+launch: the hero clip (§11 there) and the stale "sezon 2025/26" label, which
+needs the 2026/27 schedule from the client. Re-verify the TAN Meringue webfont
+licence as well — `docs/design-decisions.md` §1.1.

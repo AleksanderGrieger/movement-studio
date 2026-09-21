@@ -172,7 +172,27 @@ check(
   await page.evaluate(() =>
     document.querySelector('.nav a[aria-current="true"]')?.getAttribute("href"),
   ),
-  "#pricelist",
+  "/#pricelist",
+);
+
+/* Nav anchors are route-absolute so they also work from /programs. From the
+   home page they must still be a same-document scroll, not a reload. */
+let reloaded = false;
+page.once("load", () => {
+  reloaded = true;
+});
+await page.locator('.nav a[href="/#about-us"]').click();
+await page.waitForTimeout(600);
+check("home nav anchor scrolls without reloading", reloaded, false);
+check(
+  "home nav anchor lands on the section",
+  await page.evaluate(
+    () =>
+      Math.abs(
+        document.getElementById("about-us")!.getBoundingClientRect().top,
+      ) < 200,
+  ),
+  true,
 );
 
 /* ---------- theme toggle ---------- */

@@ -24,9 +24,13 @@ export function SiteNav({
   const [currentId, setCurrentId] = useState<string | null>(null);
 
   useEffect(() => {
+    /* hrefs are route-absolute ("/#offer") so they resolve from /programs
+       too, so take the fragment rather than stripping the hash. On a route
+       with no such sections this simply finds nothing and no spy runs. */
     const ids = items
       .filter((item) => item.scrollSpy)
-      .map((item) => item.href.replace("#", ""));
+      .map((item) => item.href.split("#")[1])
+      .filter(Boolean);
 
     const sections = ids
       .map((id) => document.getElementById(id))
@@ -55,7 +59,9 @@ export function SiteNav({
           href={item.href}
           className={item.scrollSpy ? undefined : "ext"}
           aria-current={
-            item.scrollSpy && item.href === `#${currentId}` ? "true" : undefined
+            item.scrollSpy && item.href.split("#")[1] === currentId
+              ? "true"
+              : undefined
           }
         >
           {item.label}

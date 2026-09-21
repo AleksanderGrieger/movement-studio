@@ -1,10 +1,10 @@
 {
   "navigation": [
-    { "label": "Oferta", "href": "#offer", "scrollSpy": true },
-    { "label": "Grafik", "href": "#schedule", "scrollSpy": true },
-    { "label": "Cennik", "href": "#pricelist", "scrollSpy": true },
-    { "label": "O nas", "href": "#about-us", "scrollSpy": true },
-    { "label": "Kontakt", "href": "#contact", "scrollSpy": true },
+    { "label": "Oferta", "href": "/#offer", "scrollSpy": true },
+    { "label": "Grafik", "href": "/#schedule", "scrollSpy": true },
+    { "label": "Cennik", "href": "/#pricelist", "scrollSpy": true },
+    { "label": "O nas", "href": "/#about-us", "scrollSpy": true },
+    { "label": "Kontakt", "href": "/#contact", "scrollSpy": true },
     { "label": "Programy", "href": "/programs/", "scrollSpy": false }
   ],
   "header": {
@@ -136,11 +136,11 @@
     "navAriaLabel": "Nawigacja w stopce",
     "logoAriaLabel": "Movement Studio",
     "nav": [
-      { "label": "Oferta", "href": "#offer", "scrollSpy": false },
-      { "label": "Grafik", "href": "#schedule", "scrollSpy": false },
-      { "label": "Cennik", "href": "#pricelist", "scrollSpy": false },
-      { "label": "O nas", "href": "#about-us", "scrollSpy": false },
-      { "label": "Kontakt", "href": "#contact", "scrollSpy": false },
+      { "label": "Oferta", "href": "/#offer", "scrollSpy": false },
+      { "label": "Grafik", "href": "/#schedule", "scrollSpy": false },
+      { "label": "Cennik", "href": "/#pricelist", "scrollSpy": false },
+      { "label": "O nas", "href": "/#about-us", "scrollSpy": false },
+      { "label": "Kontakt", "href": "/#contact", "scrollSpy": false },
       { "label": "Programy", "href": "/programs/", "scrollSpy": false }
     ],
     "legal": "© 2026 Movement Studio · ul. Kochanowskiego 30, 78-200 Białogard"

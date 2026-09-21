@@ -10,7 +10,8 @@
     "deploy": "next build && next export",
     "check:content": "tsx scripts/check-content.mts",
     "shoot": "tsx scripts/shoot.mts",
-    "check:ui": "tsx scripts/check-interactions.mts"
+    "check:ui": "tsx scripts/check-interactions.mts",
+    "check:a11y": "tsx scripts/check-a11y.mts"
   },
   "dependencies": {
     "next": "^15.5.25",

@@ -245,8 +245,15 @@
   --label-adults-soft: rgba(180, 64, 47, 0.12);
   --label-kids: #245c4f;
   --label-kids-soft: rgba(36, 92, 79, 0.12);
-  --label-intake: #a35c41; /* one step darker than tertiary, so
-                                                   white chip text clears 4.5:1 (§8.1.9) */
+  /* §4 specifies #a35c41, derived so white chip text clears 4.5:1 (§8.1.9).
+     Darkened again to #9e5940 because §8 only ever measured this token as a
+     chip dot and cell bar, at the 3:1 bar — but the schedule row prints the
+     label as ~11px TEXT in this colour, which needs 4.5:1, and #a35c41
+     measures 4.45 on the cream page. axe flags it at every Theme B
+     breakpoint. #9e5940 reaches 4.69 on the page and 5.22 on a card, and
+     white on it improves to 5.31, so the filled-chip case gets better too.
+     The prototype has the same markup and the same failure. */
+  --label-intake: #9e5940;
   --label-intake-soft: rgba(163, 92, 65, 0.12);
   --label-sport: #7a5c1f;
   --label-sport-soft: rgba(122, 92, 31, 0.12);

@@ -254,7 +254,7 @@
      white on it improves to 5.31, so the filled-chip case gets better too.
      The prototype has the same markup and the same failure. */
   --label-intake: #9e5940;
-  --label-intake-soft: rgba(163, 92, 65, 0.12);
+  --label-intake-soft: rgba(158, 89, 64, 0.12); /* tracks --label-intake */
   --label-sport: #7a5c1f;
   --label-sport-soft: rgba(122, 92, 31, 0.12);
 }

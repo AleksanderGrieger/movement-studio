@@ -40,3 +40,6 @@ public/assets/video/
 
 # verification artefacts
 .shots/
+
+# macOS
+.DS_Store

@@ -35,21 +35,21 @@
   /* ---- Theme A — "Parkiet" (dark, default) (§4) --------------------------
      Defaults live here so Tailwind can generate utilities; Theme B overrides
      the same names below. Locked brand values are marked. */
-  --color-bg: #303030;                          /* locked brand value */
+  --color-bg: #303030; /* locked brand value */
   --color-surface: #3a3a3a;
   --color-surface-2: #262626;
-  --color-text: #ffffff;                        /* locked brand value */
+  --color-text: #ffffff; /* locked brand value */
   --color-text-muted: #c4bfbf;
-  --color-accent: #df3f8f;                      /* logo pink; replaced #d626be per §8.1 */
-  --color-accent-text: #ea82b6;                 /* AA-safe sibling for accent-coloured text */
+  --color-accent: #df3f8f; /* logo pink; replaced #d626be per §8.1 */
+  --color-accent-text: #ea82b6; /* AA-safe sibling for accent-coloured text */
   --color-accent-soft: rgba(223, 63, 143, 0.16);
-  --color-on-accent: #141414;                   /* 4.6:1 on the accent fill */
-  --color-secondary: #ec712d;                   /* locked brand value */
+  --color-on-accent: #141414; /* 4.6:1 on the accent fill */
+  --color-secondary: #ec712d; /* locked brand value */
   --color-secondary-text: #ef8950;
   --color-on-secondary: #141414;
-  --color-tertiary: #b7d1c8;                    /* logo mint */
-  --color-border: #4d4d4d;                      /* decorative only — 1.3–1.6:1 */
-  --color-border-strong: #7a7a7a;               /* control boundaries, ≥3:1 */
+  --color-tertiary: #b7d1c8; /* logo mint */
+  --color-border: #4d4d4d; /* decorative only — 1.3–1.6:1 */
+  --color-border-strong: #7a7a7a; /* control boundaries, ≥3:1 */
   --color-focus: #b7d1c8;
 
   /* ---- faces (§5.1) ------------------------------------------------------ */
@@ -65,10 +65,25 @@
   /* ---- motion curves (§7.1) — shared across both themes ------------------
      Every curve is a literal cubic-bezier. ease / ease-in / ease-out are not
      used anywhere, except `linear` for the marquee and colour cross-fades. */
-  --ease-momentum: cubic-bezier(0.16, 1, 0.3, 1);  /* entrances: fast out, long settle */
-  --ease-weight: cubic-bezier(0.34, 1.2, 0.64, 1); /* lifts and presses; 20% overshoot */
-  --ease-swing: cubic-bezier(0.65, 0, 0.35, 1);    /* symmetric two-way changes */
-  --ease-exit: cubic-bezier(0.55, 0, 1, 0.45);     /* declared; reserved, not yet bound */
+  --ease-momentum: cubic-bezier(
+    0.16,
+    1,
+    0.3,
+    1
+  ); /* entrances: fast out, long settle */
+  --ease-weight: cubic-bezier(
+    0.34,
+    1.2,
+    0.64,
+    1
+  ); /* lifts and presses; 20% overshoot */
+  --ease-swing: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric two-way changes */
+  --ease-exit: cubic-bezier(
+    0.55,
+    0,
+    1,
+    0.45
+  ); /* declared; reserved, not yet bound */
 }
 
 /* ============================================================================
@@ -201,14 +216,14 @@
   --color-surface-2: #ece2d5;
   --color-text: #1f1b18;
   --color-text-muted: #5c554d;
-  --color-accent: #b4402f;                      /* burnt terracotta */
+  --color-accent: #b4402f; /* burnt terracotta */
   --color-accent-text: #9e3626;
   --color-accent-soft: rgba(180, 64, 47, 0.1);
   --color-on-accent: #ffffff;
-  --color-secondary: #245c4f;                   /* deep pine */
+  --color-secondary: #245c4f; /* deep pine */
   --color-secondary-text: #1f5346;
   --color-on-secondary: #ffffff;
-  --color-tertiary: #ad6549;                    /* clay — darkened to clear 3:1 */
+  --color-tertiary: #ad6549; /* clay — darkened to clear 3:1 */
   --color-border: #ddd2c4;
   --color-border-strong: #8d7f6d;
   --color-focus: #245c4f;
@@ -224,7 +239,7 @@
   --label-adults-soft: rgba(180, 64, 47, 0.12);
   --label-kids: #245c4f;
   --label-kids-soft: rgba(36, 92, 79, 0.12);
-  --label-intake: #a35c41;                      /* one step darker than tertiary, so
+  --label-intake: #a35c41; /* one step darker than tertiary, so
                                                    white chip text clears 4.5:1 (§8.1.9) */
   --label-intake-soft: rgba(163, 92, 65, 0.12);
   --label-sport: #7a5c1f;
@@ -285,7 +300,9 @@
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-display);
     text-transform: var(--display-case);
-    font-size: calc(var(--display-step, var(--s3)) * var(--size-adjust-display));
+    font-size: calc(
+      var(--display-step, var(--s3)) * var(--size-adjust-display)
+    );
     /* see --display-overshoot */
     padding-top: var(--display-overshoot);
     margin-top: calc(var(--display-overshoot) * -1);
@@ -315,5 +332,128 @@
   .num {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1;
+  }
+}
+
+/* ============================================================================
+   Motion primitives (§7)
+
+   Shared across both themes — motion is the one layer the theme toggle does
+   not touch.
+   ============================================================================ */
+
+@layer components {
+  /* Staggered reveal. `--i` sets the step within a group; the observer adds
+     .is-in once and never removes it, so reveals never replay (§7.3). */
+  .r {
+    opacity: 0;
+    transform: translateY(var(--reveal-y));
+    transition:
+      opacity var(--dur-reveal) var(--ease-momentum),
+      transform var(--dur-reveal) var(--ease-momentum);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+  }
+
+  .r.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Skip link — visible on focus (§10). */
+  .skip {
+    position: absolute;
+    left: var(--sp-3);
+    top: var(--sp-3);
+    z-index: 100;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    padding: var(--sp-2) var(--sp-4);
+    transform: translateY(-200%);
+    transition: transform var(--dur-ui) var(--ease-momentum);
+  }
+
+  .skip:focus {
+    transform: none;
+  }
+
+  /* ---- buttons (§7.3) ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    white-space: nowrap;
+    padding: calc(var(--unit) * 1.4) calc(var(--unit) * 3);
+    border-radius: var(--radius);
+    font-weight: var(--weight-strong);
+    font-size: var(--s0);
+    text-decoration: none;
+    border: 1px solid transparent;
+    will-change: transform;
+    transition:
+      transform var(--dur-hover) var(--ease-weight),
+      background-color var(--dur-hover) var(--ease-swing),
+      color var(--dur-hover) var(--ease-swing),
+      border-color var(--dur-hover) var(--ease-swing);
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    transform: translateY(-2px);
+    background: var(--color-accent-text);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.985);
+  }
+
+  .btn-ghost {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--color-text);
+    background: var(--color-accent-soft);
+  }
+
+  .btn-ghost:active {
+    transform: translateY(0) scale(0.985);
+  }
+}
+
+/* ============================================================================
+   Reduced motion (§7.4)
+
+   Collapses every animation and transition. The filter, the toggles and the
+   theme swap stay fully functional — only their transitions go.
+
+   Unlayered and last, so it beats both the component layer and the inline
+   transform the parallax writes from JS.
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .r {
+    opacity: 1;
+    transform: none;
   }
 }

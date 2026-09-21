@@ -1,9 +1,23 @@
 {
+  "page": {
+    "eyebrow": "Projekty i dotacje",
+    "title": "Roztańczony Białogard",
+    "intro": "Nieodpłatne warsztaty taneczno-sportowe realizowane ze środków publicznych. Poniżej znajdziesz opis każdego programu, terminy zajęć oraz miejsce, w którym się odbywają.",
+    "backLink": {
+      "label": "Wróć do oferty studia",
+      "href": "/#offer"
+    },
+    "sessionsHeading": "Terminy",
+    "venueHeading": "Miejsce"
+  },
   "teaser": {
     "eyebrow": "Projekty i dotacje",
     "title": "Roztańczony Białogard",
     "body": "Bezpłatne warsztaty taneczno-sportowe dla dzieci, dorosłych i seniorów, realizowane ze środków programu NOWEFIO oraz Programu Społecznik Pomorza Zachodniego. Terminy, regulaminy i zapisy znajdziesz na stronie programów.",
-    "cta": { "label": "Zobacz wszystkie programy", "href": "/programs/" },
+    "cta": {
+      "label": "Zobacz wszystkie programy",
+      "href": "/programs/"
+    },
     "posters": [
       {
         "href": "/programs/",
@@ -69,18 +83,42 @@
           "slug": "fio-2025-07-02",
           "dates": "02.07.2025 — środa",
           "rows": [
-            { "start": "17:00", "end": "18:00", "name": "Dla seniorów" },
-            { "start": "18:00", "end": "19:00", "name": "Dla dorosłych — Ladies style" },
-            { "start": "19:00", "end": "20:00", "name": "Dla dorosłych — Power dance" }
+            {
+              "start": "17:00",
+              "end": "18:00",
+              "name": "Dla seniorów"
+            },
+            {
+              "start": "18:00",
+              "end": "19:00",
+              "name": "Dla dorosłych — Ladies style"
+            },
+            {
+              "start": "19:00",
+              "end": "20:00",
+              "name": "Dla dorosłych — Power dance"
+            }
           ]
         },
         {
           "slug": "fio-2025-08-25",
           "dates": "25–26.08.2025 — poniedziałek i wtorek",
           "rows": [
-            { "start": "09:00", "end": "09:30", "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny" },
-            { "start": "09:30", "end": "12:00", "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe" },
-            { "start": "19:00", "end": "20:00", "name": "Dla dorosłych — Power dance" }
+            {
+              "start": "09:00",
+              "end": "09:30",
+              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+            },
+            {
+              "start": "09:30",
+              "end": "12:00",
+              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+            },
+            {
+              "start": "19:00",
+              "end": "20:00",
+              "name": "Dla dorosłych — Power dance"
+            }
           ]
         }
       ]
@@ -110,16 +148,32 @@
           "slug": "spolecznik-2025-08-27",
           "dates": "27–29.08.2025 — środa–piątek",
           "rows": [
-            { "start": "09:00", "end": "09:30", "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny" },
-            { "start": "09:30", "end": "12:00", "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe" }
+            {
+              "start": "09:00",
+              "end": "09:30",
+              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+            },
+            {
+              "start": "09:30",
+              "end": "12:00",
+              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+            }
           ]
         },
         {
           "slug": "spolecznik-2025-09-12",
           "dates": "12–14.09.2025 — piątek–niedziela",
           "rows": [
-            { "start": "09:00", "end": "09:30", "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny" },
-            { "start": "09:30", "end": "12:00", "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe" }
+            {
+              "start": "09:00",
+              "end": "09:30",
+              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+            },
+            {
+              "start": "09:30",
+              "end": "12:00",
+              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+            }
           ]
         }
       ]

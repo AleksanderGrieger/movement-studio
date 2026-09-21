@@ -328,6 +328,25 @@ export interface ProgramSessionRow {
   name: string;
 }
 
+/**
+ * Page-level copy for /programs.
+ *
+ * The route needs its own <h1> and standfirst: it is a separate document, not
+ * a section of the home page, so it cannot borrow the teaser's heading
+ * without leaving the page with no top-level heading of its own (§10).
+ */
+export interface ProgramsPageCopy {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  /** Link back into the main offer, so the route is not a dead end. */
+  backLink: LinkRef;
+  /** Heading above a programme's session table. */
+  sessionsHeading: string;
+  /** Heading above a programme's venue note. */
+  venueHeading: string;
+}
+
 /** The home-page band linking to /programs. */
 export interface ProgramsTeaser {
   eyebrow: string;
@@ -350,11 +369,7 @@ export interface TeaserPoster {
 
 /** The five anchored home sections. IA structure, so a closed union (§2). */
 export type SectionId =
-  | "offer"
-  | "schedule"
-  | "pricelist"
-  | "about-us"
-  | "contact";
+  "offer" | "schedule" | "pricelist" | "about-us" | "contact";
 
 /** The numbered heading block that opens each section. */
 export interface SectionIntro {

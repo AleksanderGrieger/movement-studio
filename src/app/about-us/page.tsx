@@ -1,12 +1,10 @@
-import { specialistCards } from "@/lib/content/content-objects";
-import { AboutContent } from "@/src/components/contents/AboutContent/AboutContent";
-import { SpecialistsContent } from "@/src/components/contents/SpecialistsContent/SpecialistsContent";
+import { LegacyRedirect, legacyMetadata } from "../legacy-redirect";
+import { getSectionIntro } from "@/lib/content/site";
 
-export default function About() {
-  return (
-    <>
-      <AboutContent />
-      <SpecialistsContent specialistCardsData={specialistCards} />
-    </>
-  );
+export const metadata = legacyMetadata("about-us");
+
+/** Retired route — now the #about-us section of the home page. */
+export default async function Page() {
+  const section = await getSectionIntro("about-us");
+  return <LegacyRedirect anchor="about-us" label={section.eyebrow} />;
 }

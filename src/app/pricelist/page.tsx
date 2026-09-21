@@ -1,12 +1,10 @@
-import Table from "@/src/components/contents/Table/Table";
-import { pricelists } from "@/lib/content/content-objects";
+import { LegacyRedirect, legacyMetadata } from "../legacy-redirect";
+import { getSectionIntro } from "@/lib/content/site";
 
-export default function Pricelist() {
-  return (
-    <>
-      {pricelists.map((pricelist, index) => (
-        <Table key={index} title={pricelist.title} rows={pricelist.rows} />
-      ))}
-    </>
-  );
+export const metadata = legacyMetadata("pricelist");
+
+/** Retired route — now the #pricelist section of the home page. */
+export default async function Page() {
+  const section = await getSectionIntro("pricelist");
+  return <LegacyRedirect anchor="pricelist" label={section.eyebrow} />;
 }

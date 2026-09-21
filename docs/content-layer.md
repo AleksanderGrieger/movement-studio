@@ -366,6 +366,37 @@ ffmpeg -ss 28.8 -t 6.0 -i hero.MP4 -an \
   -movflags +faststart hero-clip.mp4
 ```
 
+### What was supplied, and why it is still not shippable
+
+The master now in `assets-source/video/hero.mov` is a 16-second trim of the
+original: 720×1280, H.264, **with the AAC track still present**. Two problems
+remain, and a frame grab confirms both:
+
+1. **The `@KOLOBRZEGZBLISKA` watermark is still in the picture**, roughly
+   x 44–263, y 690–786 in the 720×1280 frame — left side, vertically centred.
+   §1.3's crop (`crop=495:1000:220:180`) will not remove it: that geometry was
+   computed for the 28.8–34.8 s window of the *original* file, where the
+   watermark sat bottom-left. This is a different segment, so the crop has to
+   be recomputed against it — and cropping left of x = 263 removes 36% of the
+   width and pushes the dancer to the frame edge.
+2. **The audio is still there**, which §1.3 requires stripping for licensing.
+
+Deciding the crop is an editorial call about a third-party brand mark, not a
+mechanical one, which is why it was left open rather than guessed at. §1.3's
+own recommendation stands: commission a landscape master. 440×889 is the
+ceiling this source can deliver, and it softens above ~1280 px.
+
+**ffmpeg could not be installed on the build machine.** Homebrew no longer
+ships bottles for macOS 12, so `brew install ffmpeg` would build some eighty
+formulae from source. Do the encode elsewhere.
+
 `public/assets/video/` is gitignored: a multi-megabyte master does not belong
-in a GitHub Pages repo. Only the encoded clip should be committed, and it
-needs a poster frame — `VideoRef.poster` is `null` until one exists.
+in a GitHub Pages repo, and a static export copies that directory verbatim, so
+anything left there is deployed. Only the encoded clip should be committed,
+and it needs a poster frame — `VideoRef.poster` is `null` until one exists.
+
+Until the clip lands the hero renders an empty arch frame. That path is
+handled deliberately: the `<video>` element is not rendered at all without a
+source, so there are no broken-media controls, and the only cost is one 404 in
+the console — the sole reason the home page scores 96 rather than 100 on
+Lighthouse best-practices.

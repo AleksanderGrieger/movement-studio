@@ -5,6 +5,10 @@ import { Marquee } from "@/src/components/sections/Marquee";
 import { Facts } from "@/src/components/sections/Facts";
 import { Offer } from "@/src/components/sections/Offer";
 import { Schedule } from "@/src/components/sections/Schedule";
+import { Pricelist } from "@/src/components/sections/Pricelist";
+import { About } from "@/src/components/sections/About";
+import { ProgramsTeaser } from "@/src/components/sections/ProgramsTeaser";
+import { Contact } from "@/src/components/sections/Contact";
 
 /**
  * The home page is the whole site: the approved IA collapses the old
@@ -24,6 +28,10 @@ export default async function Home() {
       <Facts />
       <Offer />
       <Schedule />
+      <Pricelist />
+      <About />
+      <ProgramsTeaser />
+      <Contact />
     </HomeStateProvider>
   );
 }

@@ -78,11 +78,11 @@ for (const width of widths) {
       // scrollHeight is re-read every step: it grows as fonts and images
       // settle, and reading it once walks only part of the page.
       await page.evaluate(async () => {
-        const step = window.innerHeight * 0.6;
+        const step = window.innerHeight * 0.35;
         let y = 0;
         for (let guard = 0; guard < 200; guard += 1) {
           window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 140));
+          await new Promise((r) => setTimeout(r, 300));
           const max = document.documentElement.scrollHeight - window.innerHeight;
           if (y >= max) break;
           y = Math.min(y + step, max);
@@ -97,10 +97,17 @@ for (const width of widths) {
     const name = `${outDir}/${width}-${theme}${anchor ? `-${anchor}` : ""}.png`;
     await page.screenshot({ path: name, fullPage: !anchor });
 
+    /* Elements inside a hidden location panel never intersect anything, so
+       they are legitimately unrevealed until the visitor switches to that
+       panel — usePanelVisibility handles them then. Only count the ones that
+       are on screen and still invisible, which would be a real bug. */
     const notRevealed = await page.evaluate(
       () =>
-        document.querySelectorAll(".r").length -
-        document.querySelectorAll(".r.is-in").length,
+        [...document.querySelectorAll<HTMLElement>(".r")].filter(
+          (el) =>
+            !el.classList.contains("is-in") &&
+            !el.closest<HTMLElement>(".panel")?.hidden,
+        ).length,
     );
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > window.innerWidth,

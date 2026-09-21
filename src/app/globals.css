@@ -1502,3 +1502,333 @@
     max-width: var(--measure);
   }
 }
+
+/* ============================================================================
+   #pricelist
+   ============================================================================ */
+
+@layer components {
+  .price-block + .price-block {
+    margin-top: var(--sp-7);
+  }
+
+  .price-block h4 {
+    font-size: var(--s-1);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--sp-3);
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    padding-block: var(--sp-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .price-row .name {
+    flex: 0 1 auto;
+  }
+
+  .price-row .name small {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: var(--s-2);
+  }
+
+  .price-row .dots {
+    flex: 1 1 auto;
+    border-bottom: 1px dotted var(--color-border-strong);
+    transform: translateY(-0.25em);
+    min-width: var(--sp-5);
+  }
+
+  .price-row .amt {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-variation-settings: var(--display-variation);
+    font-size: calc(var(--s1) * var(--size-adjust-display));
+    color: var(--color-secondary-text);
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================================
+   #about-us
+   ============================================================================ */
+
+@layer components {
+  .founders {
+    display: grid;
+    gap: var(--sp-5);
+    margin-bottom: var(--sp-8);
+  }
+
+  @media (min-width: 1280px) {
+    .founders {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-7);
+    }
+  }
+
+  .founders p {
+    color: var(--color-text-muted);
+  }
+
+  .founders .big {
+    --display-step: var(--s3);
+    color: var(--color-text);
+    max-width: none;
+    line-height: calc(var(--leading-display) * 1.2);
+  }
+
+  .crew {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 768px) {
+    .crew {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-7);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .crew {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-5);
+      /* The stagger translates even cards down by --sp-7. Without matching
+         padding the lowest card overhangs the section boundary, which shows
+         up as soon as the crew is not an exact multiple of four. Reserving
+         the space here keeps the grid correct at any count from 1 to 10. */
+      padding-bottom: var(--sp-7);
+    }
+
+    .crew li:nth-child(even) figure {
+      transform: translateY(var(--sp-7));
+    }
+  }
+
+  .crew figure {
+    margin: 0;
+  }
+
+  .crew .shot {
+    background: #1e1e1c;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .crew img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-ui) var(--ease-momentum);
+  }
+
+  .crew li:hover img,
+  .crew li:focus-within img {
+    transform: scale(1.03);
+  }
+
+  .crew h3 {
+    --display-step: var(--s2);
+    margin-top: var(--sp-4);
+  }
+
+  .crew .role {
+    font-size: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-accent-text);
+    margin-top: var(--sp-2);
+  }
+
+  .crew figcaption > p:last-child {
+    font-size: var(--s-1);
+    color: var(--color-text-muted);
+    margin-top: var(--sp-3);
+  }
+}
+
+/* ============================================================================
+   Programs band
+   ============================================================================ */
+
+@layer components {
+  .programs {
+    background: var(--color-surface-2);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .programs .inner {
+    display: grid;
+    gap: var(--sp-6);
+    padding-block: var(--section-y);
+  }
+
+  @media (min-width: 1280px) {
+    .programs .inner {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--sp-8);
+    }
+  }
+
+  .programs h2 {
+    --display-step: var(--s4);
+    margin-bottom: var(--sp-4);
+  }
+
+  .programs-cta {
+    margin-top: var(--sp-5);
+  }
+
+  .posters {
+    display: flex;
+    gap: var(--sp-3);
+  }
+
+  .posters img {
+    width: clamp(5.5rem, 20vw, 10.5rem);
+    height: auto;
+    border: 1px solid var(--color-border);
+    transition: transform var(--dur-ui) var(--ease-weight);
+  }
+
+  .posters a:hover img,
+  .posters a:focus-visible img {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+}
+
+/* ============================================================================
+   #contact
+   ============================================================================ */
+
+@layer components {
+  .contact-grid {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-7);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.5fr;
+    }
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: var(--sp-5);
+  }
+
+  .card h3 {
+    --display-step: var(--s2);
+    margin-bottom: var(--sp-3);
+  }
+
+  .card address {
+    font-style: normal;
+    color: var(--color-text-muted);
+    display: grid;
+  }
+
+  .card dl {
+    margin-top: var(--sp-4);
+    display: grid;
+    gap: var(--sp-2);
+    font-size: var(--s-1);
+  }
+
+  .card .hours-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-4);
+  }
+
+  .card dt {
+    color: var(--color-text-muted);
+  }
+
+  .card dd {
+    margin: 0;
+  }
+
+  .map {
+    min-height: 16rem;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 16rem;
+    border: 0;
+    display: block;
+  }
+
+  .contact-links {
+    display: grid;
+    gap: var(--sp-3);
+    margin-top: var(--sp-7);
+  }
+
+  @media (min-width: 768px) {
+    .contact-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 64rem;
+      gap: var(--sp-4) var(--sp-6);
+    }
+  }
+
+  .contact-links a {
+    --display-step: var(--s2);
+    text-decoration: none;
+    word-break: break-word;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    transition:
+      color var(--dur-hover) var(--ease-swing),
+      transform var(--dur-hover) var(--ease-momentum);
+  }
+
+  .contact-links a:hover,
+  .contact-links a:focus-visible {
+    color: var(--color-accent-text);
+    transform: translateX(4px);
+  }
+
+  .contact-links a.plain {
+    font-family: var(--font-body);
+    font-size: var(--s1);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--tracking-body);
+  }
+}
+
+/* A panel the visitor switched to after first render. Its contents never
+   intersected anything while it was hidden, so the reveal observer never
+   fired for them — without this they stay at opacity 0 and the panel looks
+   empty. See usePanelVisibility. */
+@layer components {
+  .panel.is-revealed .r {
+    opacity: 1;
+    transform: none;
+  }
+}

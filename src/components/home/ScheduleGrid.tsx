@@ -2,6 +2,7 @@
 
 import type { ScheduleGrid as Grid, ScheduleLabel } from "@/lib/content/types";
 import { useHomeState } from "./HomeState";
+import { usePanelVisibility } from "./usePanelVisibility";
 
 /**
  * The day columns for one location.
@@ -29,11 +30,12 @@ export function ScheduleGrid({
   grid: Grid;
   labels: ScheduleLabel[];
 }) {
-  const { location, filter } = useHomeState();
+  const { filter } = useHomeState();
+  const { hidden, className } = usePanelVisibility(grid.location.slug);
   const bySlug = new Map(labels.map((label) => [label.slug, label]));
 
   return (
-    <div className="panel" hidden={grid.location.slug !== location}>
+    <div className={className} hidden={hidden}>
       <ul className={`days${filter ? " is-filtering" : ""}`}>
         {grid.days.map((group, index) => {
           const dimmed = group.entries.filter(

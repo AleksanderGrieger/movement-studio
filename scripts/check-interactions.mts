@@ -146,7 +146,9 @@ check("Kołobrzeg dimmed count differs from Białogard", kgAdults?.dim, 9);
 
 /* ---------- offer deep link ---------- */
 await page.getByRole("radio", { name: "Wszystkie" }).click();
-await page.getByRole("link", { name: /dla dzieci/i }).click();
+await page
+  .getByRole("link", { name: "Zobacz terminy zajęć dla dzieci" })
+  .click();
 await page.waitForTimeout(400);
 check(
   "offer CTA presets the filter",

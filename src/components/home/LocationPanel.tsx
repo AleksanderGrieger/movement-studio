@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import type { Slug } from "@/lib/content/types";
-import { useHomeState } from "./HomeState";
+import { usePanelVisibility } from "./usePanelVisibility";
 
 /**
  * Shows its children only while its location is the selected one.
@@ -22,9 +22,9 @@ export function LocationPanel({
   location: Slug;
   children: ReactNode;
 }) {
-  const { location: selected } = useHomeState();
+  const { hidden, className } = usePanelVisibility(location);
   return (
-    <div className="panel" hidden={location !== selected}>
+    <div className={className} hidden={hidden}>
       {children}
     </div>
   );

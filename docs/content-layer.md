@@ -330,10 +330,22 @@ Both acceptance gates pass:
 
 - **axe**: 0 issues of any severity across 16 combinations (2 routes × 4
   breakpoints × 2 themes).
-- **Lighthouse** (median of 3): `/` performance **98**, accessibility **100**;
-  `/programs/` performance **99**, accessibility **100**. CLS 0 on both.
-- Zero `*.module.scss` files. Zero console errors. Zero hydration warnings.
+- **Lighthouse** (median of 3):
+
+  | route | performance | accessibility | best practices | SEO |
+  |---|---|---|---|---|
+  | `/` | **99** | **100** | 96 | 100 |
+  | `/programs/` | **99** | **100** | 100 | 100 |
+
+  CLS is 0 on both. The home page's best-practices 96 is entirely the hero
+  clip 404 (§11) — it clears the moment that asset exists.
+- Zero `*.module.scss` files. Zero hydration warnings. The only console error
+  anywhere is the hero clip 404.
 - No horizontal overflow at 360 / 768 / 1280 / 1920.
+- 32 interaction checks pass, including the seven covering the reduced-motion
+  fallback.
+- Build output is 7.3 MB. Anything `public/` holds is deployed, so assets no
+  page references live in `assets-source/` instead.
 
 Runtime dependencies are `next`, `react`, `react-dom` — nothing else.
 

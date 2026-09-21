@@ -934,3 +934,238 @@
     display: none;
   }
 }
+
+/* ============================================================================
+   Hero, marquee, facts
+   ============================================================================ */
+
+@layer components {
+  .hero {
+    padding-top: var(--sp-6);
+    padding-bottom: var(--section-y);
+    overflow: clip;
+  }
+
+  .hero .grid {
+    display: grid;
+    gap: var(--sp-6);
+    align-items: end;
+  }
+
+  /* 12-col at 1280: copy 1/7, media 8/12 — the asymmetric split from §9. */
+  @media (min-width: 1280px) {
+    .hero .grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--sp-6);
+      align-items: center;
+    }
+
+    .hero .copy {
+      grid-column: 1 / span 7;
+    }
+
+    .hero .media {
+      grid-column: 8 / span 5;
+    }
+  }
+
+  /* Ratio-driven but capped against the viewport, so it cannot overflow its
+     column at any width (§5.3). */
+  .hero h1 {
+    --display-step: min(var(--s6), 11.5vw);
+    margin-bottom: var(--sp-5);
+  }
+
+  @media (min-width: 768px) {
+    .hero h1 {
+      --display-step: min(var(--s7), 8vw);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero h1 {
+      --display-step: min(var(--s7), 5.6vw);
+    }
+  }
+
+  /* The mask is an overflow:hidden box, which is exactly what would clip
+     Meringue's accented capitals — so the overshoot is repeated here. */
+  .hero h1 .line {
+    display: block;
+    overflow: hidden;
+    padding-top: var(--display-overshoot);
+    margin-top: calc(var(--display-overshoot) * -1);
+  }
+
+  .hero h1 .line > span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform var(--dur-hero) var(--ease-momentum);
+    transition-delay: calc(var(--i) * var(--stagger));
+  }
+
+  .is-ready .hero h1 .line > span {
+    transform: none;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--color-accent-text);
+  }
+
+  .hero .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+
+  .hero .meta {
+    margin-top: var(--sp-6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    font-size: var(--s-1);
+    color: var(--color-text-muted);
+  }
+
+  .hero .meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .hero .meta span::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+  }
+
+  .media {
+    position: relative;
+  }
+
+  .media .frame {
+    position: relative;
+    border-radius: var(--arch);
+    overflow: hidden;
+    background: var(--color-surface-2);
+    aspect-ratio: 44/100;
+    height: min(62vh, 30rem);
+    width: auto;
+    margin-inline: auto;
+    border: 1px solid var(--color-border);
+    will-change: transform;
+  }
+
+  @media (min-width: 1280px) {
+    .media .frame {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3/4;
+      max-height: min(72vh, 40rem);
+    }
+  }
+
+  .media video,
+  .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+  }
+
+  .media .badge {
+    position: absolute;
+    left: 0;
+    bottom: var(--sp-5);
+    background: var(--color-secondary);
+    color: var(--color-on-secondary);
+    font-size: var(--s-2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: var(--weight-strong);
+    padding: var(--sp-2) var(--sp-4);
+  }
+
+  /* ---- marquee ---- */
+  .marquee {
+    border-block: 1px solid var(--color-border);
+    padding-block: var(--sp-4);
+    overflow: hidden;
+    background: var(--color-surface-2);
+  }
+
+  .marquee .track {
+    display: flex;
+    gap: var(--sp-6);
+    width: max-content;
+    animation: slide 38s linear infinite;
+  }
+
+  .marquee span {
+    --display-step: var(--s3);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .marquee b {
+    color: var(--color-accent-text);
+    font-weight: inherit;
+  }
+
+  /* ---- facts ---- */
+  .facts {
+    display: grid;
+    gap: var(--sp-5);
+    padding-block: var(--sp-7);
+  }
+
+  @media (min-width: 768px) {
+    .facts {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+    }
+  }
+
+  .fact dt {
+    font-size: var(--s-1);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--sp-2);
+  }
+
+  .fact dd {
+    --display-step: var(--s2);
+    margin: 0;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Motion the global reduced-motion block cannot reach generically: the hero
+   lines are transform-based rather than animated, the marquee is a keyframe
+   loop, and the parallax writes an inline style that only !important beats. */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .line > span {
+    transform: none;
+  }
+
+  .marquee .track {
+    animation: none;
+  }
+
+  .media .frame {
+    transform: none !important;
+  }
+}

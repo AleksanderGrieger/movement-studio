@@ -5,6 +5,7 @@ import { getHeaderCopy, getSiteMeta } from "@/lib/content/site";
 import { Header } from "../components/layout/Header/Header";
 import { Footer } from "../components/layout/Footer/Footer";
 import { RevealObserver } from "../components/layout/RevealObserver";
+import { NoScriptReveal } from "../components/layout/NoScriptReveal";
 import { ThemeScript } from "../components/layout/ThemeScript";
 
 /* Search results and share cards are user-visible copy, so the title and
@@ -36,6 +37,7 @@ export default async function RootLayout({
     >
       <head>
         <ThemeScript />
+        <NoScriptReveal />
       </head>
       <body>
         {/* Landmarks per §10. Header and Footer previously sat inside <main>,

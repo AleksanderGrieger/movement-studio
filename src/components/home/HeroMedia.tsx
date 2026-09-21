@@ -21,6 +21,12 @@ import type { VideoRef } from "@/lib/content/types";
  * It also sets `is-ready` on <html> on the first frame, which is what starts
  * the hero headline's masked line reveal. Doing it here rather than in the
  * server markup means the lines animate in rather than appearing already up.
+ *
+ * The <video> element is rendered only once there is a source for it. A
+ * source-less <video> makes Chrome draw its broken-media controls inside the
+ * arch frame, which is what a visitor without JavaScript would otherwise see.
+ * The observer therefore watches the frame rather than the video, so the
+ * element does not need to exist in order to be lazily loaded.
  */
 export function HeroMedia({
   video,
@@ -43,7 +49,7 @@ export function HeroMedia({
 
   // Lazy-load the video, well after first paint.
   useEffect(() => {
-    const element = videoRef.current;
+    const element = frameRef.current;
     if (!element || src) return;
 
     const idle =
@@ -120,18 +126,20 @@ export function HeroMedia({
   return (
     <div className="media r" style={{ "--i": 5 } as React.CSSProperties}>
       <div className="frame" ref={frameRef}>
-        <video
-          ref={videoRef}
-          src={src}
-          poster={video.poster?.src}
-          width={video.width}
-          height={video.height}
-          aria-label={video.ariaLabel}
-          muted
-          loop
-          playsInline
-          preload="none"
-        />
+        {src ? (
+          <video
+            ref={videoRef}
+            src={src}
+            poster={video.poster?.src}
+            width={video.width}
+            height={video.height}
+            aria-label={video.ariaLabel}
+            muted
+            loop
+            playsInline
+            preload="none"
+          />
+        ) : null}
         <p className="badge">{badge}</p>
       </div>
     </div>

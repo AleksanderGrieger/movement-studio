@@ -117,11 +117,10 @@ await page.getByRole("button", { name: "Kołobrzeg" }).first().click();
 check("location: Kołobrzeg schedule rows", (await rows(page))?.total, 12);
 check(
   "location: all three toggles follow",
-  await page.evaluate(
-    () =>
-      [...document.querySelectorAll('.toggle button[aria-pressed="true"]')].map(
-        (b) => b.textContent,
-      ),
+  await page.evaluate(() =>
+    [...document.querySelectorAll('.toggle button[aria-pressed="true"]')].map(
+      (b) => b.textContent,
+    ),
   ),
   ["Kołobrzeg", "Kołobrzeg", "Kołobrzeg"],
 );
@@ -211,6 +210,68 @@ check(
 
 check("no console errors", errors, []);
 
+/* ---------- reduced motion (§7.4) ----------
+   Every animation and transition collapses, but the filter, the toggles and
+   the theme swap stay fully functional — only their transitions go. The
+   reveal must fail OPEN: .r starts at opacity 0, so getting this wrong blanks
+   the page for anyone who asks for less motion. */
+const reducedContext = await browser.newContext({
+  viewport: { width: 1280, height: 900 },
+  reducedMotion: "reduce",
+});
+const reduced = await reducedContext.newPage();
+await reduced.goto(url, { waitUntil: "networkidle" });
+await reduced.waitForTimeout(1200);
+
+const motion = (await reduced.evaluate(`(function(){
+  var all = Array.prototype.slice.call(document.querySelectorAll('.r'));
+  var hidden = 0;
+  for (var i = 0; i < all.length; i++) {
+    if (getComputedStyle(all[i]).opacity !== '1') hidden++;
+  }
+  function p(sel, prop){ var e = document.querySelector(sel); return e ? getComputedStyle(e)[prop] : null; }
+  return {
+    hiddenReveals: hidden,
+    heroLines: p('.hero h1 .line > span', 'transform'),
+    marquee: p('.marquee .track', 'animationName'),
+    parallax: p('.media .frame', 'transform'),
+    scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior
+  };
+})()`)) as Record<string, unknown>;
+
+check("reduced motion: nothing left hidden", motion.hiddenReveals, 0);
+check("reduced motion: hero lines un-translated", motion.heroLines, "none");
+check("reduced motion: marquee stopped", motion.marquee, "none");
+check("reduced motion: parallax cancelled", motion.parallax, "none");
+check("reduced motion: smooth scrolling off", motion.scrollBehavior, "auto");
+
+await reduced.getByRole("radio", { name: "Dorośli" }).click();
+await reduced.waitForTimeout(250);
+check(
+  "reduced motion: filter still works",
+  // Scoped to the visible panel: the hidden Kołobrzeg grid is filtered too,
+  // which is correct, but counting both would assert 19 rather than 13-3.
+  await reduced.evaluate(`(function(){
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+    for (var i = 0; i < panels.length; i++) {
+      if (!panels[i].hidden && panels[i].querySelector('.days')) {
+        return panels[i].querySelectorAll('.day li.is-dim').length;
+      }
+    }
+    return -1;
+  })()`),
+  10,
+);
+await reduced.locator(".theme-toggle").click();
+await reduced.waitForTimeout(150);
+check(
+  "reduced motion: theme toggle still works",
+  await reduced.getAttribute("html", "data-theme"),
+  "b",
+);
+
 await browser.close();
-console.log(failures.length ? `\n${failures.length} FAILED` : "\nall checks passed");
+console.log(
+  failures.length ? `\n${failures.length} FAILED` : "\nall checks passed",
+);
 process.exit(failures.length ? 1 : 0);

@@ -1305,6 +1305,7 @@
     }
   }
 
+  .day h3,
   .day h4 {
     font-family: var(--font-display);
     font-weight: var(--weight-display);
@@ -1447,6 +1448,7 @@
     opacity: 0.45;
   }
 
+  .days.is-filtering .day.is-empty h3,
   .days.is-filtering .day.is-empty h4 {
     border-bottom-color: var(--color-border);
   }
@@ -1519,7 +1521,7 @@
     margin-top: var(--sp-7);
   }
 
-  .price-block h4 {
+  .price-block h3 {
     font-size: var(--s-1);
     text-transform: uppercase;
     letter-spacing: 0.16em;

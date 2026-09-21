@@ -72,13 +72,24 @@ export interface TextRun {
   emphasis?: boolean;
 }
 
-/** A link with its own accessible name when the visible text is not enough. */
+/** A link, with two different ways of clarifying its accessible name. */
 export interface LinkRef {
   /** Visible label. */
   label: string;
   href: string;
-  /** Overrides the accessible name when `label` alone is ambiguous. */
+  /**
+   * REPLACES the accessible name. Only for links with no visible text of
+   * their own — a link wrapping an image, say. Using it on a link that does
+   * show text breaks WCAG 2.5.3 Label in Name, which requires the accessible
+   * name to contain the visible text.
+   */
   ariaLabel?: string;
+  /**
+   * APPENDED to the visible label for assistive tech, as visually hidden
+   * text. This is the right field when the visible text is shown but needs
+   * disambiguating — "Movement Studio" meaning the Facebook page, say.
+   */
+  context?: string;
   /** Opens in a new tab and gets rel="noopener". */
   external?: boolean;
 }
@@ -389,6 +400,12 @@ export interface NavItem {
   href: string;
   /** Anchors participate in scroll-spy; /programs does not (§2). */
   scrollSpy: boolean;
+}
+
+/** Document-level copy. Search results and share cards are user-visible. */
+export interface SiteMeta {
+  title: string;
+  description: string;
 }
 
 export interface HeaderCopy {

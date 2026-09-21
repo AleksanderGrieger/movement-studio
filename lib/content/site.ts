@@ -8,6 +8,7 @@ import type {
   NavItem,
   SectionId,
   SectionIntro,
+  SiteMeta,
   UiCopy,
 } from "./types";
 import data from "./data/site.json";
@@ -19,6 +20,11 @@ import data from "./data/site.json";
  * the other content modules — including aria-labels, button text and alt
  * text. Nothing is hardcoded in TSX.
  */
+
+/** Document title and meta description. */
+export async function getSiteMeta(): Promise<SiteMeta> {
+  return data.meta as SiteMeta;
+}
 
 /** Main navigation. Anchors take part in scroll-spy; /programs does not (§2). */
 export async function getNavigation(): Promise<NavItem[]> {

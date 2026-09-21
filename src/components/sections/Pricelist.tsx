@@ -47,7 +47,7 @@ export async function Pricelist() {
           <LocationPanel key={location.slug} location={location.slug}>
             {blocks.map((block) => (
               <div className="price-block r" key={block.slug}>
-                <h4>{block.title}</h4>
+                <h3>{block.title}</h3>
                 {block.rows.map((row) => (
                   <div className="price-row" key={row.slug}>
                     <span className="name">

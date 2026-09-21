@@ -75,12 +75,14 @@ export async function Contact() {
               key={link.href}
               className={index === 0 ? "display" : "plain"}
               href={link.href}
-              aria-label={link.ariaLabel}
               {...(link.external
                 ? { rel: "noopener", target: "_blank" }
                 : null)}
             >
               <span>{link.label}</span>
+              {link.context ? (
+                <span className="sr-only">{link.context}</span>
+              ) : null}
             </a>
           ))}
         </div>

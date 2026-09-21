@@ -49,7 +49,7 @@ export function ScheduleGrid({
               className={`day r${isEmpty ? " is-empty" : ""}`}
               style={{ "--i": index } as React.CSSProperties}
             >
-              <h4>{group.day.name}</h4>
+              <h3>{group.day.name}</h3>
               <ul>
                 {group.entries.map((entry) => {
                   const isDim =

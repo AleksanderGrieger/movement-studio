@@ -11,7 +11,8 @@
     "check:content": "tsx scripts/check-content.mts",
     "shoot": "tsx scripts/shoot.mts",
     "check:ui": "tsx scripts/check-interactions.mts",
-    "check:a11y": "tsx scripts/check-a11y.mts"
+    "check:a11y": "tsx scripts/check-a11y.mts",
+    "check:lh": "tsx scripts/check-lighthouse.mts"
   },
   "dependencies": {
     "next": "^15.5.25",
@@ -26,6 +27,7 @@
     "@types/react-dom": "^19.3.0",
     "eslint": "^8",
     "eslint-config-next": "^15.5.25",
+    "lighthouse": "^13.5.0",
     "playwright": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",

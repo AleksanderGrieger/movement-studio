@@ -1,16 +1,21 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { fontVariables } from "../fonts";
-import { getHeaderCopy } from "@/lib/content/site";
+import { getHeaderCopy, getSiteMeta } from "@/lib/content/site";
 import { Header } from "../components/layout/Header/Header";
 import { Footer } from "../components/layout/Footer/Footer";
 import { RevealObserver } from "../components/layout/RevealObserver";
 import { ThemeScript } from "../components/layout/ThemeScript";
 
-export const metadata: Metadata = {
-  title: "Movement Studio | Studio Tańca",
-  description: "", //todo: uzupełnić
-};
+/* Search results and share cards are user-visible copy, so the title and
+   description come from the content layer like everything else. */
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getSiteMeta();
+  return {
+    title: meta.title,
+    description: meta.description,
+  };
+}
 
 export default async function RootLayout({
   children,

@@ -68,7 +68,17 @@ for (const route of ROUTES) {
       await page.waitForTimeout(1500);
 
       const results = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+        /* best-practice is included because axe tags heading-order there rather
+           than under a WCAG success criterion — Lighthouse reports it, so the
+           two gates should agree. */
+        .withTags([
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+          "best-practice",
+        ])
         /* The contact map is a Google Maps embed. axe audits into the iframe
            and flags Google's own controls, which are not ours to fix and not
            what this gate is measuring. */

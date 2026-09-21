@@ -457,3 +457,389 @@
     transform: none;
   }
 }
+
+/* ============================================================================
+   Shell — header, nav, footer
+
+   These are component classes rather than utility soup because almost all of
+   it is stateful or pseudo-element work: the nav underline is a ::after that
+   scales on hover, focus and aria-current; the burger animates three spans
+   into a cross off aria-expanded; the logo fills are driven by --logo-*. The
+   utility equivalents would be unreadable arbitrary variants, and this CSS is
+   already token-driven and verified against the approved prototype.
+   ============================================================================ */
+
+@layer components {
+  /* ---- logo (§1.2) — fills follow the theme, so it must be inline SVG ---- */
+  .logo svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .lg-a,
+  .lgv-a {
+    fill: var(--logo-1);
+    transition: fill var(--dur-ui) var(--ease-swing);
+  }
+
+  .lg-b,
+  .lgv-b {
+    fill: var(--logo-2);
+    transition: fill var(--dur-ui) var(--ease-swing);
+  }
+
+  .lg-c,
+  .lgv-c {
+    fill: var(--logo-3);
+    transition: fill var(--dur-ui) var(--ease-swing);
+  }
+
+  /* ---- theme toggle (§6.1) ---- */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 999px;
+    padding: var(--sp-2) var(--sp-3);
+    font-size: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-strong);
+    white-space: nowrap;
+    transition:
+      border-color var(--dur-hover) var(--ease-swing),
+      background-color var(--dur-hover) var(--ease-swing),
+      transform var(--dur-hover) var(--ease-weight);
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    border-color: var(--color-text);
+    background: var(--color-accent-soft);
+    transform: translateY(-1px);
+  }
+
+  .theme-toggle:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .theme-toggle svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--dur-ui) var(--ease-weight);
+  }
+
+  .theme-toggle:hover svg {
+    transform: rotate(-18deg);
+  }
+
+  /* The control shows the icon and word of the mode it will switch TO.
+     Both variants are in the DOM and CSS picks one, so the label and the
+     accessible name are correct before hydration — display:none also removes
+     the inactive variant from the accessibility tree. */
+  .theme-toggle .i-sun,
+  .theme-toggle .to-light {
+    display: none;
+  }
+
+  [data-theme="a"] .theme-toggle .i-sun,
+  [data-theme="a"] .theme-toggle .to-light {
+    display: inline-flex;
+  }
+
+  [data-theme="a"] .theme-toggle .i-moon,
+  [data-theme="a"] .theme-toggle .to-dark {
+    display: none;
+  }
+
+  /* Icon-only below 768px; the accessible name is carried by sr-only text
+     that stays in the tree at every width (§6.1). */
+  .theme-toggle .tlabel {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .theme-toggle .tlabel {
+      display: inline;
+    }
+  }
+
+  /* ---- header ---- */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color var(--dur-ui) var(--ease-swing),
+      background-color var(--dur-ui) var(--ease-swing);
+    backdrop-filter: saturate(1.2) blur(10px);
+  }
+
+  .header.is-stuck {
+    border-bottom-color: var(--color-border);
+  }
+
+  .header .bar {
+    width: var(--wrap);
+    margin-inline: auto;
+    min-height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+  }
+
+  .bar-end {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .header .logo {
+    width: clamp(9rem, 22vw, 12.5rem);
+  }
+
+  .nav {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    .bar-end {
+      gap: var(--sp-3);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .nav {
+      gap: var(--sp-5);
+    }
+  }
+
+  .nav a {
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: var(--s-1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: var(--weight-strong);
+    color: var(--color-text-muted);
+    position: relative;
+    padding-block: var(--sp-2);
+    transition: color var(--dur-hover) var(--ease-swing);
+  }
+
+  .nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-ui) var(--ease-momentum);
+  }
+
+  .nav a:hover,
+  .nav a:focus-visible {
+    color: var(--color-text);
+  }
+
+  .nav a:hover::after,
+  .nav a:focus-visible::after,
+  .nav a[aria-current="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .nav a[aria-current="true"] {
+    color: var(--color-text);
+  }
+
+  .nav .ext {
+    color: var(--color-accent-text);
+  }
+
+  .header .cta {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    .header .cta {
+      display: inline-flex;
+      font-size: var(--s-1);
+      padding-inline: var(--sp-4);
+    }
+  }
+
+  /* ---- burger + mobile nav ---- */
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--s-1);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-strong);
+    border: 1px solid var(--color-border-strong);
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius);
+  }
+
+  @media (min-width: 1280px) {
+    .burger {
+      display: none;
+    }
+  }
+
+  .burger .bars {
+    width: 1.1rem;
+    height: 0.7rem;
+    position: relative;
+  }
+
+  .burger .bars span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform var(--dur-ui) var(--ease-swing),
+      opacity var(--dur-tap) linear;
+  }
+
+  .burger .bars span:nth-child(1) {
+    top: 0;
+  }
+
+  .burger .bars span:nth-child(2) {
+    top: 50%;
+  }
+
+  .burger .bars span:nth-child(3) {
+    bottom: 0;
+  }
+
+  .burger[aria-expanded="true"] .bars span:nth-child(1) {
+    transform: translateY(0.29rem) rotate(45deg);
+  }
+
+  .burger[aria-expanded="true"] .bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger[aria-expanded="true"] .bars span:nth-child(3) {
+    transform: translateY(-0.29rem) rotate(-45deg);
+  }
+
+  .mobile-nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    z-index: 55;
+    background: var(--color-surface-2);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--sp-5) 0 var(--sp-7);
+    transform: translateY(-102%);
+    visibility: hidden;
+    /* visibility is delayed to the full duration on close so the panel stays
+       in the accessibility tree until it has finished sliding away (§7.3). */
+    transition:
+      transform var(--dur-ui) var(--ease-momentum),
+      visibility 0s linear var(--dur-ui);
+  }
+
+  .mobile-nav.is-open {
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .mobile-nav ul {
+    width: var(--wrap);
+    margin-inline: auto;
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .mobile-nav a {
+    --display-step: var(--s2);
+    display: block;
+    padding-block: var(--sp-2);
+    text-decoration: none;
+  }
+
+  @media (min-width: 1280px) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+
+  /* ---- footer ---- */
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--sp-7) var(--sp-6);
+  }
+
+  .footer .inner {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 768px) {
+    .footer .inner {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: var(--sp-7);
+    }
+  }
+
+  .footer .logo {
+    width: clamp(7rem, 18vw, 10rem);
+  }
+
+  .footer nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3) var(--sp-5);
+  }
+
+  .footer a {
+    font-size: var(--s-1);
+    text-decoration: none;
+    color: var(--color-text-muted);
+    transition: color var(--dur-hover) var(--ease-swing);
+  }
+
+  .footer a:hover,
+  .footer a:focus-visible {
+    color: var(--color-text);
+  }
+
+  .footer .legal {
+    margin-top: var(--sp-6);
+    font-size: var(--s-2);
+    color: var(--color-text-muted);
+  }
+
+  /* ---- shared wrapper ---- */
+  .wrap {
+    width: var(--wrap);
+    margin-inline: auto;
+  }
+}

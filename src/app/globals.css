@@ -178,6 +178,12 @@
   /* ---- shape (§9) -------------------------------------------------------- */
   --radius: 2px;
   --arch: 52% 52% 3px 3px / 26% 26% 3px 3px; /* lifted from the M monogram */
+
+  /* Minimum interactive size (§10: touch targets ≥ 44px). Not a token in
+     design-decisions.md — the prototype set control padding by eye and landed
+     under its own criterion (burger 41.9px, theme toggle 34.9px measured).
+     Naming it keeps every control honest to the same floor. */
+  --tap-target: 44px;
 }
 
 /* One scale system, shared by both themes. The ratio widens with the viewport
@@ -380,6 +386,8 @@
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-height: var(--tap-target);
     gap: var(--sp-2);
     white-space: nowrap;
     padding: calc(var(--unit) * 1.4) calc(var(--unit) * 3);
@@ -498,6 +506,8 @@
   .theme-toggle {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-height: var(--tap-target);
     gap: var(--sp-2);
     border: 1px solid var(--color-border-strong);
     border-radius: 999px;
@@ -691,6 +701,8 @@
   .burger {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-height: var(--tap-target);
     gap: var(--sp-2);
     font-size: var(--s-1);
     text-transform: uppercase;

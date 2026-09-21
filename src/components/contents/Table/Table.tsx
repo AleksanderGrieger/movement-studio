@@ -26,9 +26,7 @@ export default function Table({
             className={`row ${row.highlighted ? styles.highlightedRow : ""}`}
             key={index}
           >
-            <div
-              className={dividerOnLeft ? "six columns" : "eight columns"}
-            >
+            <div className={dividerOnLeft ? "six columns" : "eight columns"}>
               {row.col1}
             </div>
             <div

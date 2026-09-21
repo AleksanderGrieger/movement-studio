@@ -105,8 +105,7 @@ export function HeroMedia({
       ticking = true;
       requestAnimationFrame(() => {
         const rect = frame.getBoundingClientRect();
-        const progress =
-          1 - (rect.top + rect.height / 2) / window.innerHeight;
+        const progress = 1 - (rect.top + rect.height / 2) / window.innerHeight;
         const shift = Math.max(-1, Math.min(1, progress)) * maxShift;
         frame.style.transform = `translate3d(0, ${shift.toFixed(2)}px, 0)`;
         ticking = false;

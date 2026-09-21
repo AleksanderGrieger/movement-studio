@@ -1169,3 +1169,108 @@
     transform: none !important;
   }
 }
+
+/* ============================================================================
+   #offer
+   ============================================================================ */
+
+@layer components {
+  .offer-group + .offer-group {
+    margin-top: var(--sp-8);
+  }
+
+  .offer-group {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .offer-group h3 {
+    --display-step: var(--s3);
+  }
+
+  /* Sticky only at ≥1280, where the heading owns a column of its own.
+     Below that the heading and the list share one column, so a sticky
+     heading parks on top of the item text — two unreadable layers (§9). */
+  @media (min-width: 1280px) {
+    .offer-group {
+      grid-template-columns: 18rem 1fr;
+      gap: var(--sp-7);
+      align-items: start;
+    }
+
+    .offer-group h3 {
+      position: sticky;
+      top: calc(var(--header-h) + var(--sp-4));
+    }
+  }
+
+  .offer-cta {
+    margin-top: var(--sp-4);
+    display: flex;
+  }
+
+  .btn-sm {
+    padding: var(--sp-2) var(--sp-4);
+    font-size: var(--s-1);
+  }
+
+  .btn-sm .arrow {
+    transition: transform var(--dur-hover) var(--ease-momentum);
+  }
+
+  .btn-sm:hover .arrow,
+  .btn-sm:focus-visible .arrow {
+    transform: translateX(4px);
+  }
+
+  .offer-list li {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .offer-list li:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .offer-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-2) var(--sp-4);
+    padding: var(--sp-4) var(--sp-3);
+    position: relative;
+    width: 100%;
+    text-align: left;
+    transition:
+      background-color var(--dur-hover) var(--ease-swing),
+      padding-left var(--dur-hover) var(--ease-momentum);
+  }
+
+  .offer-item:hover,
+  .offer-item:focus-within {
+    background: var(--color-accent-soft);
+    padding-left: var(--sp-5);
+  }
+
+  .offer-item .idx {
+    font-size: var(--s-1);
+    color: var(--color-accent-text);
+    padding-top: 0.35em;
+  }
+
+  /* Display face at a fixed step rather than .display, because the overshoot
+     padding would break the two-column grid alignment with the index. */
+  .offer-item h4 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-variation-settings: var(--display-variation);
+    letter-spacing: var(--tracking-display);
+    font-size: calc(var(--s1) * var(--size-adjust-display));
+    line-height: var(--leading-display);
+  }
+
+  .offer-item p {
+    grid-column: 2;
+    color: var(--color-text-muted);
+    max-width: var(--measure);
+    font-size: var(--s-1);
+  }
+}

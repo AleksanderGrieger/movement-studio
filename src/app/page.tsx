@@ -3,6 +3,7 @@ import { HomeStateProvider } from "@/src/components/home/HomeState";
 import { Hero } from "@/src/components/sections/Hero";
 import { Marquee } from "@/src/components/sections/Marquee";
 import { Facts } from "@/src/components/sections/Facts";
+import { Offer } from "@/src/components/sections/Offer";
 
 /**
  * The home page is the whole site: the approved IA collapses the old
@@ -20,6 +21,7 @@ export default async function Home() {
       <Hero />
       <Marquee />
       <Facts />
+      <Offer />
     </HomeStateProvider>
   );
 }

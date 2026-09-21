@@ -1,30 +1,29 @@
-import Image from "next/image";
-import FooterLogo from "@/public/assets/images/logo-color-circle.svg";
-import { SocialMediaLinks } from "../../shared/SocialMediaLinks/SocialMediaLinks";
-import styles from "./Footer.module.scss";
+import { getFooterCopy } from "@/lib/content/site";
+import { LogoStacked } from "../../brand/LogoStacked";
 
-export const Footer = () => {
+/** Site footer. Server Component — nothing here is interactive. */
+export async function Footer() {
+  const copy = await getFooterCopy();
+
   return (
-    <footer className={styles.footer}>
-      <div className={`container ${styles.footerInner}`}>
-        <div className={styles.footerContent}>
-          <div>
-            <Image
-              className={styles.footerLogo}
-              src={FooterLogo}
-              alt="logo footer"
-            />
-          </div>
-          <div className={styles.footerInfo}>
-            <h4>SKONTAKTUJ SIĘ Z NAMI</h4>
-            <a href="tel:0048577437237">+48 577 437 237</a>
-            <a href="mailto:kontakt.movementstudio@gmail.com">
-              kontakt.movementstudio@gmail.com
-            </a>
-          </div>
-          <SocialMediaLinks className={styles.socialLinks} />
+    <footer className="footer">
+      <div className="wrap inner">
+        <div className="logo" role="img" aria-label={copy.logoAriaLabel}>
+          <LogoStacked />
         </div>
+        <nav aria-label={copy.navAriaLabel}>
+          <ul>
+            {copy.nav.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div className="wrap">
+        <p className="legal">{copy.legal}</p>
       </div>
     </footer>
   );
-};
+}

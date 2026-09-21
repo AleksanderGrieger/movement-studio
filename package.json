@@ -9,7 +9,8 @@
     "lint": "next lint",
     "deploy": "next build && next export",
     "check:content": "tsx scripts/check-content.mts",
-    "shoot": "tsx scripts/shoot.mts"
+    "shoot": "tsx scripts/shoot.mts",
+    "check:ui": "tsx scripts/check-interactions.mts"
   },
   "dependencies": {
     "next": "^15.5.25",

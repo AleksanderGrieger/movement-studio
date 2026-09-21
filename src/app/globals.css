@@ -1274,3 +1274,231 @@
     font-size: var(--s-1);
   }
 }
+
+/* ============================================================================
+   #schedule
+   ============================================================================ */
+
+@layer components {
+  .days {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  @media (min-width: 768px) {
+    .days {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .days {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .day h4 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-variation-settings: var(--display-variation);
+    letter-spacing: var(--tracking-display);
+    font-size: calc(var(--s2) * var(--size-adjust-display));
+    line-height: var(--leading-display);
+    padding-bottom: var(--sp-3);
+    border-bottom: 2px solid var(--color-accent);
+    margin-bottom: var(--sp-3);
+  }
+
+  /* ---- filter chips ---- */
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-4);
+    margin-bottom: var(--sp-6);
+  }
+
+  .filter .flabel {
+    font-size: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-text-muted);
+  }
+
+  .filter .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--tap-target);
+    gap: var(--sp-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 999px;
+    padding: var(--sp-2) var(--sp-4);
+    font-size: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: var(--weight-strong);
+    white-space: nowrap;
+    transition:
+      border-color var(--dur-hover) var(--ease-swing),
+      background-color var(--dur-hover) var(--ease-swing),
+      transform var(--dur-hover) var(--ease-weight);
+  }
+
+  .chip::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex: none;
+    background: var(--chip-color, var(--color-border-strong));
+  }
+
+  .chip.chip-reset::before {
+    display: none;
+  }
+
+  .chip:hover,
+  .chip:focus-visible {
+    border-color: var(--chip-color, var(--color-text));
+    transform: translateY(-1px);
+  }
+
+  /* The selected chip is FILLED, not merely tinted. The chip row is where
+     filter state is stated, which is why the grid itself does not have to
+     shout it and there is no result-count line (§6.2). */
+  .chip[aria-checked="true"] {
+    background: var(--chip-color, var(--color-text));
+    border-color: var(--chip-color, var(--color-text));
+    color: var(--on-label);
+  }
+
+  .chip[aria-checked="true"]::before {
+    background: currentColor;
+  }
+
+  .chip.chip-reset[aria-checked="true"] {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  /* ---- rows ---- */
+  .day li {
+    display: grid;
+    grid-template-columns: 4.6em 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+    border-bottom: 1px solid var(--color-border);
+    border-left: 3px solid transparent;
+    align-items: baseline;
+    transition:
+      background-color var(--dur-hover) var(--ease-swing),
+      border-left-color var(--dur-hover) var(--ease-swing),
+      opacity var(--dur-ui) var(--ease-swing),
+      filter var(--dur-ui) var(--ease-swing),
+      transform var(--dur-ui) var(--ease-swing);
+  }
+
+  .day li:hover,
+  .day li:focus-within {
+    background: var(--color-accent-soft);
+    border-left-color: var(--color-accent);
+    transform: translateX(3px);
+  }
+
+  /* Filtering by subtraction: non-matches recede. transform does not affect
+     layout, so the rows shrink while the grid holds its geometry. */
+  .day li.is-dim {
+    opacity: 0.16;
+    filter: grayscale(0.95);
+    transform: scale(0.92);
+    transform-origin: left center;
+  }
+
+  /* Dimmed rows lose their hover response, so a pointer passing over them
+     cannot make them jump back to full size. */
+  .day li.is-dim:hover,
+  .day li.is-dim:focus-within {
+    background: none;
+    border-left-color: transparent;
+    transform: scale(0.92);
+  }
+
+  .day {
+    transition: opacity var(--dur-ui) var(--ease-swing);
+  }
+
+  .days.is-filtering .day.is-empty {
+    opacity: 0.45;
+  }
+
+  .days.is-filtering .day.is-empty h4 {
+    border-bottom-color: var(--color-border);
+  }
+
+  .day time {
+    color: var(--color-accent-text);
+    font-weight: var(--weight-strong);
+    font-size: var(--s0);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .day .what {
+    font-size: var(--s-1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-1);
+  }
+
+  .day .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+  }
+
+  .day .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    font-size: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--tag-color, var(--color-text-muted));
+    border: 1px solid var(--tag-color, var(--color-border-strong));
+    padding: 1px var(--sp-2);
+    border-radius: 999px;
+  }
+
+  .day .tag::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .day .tag.tag-plain {
+    color: var(--color-text-muted);
+    border-color: var(--color-border-strong);
+  }
+
+  .day .tag.tag-plain::before {
+    display: none;
+  }
+
+  .note {
+    margin-top: var(--sp-5);
+    font-size: var(--s-1);
+    color: var(--color-text-muted);
+    max-width: var(--measure);
+  }
+}

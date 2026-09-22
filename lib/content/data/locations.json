@@ -23,7 +23,11 @@
       { "term": "zajęcia", "value": "wt – czw" },
       { "term": "godziny", "value": "16:30 – 20:15" }
     ],
-    "map": null,
+    "map": {
+      "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2335.70967191149!2d15.558190876590368!3d54.16750641296671!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4700157426645019%3A0x40f936b462143053!2sMazowiecka%2029%2C%2078-100%20Ko%C5%82obrzeg!5e0!3m2!1spl!2spl!4v1790028504559!5m2!1spl!2spl",
+      "title": "Mapa dojazdu do Movement Studio w Kołobrzegu, ul. Mazowiecka 29"
+    },
+
     "order": 2,
     "isDefault": false
   }

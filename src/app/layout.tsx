@@ -40,9 +40,6 @@ export default async function RootLayout({
         <NoScriptReveal />
       </head>
       <body>
-        {/* Landmarks per §10. Header and Footer previously sat inside <main>,
-            which left the skip link with nothing meaningful to skip to and
-            nested two landmarks inside a third. */}
         <a className="skip" href="#main">
           {headerCopy.skipLink}
         </a>

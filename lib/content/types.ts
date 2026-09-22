@@ -378,9 +378,14 @@ export interface TeaserPoster {
    Page copy
    ======================================================================== */
 
-/** The five anchored home sections. IA structure, so a closed union (§2). */
+/** The anchored home sections. IA structure, so a closed union (§2). */
 export type SectionId =
-  "offer" | "schedule" | "pricelist" | "about-us" | "contact";
+  | "offer"
+  | "schedule"
+  | "pricelist"
+  | "about-us"
+  | "faq"
+  | "contact";
 
 /** The numbered heading block that opens each section. */
 export interface SectionIntro {
@@ -483,6 +488,26 @@ export interface UiCopy {
   };
   /** Footnote under the schedule explaining nabór and gr. sportowa. */
   scheduleNote: TextRun[];
+}
+
+/**
+ * One question in #faq.
+ *
+ * `answer` is an array of paragraphs rather than one string with markup,
+ * because rule 1 keeps HTML out of the data. Where an answer needs to send
+ * the reader somewhere, it carries a `link` rendered after the prose instead
+ * of an anchor buried inside it — which also keeps the destination visible to
+ * anyone scanning rather than reading.
+ *
+ * Nothing here says which question opens first: that is presentation, and the
+ * component derives it from `order`.
+ */
+export interface FaqItem {
+  slug: Slug;
+  question: string;
+  answer: string[];
+  link?: LinkRef;
+  order: number;
 }
 
 export interface ContactCopy {

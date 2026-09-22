@@ -1756,6 +1756,122 @@
 }
 
 /* ============================================================================
+   #faq
+
+   Built from the schedule row's vocabulary rather than a new one: hairline
+   rules, a left edge that takes the accent, and a 3px shift on the way in.
+   A reader who has already used the grid recognises the shape.
+   ============================================================================ */
+
+@layer components {
+  .faq {
+    border-top: 1px solid var(--color-border);
+    max-width: 58rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+    border-left: 3px solid transparent;
+    transition:
+      background-color var(--dur-hover) var(--ease-swing),
+      border-left-color var(--dur-hover) var(--ease-swing);
+  }
+
+  .faq-item:hover,
+  .faq-item:focus-within,
+  .faq-item[open] {
+    border-left-color: var(--color-accent);
+  }
+
+  .faq-item[open] {
+    background: var(--color-accent-soft);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    /* min-height rather than padding alone, so the row clears §10's 44px even
+       when a question fits on one line. */
+    min-height: var(--tap-target);
+    padding: var(--sp-3);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* Safari draws its own disclosure triangle through a pseudo-element that
+     `list-style: none` alone does not remove. */
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-q {
+    font-size: var(--s1);
+    font-weight: var(--weight-strong);
+  }
+
+  /* The mark is drawn, not typed: a glyph would inherit the body face's
+     metrics and sit off the question's baseline at every step. Two rules that
+     cross, with the vertical one folding away when the panel opens. */
+  .faq-mark {
+    position: relative;
+    flex: none;
+    width: 0.85em;
+    height: 0.85em;
+    align-self: center;
+    color: var(--color-accent-text);
+  }
+
+  .faq-mark::before,
+  .faq-mark::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: translateY(-50%);
+    transition: transform var(--dur-ui) var(--ease-swing);
+  }
+
+  .faq-mark::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .faq-item[open] .faq-mark::after {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  .faq-a {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0 var(--sp-3) var(--sp-4);
+  }
+
+  .faq-link a {
+    font-size: var(--s-1);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-strong);
+    color: var(--color-accent-text);
+    text-underline-offset: 0.35em;
+  }
+
+  @media (min-width: 768px) {
+    .faq-item summary,
+    .faq-a {
+      padding-inline: var(--sp-4);
+    }
+
+    .faq-a {
+      /* Align the answer under the question rather than under the row edge. */
+      padding-bottom: var(--sp-5);
+    }
+  }
+}
+
+/* ============================================================================
    #contact
    ============================================================================ */
 

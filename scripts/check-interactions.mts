@@ -41,7 +41,10 @@ async function rows(page: Page) {
     return {
       total: all.length,
       dim: all.filter((li) => li.classList.contains("is-dim")).length,
-      emptyDays: panel.querySelectorAll(".day.is-empty").length,
+      /* An attribute, not a class: a class here would be wiped by React's
+         className reconciliation along with the observer's .is-in, and the
+         day would never reveal again. See ScheduleGrid. */
+      emptyDays: panel.querySelectorAll(".day[data-empty]").length,
       filtering: !!panel.querySelector(".days.is-filtering"),
     };
   });
@@ -190,6 +193,40 @@ check(
       Math.abs(
         document.getElementById("about-us")!.getBoundingClientRect().top,
       ) < 200,
+  ),
+  true,
+);
+
+/* ---------- faq ----------
+   The accordion is native <details name>, so this is really a check that the
+   markup stayed native: no script of ours runs here, and the exclusivity comes
+   from the browser. A regression would most likely be someone dropping `name`
+   or reaching for state. */
+check(
+  "faq opens the first question on load",
+  await page.evaluate(() =>
+    [...document.querySelectorAll<HTMLDetailsElement>(".faq-item")].map(
+      (d) => d.open,
+    ),
+  ),
+  [true, false, false, false, false, false],
+);
+await page.locator(".faq-item").nth(2).locator("summary").click();
+await page.waitForTimeout(300);
+check(
+  "faq is exclusive: opening one closes the rest",
+  await page.evaluate(
+    () =>
+      document.querySelectorAll<HTMLDetailsElement>(".faq-item[open]").length,
+  ),
+  1,
+);
+check(
+  "faq answers stay in the accessible tree when open",
+  await page.evaluate(
+    () =>
+      document.querySelector(".faq-item[open] .faq-a")!.textContent!.trim()
+        .length > 0,
   ),
   true,
 );

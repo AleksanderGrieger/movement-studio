@@ -63,8 +63,9 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 | program sessions | **4** | 2 each |
 | program session rows | **10** | 3+3, 2+2 |
 | teaser posters | **3** | |
-| nav items | **6** | 5 anchors + /programs |
-| section intros | **5** | offer, schedule, pricelist, about-us, contact |
+| nav items | **7** | 6 anchors + /programs |
+| section intros | **6** | offer, schedule, pricelist, about-us, faq, contact |
+| faq items | **6** | partner, wiek-dzieci, bez-doswiadczenia, koszt, zajecia-probne, stroj |
 | facts | **3** | |
 | marquee items | **10** | |
 | contact links | **4** | phone, email, Instagram, Facebook |
@@ -125,6 +126,17 @@ getProgramsTeaser(): Promise<ProgramsTeaser>
 getProgramsPageCopy(): Promise<ProgramsPageCopy>
 ```
 
+### `lib/content/faq.ts` — backed by `data/faq.json`
+
+```ts
+getFaqItems(): Promise<FaqItem[]>            // sorted by order
+```
+
+Order is editorial, not alphabetical: the list walks a first visit, and the
+section opens whichever item sorts first, so `order` decides what a visitor
+reads without clicking. The count is not fixed — the section renders however
+many come back.
+
 ### `lib/content/site.ts` — backed by `data/site.json`
 
 ```ts
@@ -170,7 +182,8 @@ own heading.
 | `Program` / `ProgramSession` / `ProgramSessionRow` | `programs.json` → `programs` | |
 | `ProgramsTeaser` / `TeaserPoster` | `programs.json` → `teaser` | |
 | `ProgramsPageCopy` | `programs.json` → `page` | |
-| `SectionId` | — | closed union of the five anchors — IA structure, not content |
+| `FaqItem` | `faq.json` | `answer` is an array of paragraphs, not one string with markup; an optional `link` rides after the prose rather than inside it |
+| `SectionId` | — | closed union of the six anchors — IA structure, not content |
 | `SectionIntro`, `NavItem`, `HeaderCopy`, `MenuButtonCopy`, `ThemeToggleCopy`, `HeroCopy`, `Fact`, `UiCopy`, `ContactCopy`, `FooterCopy`, `SiteMeta`, `MarqueeItems` | `site.json` | one key per type name |
 
 ### Cross-references the checker enforces
@@ -180,6 +193,8 @@ own heading.
 - `ScheduleEntry.labels[]` → `ScheduleLabel.slug`
 - `OfferGroup.scheduleFilter` → `ScheduleLabel.slug`
 - every `ScheduleEntry.slug` unique; every entry carries at least one label
+- every `FaqItem.slug` unique; every item carries at least one answer paragraph
+- `FaqItem.link.href`, where it is an anchor, → `SectionIntro.id`
 
 In Payload these become relations. Keep them as relations, not free text.
 
@@ -296,6 +311,16 @@ Everything else is a Server Component.
 
 `layout/ThemeScript` is a Server Component that emits a blocking inline script
 into `<head>`, applying the saved theme before first paint.
+
+**`sections/Faq` is deliberately not on this list.** An accordion is the
+textbook reason to reach for client state, and it does not need any: the
+section is `<details name="faq">`, so open/close, the keyboard, the accessible
+name and the expanded state all come from the browser, the group is mutually
+exclusive without a line of script, and the whole thing works with JavaScript
+off. `name` is the only part with a support floor, and where it is missing the
+panels simply open independently — a worse behaviour, not a broken one. If a
+future change needs animated height, prefer CSS over making this a client
+component.
 
 **A trap worth knowing.** Content inside a `hidden` location panel never
 intersects anything, so the reveal observer never fires for it and the panel

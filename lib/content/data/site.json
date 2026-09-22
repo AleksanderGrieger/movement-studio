@@ -25,6 +25,11 @@
       "scrollSpy": true
     },
     {
+      "label": "FAQ",
+      "href": "/#faq",
+      "scrollSpy": true
+    },
+    {
       "label": "Kontakt",
       "href": "/#contact",
       "scrollSpy": true
@@ -166,8 +171,15 @@
       "title": "Kto Cię poprowadzi"
     },
     {
-      "id": "contact",
+      "id": "faq",
       "number": "05",
+      "eyebrow": "FAQ",
+      "title": "Zanim wejdziesz na parkiet",
+      "intro": "Sześć pytań, które słyszymy najczęściej przed pierwszymi zajęciami. Jeśli Twojego tu nie ma — zadzwoń, odpowiemy od ręki."
+    },
+    {
+      "id": "contact",
+      "number": "06",
       "eyebrow": "Kontakt",
       "title": "Zapraszamy"
     }
@@ -245,6 +257,11 @@
       {
         "label": "O nas",
         "href": "/#about-us",
+        "scrollSpy": false
+      },
+      {
+        "label": "FAQ",
+        "href": "/#faq",
         "scrollSpy": false
       },
       {

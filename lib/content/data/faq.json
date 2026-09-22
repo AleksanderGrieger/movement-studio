@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "partner",
+    "question": "Czy potrzebuję partnera?",
+    "answer": [
+      "Do większości zajęć nie. Latino Solo, Ladies Style, Power Dance, Sexy Dance, Disco Folk oraz body workout ze stretchingiem to zajęcia solowe — przychodzisz sam lub sama.",
+      "Partner jest potrzebny tylko na tańcu towarzyskim, tańcu użytkowym dla par i przy nauce pierwszego tańca."
+    ],
+    "order": 1
+  },
+  {
+    "slug": "wiek-dzieci",
+    "question": "Od jakiego wieku przyjmujecie dzieci?",
+    "answer": [
+      "Najmłodsi zaczynają na Baby Movement — od szóstego do osiemnastego miesiąca, w chuście lub nosidle, razem z rodzicem.",
+      "Od trzeciego roku życia zapraszamy na Dance Mix, a starsze dzieci na grupy kierunkowe: taniec towarzyski, Latino Solo Kids i podstawy baletu. Dla nastolatków prowadzimy Teen Movement."
+    ],
+    "link": {
+      "label": "Zobacz zajęcia dla dzieci",
+      "href": "#offer"
+    },
+    "order": 2
+  },
+  {
+    "slug": "bez-doswiadczenia",
+    "question": "Nigdy nie tańczyłem. Czy to problem?",
+    "answer": [
+      "Nie. Grupy oznaczone w grafiku jako „nabór” są przeznaczone właśnie dla osób zaczynających od zera — zaczynamy od podstaw kroku i rytmu.",
+      "„Gr. sportowa” to osobna ścieżka, dla tancerzy startujących w turniejach. Filtr nad grafikiem pokazuje jedne i drugie."
+    ],
+    "link": {
+      "label": "Otwórz grafik",
+      "href": "#schedule"
+    },
+    "order": 3
+  },
+  {
+    "slug": "koszt",
+    "question": "Ile kosztują zajęcia?",
+    "answer": [
+      "Jedne zajęcia w tygodniu to 140 zł miesięcznie. Grupy sportowe, które trenują dwa razy w tygodniu, kosztują od 280 zł.",
+      "Lekcje indywidualne i przygotowanie pierwszego tańca rozliczamy za pojedyncze spotkanie. Ceny różnią się między Białogardem a Kołobrzegiem."
+    ],
+    "link": {
+      "label": "Zobacz pełny cennik",
+      "href": "#pricelist"
+    },
+    "order": 4
+  },
+  {
+    "slug": "zajecia-probne",
+    "question": "Czy mogę przyjść na zajęcia próbne?",
+    "answer": [
+      "Tak. Zadzwoń albo napisz do nas, a wspólnie ustalimy termin i grupę odpowiednią dla Ciebie — również wtedy, gdy nie wiesz jeszcze, co chcesz tańczyć."
+    ],
+    "link": {
+      "label": "Napisz lub zadzwoń",
+      "href": "#contact"
+    },
+    "order": 5
+  },
+  {
+    "slug": "stroj",
+    "question": "W czym przyjść na pierwsze zajęcia?",
+    "answer": [
+      "Wygodny strój, w którym możesz się swobodnie ruszać, i obuwie zmienne na miękkiej podeszwie.",
+      "Butów tanecznych nie musisz kupować od razu — doradzimy, kiedy przyjdzie na to czas."
+    ],
+    "order": 6
+  }
+]

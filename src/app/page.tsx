@@ -8,6 +8,7 @@ import { Schedule } from "@/src/components/sections/Schedule";
 import { Pricelist } from "@/src/components/sections/Pricelist";
 import { About } from "@/src/components/sections/About";
 import { ProgramsTeaser } from "@/src/components/sections/ProgramsTeaser";
+import { Faq } from "@/src/components/sections/Faq";
 import { Contact } from "@/src/components/sections/Contact";
 
 /**
@@ -31,6 +32,7 @@ export default async function Home() {
       <Pricelist />
       <About />
       <ProgramsTeaser />
+      <Faq />
       <Contact />
     </HomeStateProvider>
   );

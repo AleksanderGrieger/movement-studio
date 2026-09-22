@@ -14,6 +14,7 @@ import { getScheduleEntries, getScheduleLabels, getScheduleGrid } from "@/lib/co
 import { getPriceBlocks } from "@/lib/content/pricing";
 import { getInstructors } from "@/lib/content/instructors";
 import { getPrograms, getProgramsTeaser } from "@/lib/content/programs";
+import { getFaqItems } from "@/lib/content/faq";
 import { getNavigation, getSectionIntros, getFacts, getMarqueeItems, getUiCopy, getContactCopy, getHeroCopy } from "@/lib/content/site";
 
 const fail: string[] = [];
@@ -48,10 +49,14 @@ eq("programs", programs.length, 2);
 eq("program sessions", programs.reduce((n, p) => n + p.sessions.length, 0), 4);
 eq("program session rows", programs.reduce((n, p) => n + p.sessions.reduce((m, s) => m + s.rows.length, 0), 0), 10);
 eq("teaser posters", (await getProgramsTeaser()).posters.length, 3);
-eq("nav items", (await getNavigation()).length, 6);
-eq("section intros", (await getSectionIntros()).length, 5);
+eq("nav items", (await getNavigation()).length, 7);
+eq("section intros", (await getSectionIntros()).length, 6);
 eq("facts", (await getFacts()).length, 3);
 eq("marquee items", (await getMarqueeItems()).length, 10);
+const faq = await getFaqItems();
+eq("faq items", faq.length, 6);
+eq("faq items with an answer", faq.filter((f) => f.answer.length > 0).length, faq.length);
+eq("duplicate faq slugs", faq.length - new Set(faq.map((f) => f.slug)).size, 0);
 eq("contact links", (await getContactCopy()).links.length, 4);
 eq("hero headline lines", (await getHeroCopy()).headline.length, 3);
 
@@ -65,6 +70,15 @@ eq("entries -> unknown labels", badLabels.length, 0);
 eq("rows -> unknown locations", badLocs.length, 0);
 eq("offer -> unknown filters", badFilters.length, 0);
 eq("duplicate entry slugs", entries.length - new Set(entries.map((e) => e.slug)).size, 0);
+
+/* FAQ answers link onward by anchor. A typo there is a dead click that no
+   type checks, so the targets are verified against the section intros. */
+const sectionIds = new Set((await getSectionIntros()).map((s) => s.id));
+const badFaqLinks = faq
+  .map((f) => f.link?.href)
+  .filter((href): href is string => !!href && href.startsWith("#"))
+  .filter((href) => !sectionIds.has(href.slice(1) as never));
+eq("faq links -> unknown sections", badFaqLinks.length, 0);
 
 const grid = await getScheduleGrid();
 eq("grid locations", grid.length, 2);

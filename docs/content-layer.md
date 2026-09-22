@@ -305,6 +305,17 @@ is deliberately declarative: adding `is-in` with `classList` gets wiped the
 next time React reconciles those elements' className, which happens on every
 filter change in the schedule grid.
 
+The same hazard bit from the other direction. `RevealObserver` adds `is-in`
+to `.r` elements with `classList`, and the schedule's day `<li>` is both a
+`.r` element and the thing that marks itself empty under a filter. While that
+empty state lived in `className`, every filter change that flipped it made
+React rewrite the whole attribute and drop `is-in` — and since the observer
+unobserves on first reveal, nothing ever brought the day back. Białogard's
+Wtorek holds a single entry, so it flipped on almost every chip and was the
+first to vanish. The empty state is therefore an **attribute**, `data-empty`,
+not a class. The rule: never put React-controlled state in the `className` of
+an element the observer also writes to.
+
 ---
 
 ## 9. Deviations from design-decisions.md
@@ -313,8 +324,7 @@ Each is a considered departure, not drift.
 
 | what | why |
 |---|---|
-| Body face is **Capsuula**, not Archivo | client chose the repo pairing. Applied §13's procedure: Polish coverage verified (366 glyphs, all 18 diacritics with real outlines), `--size-adjust-body` recomputed 0.99 → **1.04** (0.520 / Capsuula's 0.500 x-height), `--measure` 58ch → **62ch** (digit advance 0.510 vs 0.575; `ch` is per-face). Meringue untouched. |
-| `--weight-strong` 600 → **400** | Capsuula ships one weight. 600 would be a synthesized faux bold on every eyebrow and button. Emphasis is carried by tracking, colour and size. |
+| `--header-bg` added, replacing `color-mix()` on `.header` | not a colour change — a build one. The minifier wraps any `color-mix()` in `@supports (color: color-mix(in lab, red, red))` and emits a static fallback beside it with the **default** theme's value inlined (`#303030e0`). Browsers with `color-mix` in srgb but not in lab — Safari 16.2–16.3 — took that fallback, so the page themed to light while the header alone stayed dark. A literal `rgba` per theme has no fallback path. Keep the two values in step with `--color-bg`. |
 | `--label-intake` (Theme B) `#a35c41` → **`#9e5940`** | §8 measured this token only as a chip dot and cell bar at the 3:1 bar, but the schedule row prints the label as ~11px **text**, needing 4.5:1 — `#a35c41` measures 4.45. The prototype has the same failure. New value: 4.69 on the page, and white-on-fill improves to 5.31. |
 | `--tap-target: 44px` added | §10 requires ≥44px but the prototype's own controls measured 41.9px (burger) and 34.9px (theme toggle). |
 | Day/price headings h4 → **h3** | they sat directly under the section `h2`, skipping a level. |

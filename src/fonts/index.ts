@@ -26,32 +26,37 @@ export const meringue = localFont({
 });
 
 /**
- * Body face — Capsuula.
+ * Body face — Archivo (SIL OFL 1.1), the prototype's face.
  *
- * Substituted for the prototype's Archivo at the client's request (both faces
- * now come from the repo). Verified against the supplied Capsuula.ttf v1.002
- * before selection, per the procedure in design-decisions.md §13:
+ * Capsuula held this slot for a while as a client substitution; this is the
+ * move back. The three tokens that were recomputed for Capsuula go back to
+ * their Archivo values with it — they are a set, and changing the face
+ * without them is what makes type look subtly wrong:
  *
- *   1. Polish coverage — 366 glyphs; all of ą ć ę ł ń ó ś ź ż and capitals
- *      present with real (non-blank) outlines.
- *   2. x-height 0.500 em vs Archivo's 0.526, so --size-adjust-body is
- *      recomputed 0.520 / 0.500 = 1.04 (was 0.99).
- *   3. `ch` is a per-face unit — digit advance is 0.510 em vs Archivo's 0.575,
- *      so --measure is recomputed to 62ch to preserve the identical rendered
- *      line length.
+ *   1. x-height 0.526 em, so --size-adjust-body is 0.520 / 0.526 = 0.99
+ *      (was 1.04 for Capsuula's 0.500).
+ *   2. `ch` is a per-face unit — digit advance 0.575 em against Capsuula's
+ *      0.510 — so --measure goes back to 58ch for the same rendered line
+ *      length.
+ *   3. Archivo carries a real wght 100-900 axis, so --weight-strong is 600
+ *      again rather than the 400 that avoided a synthesized faux bold.
  *
- * Capsuula ships a single weight (usWeightClass 400) where Archivo carried a
- * wght 100–900 axis. See --weight-strong in globals.css.
+ * Vendored rather than pulled through next/font/google so the build stays
+ * offline and matches how Meringue is loaded. Two files because Polish needs
+ * both of Google's Latin subsets: ó sits in latin, ą ć ę ł ń ś ź ż in
+ * latin-ext. Variable font, hence the 100 900 weight range — next/font keeps
+ * the axis, so --weight-strong renders as a real drawn weight.
  */
-export const capsuula = localFont({
-  src: "./capsuula-subset.woff2",
-  variable: "--font-capsuula",
+export const archivo = localFont({
+  src: [
+    { path: "./archivo-latin.woff2", weight: "100 900", style: "normal" },
+    { path: "./archivo-latin-ext.woff2", weight: "100 900", style: "normal" },
+  ],
+  variable: "--font-archivo",
   display: "block",
   preload: true,
-  weight: "400",
-  style: "normal",
   fallback: ["system-ui", "sans-serif"],
   adjustFontFallback: "Arial",
 });
 
-export const fontVariables = `${meringue.variable} ${capsuula.variable}`;
+export const fontVariables = `${meringue.variable} ${archivo.variable}`;

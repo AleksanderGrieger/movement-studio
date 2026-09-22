@@ -17,8 +17,17 @@ import { usePanelVisibility } from "./usePanelVisibility";
  * geometry, so nothing reflows and the eye reads the untouched rows as the
  * answer.
  *
- * A day whose every row is dimmed gets .is-empty, so an emptied Tuesday reads
- * as empty rather than unfiltered.
+ * A day whose every row is dimmed gets data-empty, so an emptied Tuesday
+ * reads as empty rather than unfiltered.
+ *
+ * That state is an ATTRIBUTE, not a class, and it has to stay one. The day is
+ * also a .r element, and RevealObserver adds .is-in to those with classList —
+ * a class React does not know about. Putting the empty state in className
+ * meant every filter change that flipped it made React rewrite the whole
+ * attribute and drop .is-in, leaving the day at opacity 0 for good, with the
+ * observer already unobserved so nothing brought it back. Białogard's Wtorek
+ * has a single entry, so it flips on almost every chip and vanished first.
+ * Same hazard as the one usePanelVisibility documents.
  *
  * Colour is never the only signal: every row prints its labels as words, and
  * the filter state is reported by the filled chip above the grid.
@@ -46,7 +55,8 @@ export function ScheduleGrid({
           return (
             <li
               key={group.day.slug}
-              className={`day r${isEmpty ? " is-empty" : ""}`}
+              className="day r"
+              data-empty={isEmpty ? "" : undefined}
               style={{ "--i": index } as React.CSSProperties}
             >
               <h3>{group.day.name}</h3>

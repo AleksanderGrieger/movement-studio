@@ -54,7 +54,7 @@
 
   /* ---- faces (§5.1) ------------------------------------------------------ */
   --font-display: var(--font-meringue), Georgia, serif;
-  --font-body: var(--font-capsuula), system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
 
   /* ---- shared type metrics (§5.4) — never themed ------------------------- */
   --tracking-display: 0.005em;
@@ -91,6 +91,18 @@
    ============================================================================ */
 
 :root {
+  /* ---- header scrim ------------------------------------------------------
+     The sticky header is --color-bg at 88%. Written as a literal rgba per
+     theme rather than color-mix(in srgb, var(--color-bg) 88%, transparent):
+     the minifier wraps a color-mix() in @supports (color: color-mix(in lab,
+     red, red)) and emits a static fallback with the DEFAULT theme's value
+     inlined (#303030e0). Browsers that have color-mix in srgb but not in lab
+     — Safari 16.2-16.3 among them — take that fallback, so the whole page
+     themed to light while the header stayed dark. A plain custom property
+     has no fallback path and cannot desynchronise from the theme.
+     Keep these two in step with --color-bg. */
+  --header-bg: rgba(48, 48, 48, 0.88);
+
   /* ---- logo fills (§1.2) — inline SVG only; an <img> cannot be recoloured -- */
   --logo-1: var(--color-accent);
   --logo-2: var(--color-tertiary);
@@ -111,23 +123,23 @@
 
   /* ---- type system (§5.2–5.4) — shared, never themed --------------------- */
   --scale-ratio: 1.125;
-  --measure: 62ch;
+  /* `ch` is a per-face unit: Archivo's digit advance is 0.575 em. 58ch here
+     is the same rendered line length Capsuula needed 62ch for. */
+  --measure: 58ch;
   --weight-display: 400;
   --weight-body: 400;
-  /* Deviation from §5.4, which specifies 600. Capsuula ships a single weight
-     (usWeightClass 400) where the prototype's Archivo carried a wght 100-900
-     axis, so 600 would be a browser-synthesized faux bold on every eyebrow,
-     button label and <strong>. Emphasis is carried by letter-spacing, colour
-     and size instead, which is how the rest of the system already works. */
-  --weight-strong: 400;
+  /* §5.4's value. Archivo carries a wght 100-900 axis, so this is a real
+     drawn weight — it was held at 400 only while Capsuula, a single-weight
+     face, would have made it a synthesized faux bold. */
+  --weight-strong: 600;
   --display-variation: normal;
   --display-case: none;
 
   /* Optical normalisation (§5.2). Meringue's cap height is a full em against
      a normal face's ~0.69, so it must be set ~20% smaller to look the same
      size — the single most important number in the type system.
-     --size-adjust-body is 0.520 / Capsuula's 0.500 x-height. */
-  --size-adjust-body: 1.04;
+     --size-adjust-body is 0.520 / Archivo's 0.526 x-height. */
+  --size-adjust-body: 0.99;
   --size-adjust-display: 0.8;
 
   /* Meringue's accented capitals overshoot the em box by ~19%. Applied as
@@ -233,6 +245,9 @@
   --color-border: #ddd2c4;
   --color-border-strong: #8d7f6d;
   --color-focus: #245c4f;
+
+  /* --color-bg at 88%; see the note on the default in :root. */
+  --header-bg: rgba(246, 240, 232, 0.88);
 
   /* Pink and orange on cream reads as a printing error, so the mark goes
      monochrome ink. The mono lockup exists in the supplied PDF family (§4). */
@@ -515,7 +530,12 @@
     align-items: center;
     justify-content: center;
     min-height: var(--tap-target);
-    gap: var(--sp-2);
+    /* No gap below 768px. The word is hidden there, but its wrapper stays in
+       the flex row so the sr-only name never leaves the accessibility tree.
+       That wrapper is zero width — sr-only is absolutely positioned — so a
+       gap would still be laid out beside it and push the icon off centre in
+       the round icon-only button. The gap returns with the word at 768px. */
+    gap: 0;
     border: 1px solid var(--color-border-strong);
     border-radius: 999px;
     padding: var(--sp-2) var(--sp-3);
@@ -586,6 +606,10 @@
     .theme-toggle .tlabel {
       display: inline;
     }
+
+    .theme-toggle {
+      gap: var(--sp-2);
+    }
   }
 
   /* ---- header ---- */
@@ -593,7 +617,7 @@
     position: sticky;
     top: 0;
     z-index: 60;
-    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    background: var(--header-bg);
     border-bottom: 1px solid transparent;
     transition:
       border-color var(--dur-ui) var(--ease-swing),
@@ -1444,12 +1468,15 @@
     transition: opacity var(--dur-ui) var(--ease-swing);
   }
 
-  .days.is-filtering .day.is-empty {
+  /* An attribute, not a class — see the note in ScheduleGrid. A class here is
+     wiped by React's className reconciliation together with the observer's
+     .is-in, and the day never reappears. */
+  .days.is-filtering .day[data-empty] {
     opacity: 0.45;
   }
 
-  .days.is-filtering .day.is-empty h3,
-  .days.is-filtering .day.is-empty h4 {
+  .days.is-filtering .day[data-empty] h3,
+  .days.is-filtering .day[data-empty] h4 {
     border-bottom-color: var(--color-border);
   }
 

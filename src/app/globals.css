@@ -345,6 +345,19 @@
     font-weight: var(--weight-strong);
   }
 
+  /* The step from an eyebrow to the heading directly under it.
+     .display carries the overshoot as padding-top plus an equal negative
+     margin-top. That pair keeps the heading's baseline exactly where it would
+     fall without it, but the border box still climbs by the overshoot — so it
+     eats whatever sits above. Where a grid lays the two out, the container's
+     gap absorbs that; where they are plain flow siblings (the hero, the
+     programs teaser) nothing did and the two boxes touched. Measured in the
+     heading's own em, so the text lands the same --sp-3 below the eyebrow that
+     the grid-laid heads produce, at every display size. */
+  .eyebrow + .display {
+    margin-top: calc(var(--sp-3) - var(--display-overshoot));
+  }
+
   .lead {
     font-size: var(--s1);
     color: var(--color-text-muted);
@@ -1856,6 +1869,7 @@
     font-weight: var(--weight-strong);
     letter-spacing: var(--tracking-body);
   }
+
 }
 
 /* A panel the visitor switched to after first render. Its contents never
@@ -1881,6 +1895,13 @@
     margin-bottom: var(--sp-6);
     display: grid;
     gap: var(--sp-3);
+  }
+
+  /* This head lays the pair out with a grid gap, which already absorbs the
+     overshoot's negative margin — so it opts out of the flow-sibling step the
+     type layer adds, which would otherwise double it. */
+  .program-head .eyebrow + .display {
+    margin-top: calc(var(--display-overshoot) * -1);
   }
 
   .program-head h2 {

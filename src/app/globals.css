@@ -59,7 +59,18 @@
   /* ---- shared type metrics (§5.4) — never themed ------------------------- */
   --tracking-display: 0.005em;
   --tracking-body: 0.005em;
-  --leading-display: 1.08;
+  /* §5.4 specifies 1.08. That is a normal display leading and this is not a
+     normal face: measured in the browser, Meringue's ink runs 1.010em above
+     the baseline for a plain capital and 0.320em below it for a descender, so
+     two stacked lines need 1.330em before they stop touching. At 1.08 they
+     overlapped by a quarter of an em and it showed — the y of "który" cut
+     through the T of "Tobie", the j of "zostaje" ran into "dłużej". 1.34 is
+     that measured floor plus a hair.
+     Not enough for every possible headline: an accented capital ascends
+     1.198em, so a line starting with Ó directly under a descender wants 1.52.
+     Setting the token there would loosen every heading on the site for a case
+     the copy does not currently contain — see docs/content-layer.md §9. */
+  --leading-display: 1.34;
   --leading-body: 1.6;
 
   /* ---- motion curves (§7.1) — shared across both themes ------------------
@@ -1645,11 +1656,16 @@
     color: var(--color-text-muted);
   }
 
+  /* A paragraph of display type, not a two-line headline: denser, and carrying
+     a diacritic on nearly every line, so it wants more air than the token
+     gives. The bump is additive rather than the ×1.2 it used to be — a
+     multiplier compounds every time the base moves, and when --leading-display
+     went to 1.34 it landed this block at 1.61. */
   .founders .big {
     --display-step: var(--s3);
     color: var(--color-text);
     max-width: none;
-    line-height: calc(var(--leading-display) * 1.2);
+    line-height: calc(var(--leading-display) + 0.12);
   }
 
   .crew {

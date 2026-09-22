@@ -94,7 +94,7 @@ export default async function Programs() {
                     width={poster.width}
                     height={poster.height}
                     alt={poster.alt}
-                    sizes="(min-width: 1280px) 10.5rem, 30vw"
+                    sizes="(min-width: 768px) 19rem, 42vw"
                     loading="lazy"
                   />
                 ))}

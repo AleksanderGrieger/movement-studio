@@ -1920,6 +1920,23 @@
     margin-bottom: var(--sp-7);
   }
 
+  /* On the home teaser a poster is a thumbnail — a link affordance standing in
+     for the route. Here it IS the document: the grant logos, dates and
+     conditions are printed on it, and at the teaser's 10.5rem none of that
+     resolves. Sized to the column instead of to a thumb, capped so two still
+     sit side by side. The img `sizes` on /programs tracks these widths; it is
+     inert while next.config sets images.unoptimized, and correct the moment
+     that is lifted. */
+  .program-body .posters img {
+    width: min(42vw, 16rem);
+  }
+
+  @media (min-width: 768px) {
+    .program-body .posters img {
+      width: min(34vw, 19rem);
+    }
+  }
+
   /* Copy against posters, echoing the home teaser's 1fr auto split. */
   @media (min-width: 1280px) {
     .program-body {

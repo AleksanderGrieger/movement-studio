@@ -2,6 +2,7 @@ import { getLocations } from "@/lib/content/locations";
 import { getContactCopy, getSectionIntro, getUiCopy } from "@/lib/content/site";
 import { LocationPanel } from "../home/LocationPanel";
 import { LocationToggle } from "../home/LocationToggle";
+import { ContactIcon } from "./ContactIcon";
 import { SectionHead } from "./SectionHead";
 
 /**
@@ -79,6 +80,7 @@ export async function Contact() {
                 ? { rel: "noopener", target: "_blank" }
                 : null)}
             >
+              <ContactIcon href={link.href} />
               <span>{link.label}</span>
               {link.context ? (
                 <span className="sr-only">{link.context}</span>

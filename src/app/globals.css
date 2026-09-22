@@ -1986,6 +1986,41 @@
     letter-spacing: var(--tracking-body);
   }
 
+  /* Decorative (§10) — the label beside it carries the meaning. Sized in em so
+     it tracks whichever type step its link is set at, and given flex: none so
+     a long address wrapping cannot squeeze it. */
+  .contact-icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    color: var(--color-accent-text);
+    transition: color var(--dur-hover) var(--ease-swing);
+  }
+
+  /* Glyph shapes, not line drawings: stroking their outline renders them
+     visibly lighter than the envelope and the Instagram frame beside them. */
+  .contact-icon[data-channel="phone"],
+  .contact-icon[data-channel="facebook"] {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .contact-links a:hover .contact-icon,
+  .contact-links a:focus-visible .contact-icon {
+    color: currentColor;
+  }
+
+  /* The phone link is set in the display face, where 1.1em would tower over
+     the others. Held to the body scale so the four marks line up as a set. */
+  .contact-links a.display .contact-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }
 
 /* A panel the visitor switched to after first render. Its contents never

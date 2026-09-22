@@ -586,7 +586,12 @@
     transition: transform var(--dur-ui) var(--ease-weight);
   }
 
-  .theme-toggle:hover svg {
+  /* The tilt the header logo and the contact marks both echo. Keyboard gets
+     it too: the button's own border and lift already answer to :focus-visible,
+     and leaving the icon out of that made the focused state a partial version
+     of the hovered one. */
+  .theme-toggle:hover svg,
+  .theme-toggle:focus-visible svg {
     transform: rotate(-18deg);
   }
 
@@ -660,6 +665,20 @@
 
   .header .logo {
     width: clamp(9rem, 22vw, 12.5rem);
+    display: block;
+    transition: transform var(--dur-ui) var(--ease-weight);
+  }
+
+  /* The theme toggle's move, at wordmark scale. The toggle lifts its button
+     1px and spins its icon -18deg; -18deg across a 12.5rem lockup would read
+     as a broken layout rather than a flourish, so the mark takes the lift and
+     keeps the tilt to the -1deg the posters already use on hover. Same
+     duration and the same overshooting curve, so the three read as one
+     gesture. The footer lockup is a <div role="img">, not a link, and stays
+     still. */
+  .header .logo:hover,
+  .header .logo:focus-visible {
+    transform: translateY(-1px) rotate(-1deg);
   }
 
   .nav {
@@ -1999,7 +2018,9 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     color: var(--color-accent-text);
-    transition: color var(--dur-hover) var(--ease-swing);
+    transition:
+      color var(--dur-hover) var(--ease-swing),
+      transform var(--dur-ui) var(--ease-weight);
   }
 
   /* Glyph shapes, not line drawings: stroking their outline renders them
@@ -2010,9 +2031,13 @@
     stroke: none;
   }
 
+  /* The theme toggle's spin, unchanged — these are icons at the same size, so
+     the angle carries over as-is. The link's own translateX(4px) is on the
+     <a>; this rides on the mark inside it. */
   .contact-links a:hover .contact-icon,
   .contact-links a:focus-visible .contact-icon {
     color: currentColor;
+    transform: rotate(-18deg);
   }
 
   /* The phone link is set in the display face, where 1.1em would tower over

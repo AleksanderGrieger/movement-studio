@@ -32,22 +32,42 @@ export function SiteNav({
       .map((item) => item.href.split("#")[1])
       .filter(Boolean);
 
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
+    /* The id sits on the section-head, not the <section> itself (§9's
+       scroll-anchor fix), so watch the section — the tall element is what
+       needs to cross the mid-viewport band for the whole time the visitor is
+       in it, not just the moment the head scrolls past — while keeping the
+       id (now unset on the section) in this map to report back. */
+    const idBySection = new Map<HTMLElement, string>();
+    for (const id of ids) {
+      const section = document.getElementById(id)?.closest("section");
+      if (section) idBySection.set(section, id);
+    }
 
-    if (sections.length === 0) return;
+    if (idBySection.size === 0) return;
 
+    /* isIntersecting only ever set currentId, never cleared it, so scrolling
+       back up above every section (into the hero) left whichever section was
+       last current highlighted forever. Clear it when the section that
+       leaves the band was the current one — the functional update reads the
+       latest state, so an entry/exit pair delivered in the same batch (e.g.
+       crossing from one section straight into the next) resolves in order
+       instead of the exit racing the entry. */
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setCurrentId(entry.target.id);
+          const id = idBySection.get(entry.target as HTMLElement);
+          if (!id) continue;
+          if (entry.isIntersecting) {
+            setCurrentId(id);
+          } else {
+            setCurrentId((current) => (current === id ? null : current));
+          }
         }
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
 
-    sections.forEach((section) => observer.observe(section));
+    idBySection.forEach((_id, section) => observer.observe(section));
     return () => observer.disconnect();
   }, [items]);
 

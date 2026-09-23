@@ -1,6 +1,6 @@
 {
   "founders": {
-    "statement": "Hania i Karolina — założycielki Movement Studio. Z miłości do tańca stworzyły przestrzeń dla dzieci, młodzieży i dorosłych.",
+    "statement": "Hania i Karolina - założycielki Movement Studio. Z miłości do tańca stworzyły przestrzeń dla dzieci, młodzieży i dorosłych.",
     "body": "Chcą przekazywać swoją wiedzę i umiejętności, zarażać entuzjazmem i rozbudzać miłość do tańca wśród mieszkańców Białogardu i Kołobrzegu. Kadrę tworzą tancerki z wieloletnim stażem zawodowym, medalistki mistrzostw Polski i trenerki, które wychowały kolejne pokolenia tancerzy."
   },
   "instructors": [
@@ -34,7 +34,7 @@
       "slug": "magdalena-lopucka",
       "name": "Magdalena Łopucka",
       "role": "Taniec współczesny · Power Dance",
-      "bio": "25 lat stażu, choreografka i nauczycielka. Wyszkoliła kilka pokoleń polskich tancerzy. Autorka programu Power Dance — połączenia tańca z treningiem fitness.",
+      "bio": "25 lat stażu, choreografka i nauczycielka. Wyszkoliła kilka pokoleń polskich tancerzy. Autorka programu Power Dance - połączenia tańca z treningiem fitness.",
       "photo": {
         "src": "/assets/images/magda.png",
         "width": 1080,

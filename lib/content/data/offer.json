@@ -33,7 +33,7 @@
       {
         "slug": "sexy-dance",
         "title": "Sexy Dance",
-        "body": "Mieszanka najbardziej zmysłowych stylów tanecznych — bez względu na wiek i doświadczenie taneczne.",
+        "body": "Mieszanka najbardziej zmysłowych stylów tanecznych - bez względu na wiek i doświadczenie taneczne.",
         "order": 5
       },
       {
@@ -52,7 +52,7 @@
       {
         "slug": "taniec-towarzyski-pary",
         "title": "Taniec towarzyski",
-        "body": "Tańce standardowe — walc, tango — oraz latynoamerykańskie: cha-cha i rumba. Dla par, które chcą aktywnie spędzać czas razem.",
+        "body": "Tańce standardowe - walc, tango - oraz latynoamerykańskie: cha-cha i rumba. Dla par, które chcą aktywnie spędzać czas razem.",
         "order": 1
       },
       {
@@ -64,7 +64,7 @@
       {
         "slug": "pierwszy-taniec",
         "title": "Pierwszy taniec",
-        "body": "Choreografia przygotowana pod Waszą piosenkę, z wejściem na parkiet, ukłonem i zakończeniem — dopasowana do układu sali weselnej.",
+        "body": "Choreografia przygotowana pod Waszą piosenkę, z wejściem na parkiet, ukłonem i zakończeniem - dopasowana do układu sali weselnej.",
         "order": 3
       }
     ]
@@ -78,7 +78,7 @@
     "items": [
       {
         "slug": "dance-mix",
-        "title": "Dance Mix — 3–6 lat",
+        "title": "Dance Mix - 3–6 lat",
         "body": "Zajęcia taneczno-umuzykalniające dla najmłodszych, budujące poczucie rytmu i swobodę ruchu.",
         "order": 1
       },
@@ -91,7 +91,7 @@
       {
         "slug": "latino-solo-kids",
         "title": "Latino Solo Kids",
-        "body": "Zajęcia dla solistów — salsa, bachata, jive. Grupa startująca w profesjonalnych turniejach.",
+        "body": "Zajęcia dla solistów - salsa, bachata, jive. Grupa startująca w profesjonalnych turniejach.",
         "order": 3
       },
       {
@@ -114,7 +114,7 @@
       },
       {
         "slug": "baby-movement",
-        "title": "Baby Movement — 6–18 mies.",
+        "title": "Baby Movement - 6–18 mies.",
         "body": "Zajęcia dla rodziców z dziećmi w chuście lub nosidle. Wspólny czas, a przy okazji trening dla rodzica.",
         "order": 7
       }
@@ -128,13 +128,13 @@
       {
         "slug": "urodzinki",
         "title": "Urodzinki taneczne",
-        "body": "Animator, dekoracja sali i stołu, pamiątkowe zdjęcia. Pakiet dla 10 osób — 700 zł, każda kolejna osoba 40 zł.",
+        "body": "Animator, dekoracja sali i stołu, pamiątkowe zdjęcia. Pakiet dla 10 osób - 700 zł, każda kolejna osoba 40 zł.",
         "order": 1
       },
       {
         "slug": "wieczor-panienski",
         "title": "Wieczór panieński",
-        "body": "Sala na wyłączność, warsztat taneczny do wyboru i lampka prosecco na powitanie. Pakiet do 10 osób — 600 zł.",
+        "body": "Sala na wyłączność, warsztat taneczny do wyboru i lampka prosecco na powitanie. Pakiet do 10 osób - 600 zł.",
         "order": 2
       },
       {
@@ -146,7 +146,7 @@
       {
         "slug": "wynajem-sali",
         "title": "Wynajem sali",
-        "body": "Sala z lożą i dwiema szatniami z toaletami — na kursy, szkolenia i imprezy okolicznościowe. Cena ustalana indywidualnie.",
+        "body": "Sala z lożą i dwiema szatniami z toaletami - na kursy, szkolenia i imprezy okolicznościowe. Cena ustalana indywidualnie.",
         "order": 4
       }
     ]

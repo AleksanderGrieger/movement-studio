@@ -24,7 +24,7 @@ export async function Schedule() {
   ]);
 
   return (
-    <section className="section" id="schedule" aria-labelledby="schedule-title">
+    <section className="section" aria-labelledby="schedule-title">
       <div className="wrap">
         <SectionHead section={section} />
 

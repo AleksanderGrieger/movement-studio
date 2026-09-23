@@ -25,7 +25,7 @@ export async function Contact() {
   ]);
 
   return (
-    <section className="section" id="contact" aria-labelledby="contact-title">
+    <section className="section" aria-labelledby="contact-title">
       <div className="wrap">
         <SectionHead section={section} />
 

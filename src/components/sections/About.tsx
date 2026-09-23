@@ -22,7 +22,7 @@ export async function About() {
   ]);
 
   return (
-    <section className="section" id="about-us" aria-labelledby="about-us-title">
+    <section className="section" aria-labelledby="about-us-title">
       <div className="wrap">
         <SectionHead section={section} />
 

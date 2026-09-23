@@ -30,11 +30,7 @@ export async function Pricelist() {
   });
 
   return (
-    <section
-      className="section"
-      id="pricelist"
-      aria-labelledby="pricelist-title"
-    >
+    <section className="section" aria-labelledby="pricelist-title">
       <div className="wrap">
         <SectionHead section={section} />
 

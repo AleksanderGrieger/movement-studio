@@ -21,7 +21,7 @@
     "posters": [
       {
         "href": "/programs/",
-        "ariaLabel": "Program Roztańczony Białogard — warsztaty dla dorosłych i seniorów",
+        "ariaLabel": "Program Roztańczony Białogard - warsztaty dla dorosłych i seniorów",
         "image": {
           "src": "/assets/images/project-fio-poster-1.png",
           "width": 1414,
@@ -31,7 +31,7 @@
       },
       {
         "href": "/programs/",
-        "ariaLabel": "Program Roztańczony Białogard — warsztaty dla dzieci",
+        "ariaLabel": "Program Roztańczony Białogard - warsztaty dla dzieci",
         "image": {
           "src": "/assets/images/project-fio-poster-2.png",
           "width": 1414,
@@ -41,7 +41,7 @@
       },
       {
         "href": "/programs/",
-        "ariaLabel": "Program Społecznik — warsztaty taneczno-sportowe",
+        "ariaLabel": "Program Społecznik - warsztaty taneczno-sportowe",
         "image": {
           "src": "/assets/images/project-spolecznik-poster-1.png",
           "width": 1414,
@@ -54,13 +54,13 @@
   "programs": [
     {
       "slug": "nowefio",
-      "title": "Roztańczony Białogard — zajęcia taneczno-sportowe",
+      "title": "Roztańczony Białogard - zajęcia taneczno-sportowe",
       "programme": "Rządowy Program Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021–2030",
       "summary": "Nieodpłatne warsztaty taneczno-sportowe dla dzieci, młodzieży i dorosłych, w tym seniorów, z terenu powiatu białogardzkiego.",
       "body": [
         "Głównym celem projektu jest zachęcenie mieszkańców powiatu, w szczególności dzieci, do aktywności fizycznej, integracja w grupie rówieśniczej, pokazanie możliwości aktywnego spędzania czasu wolnego oraz rozwijania pasji.",
         "W ramach projektu przeprowadzone będą nieodpłatne zajęcia taneczno-sportowe dla dzieci, młodzieży i dorosłych. Zajęcia poprowadzą dwie trenerki tańca, tancerki z najwyższą międzynarodową klasą taneczną „S”.",
-        "Sfinansowano ze środków Narodowego Instytutu Wolności — Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021–2030."
+        "Sfinansowano ze środków Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego w ramach Rządowego Programu Fundusz Inicjatyw Obywatelskich NOWEFIO na lata 2021–2030."
       ],
       "venue": "Zajęcia odbędą się w siedzibie szkoły tańca Movement Studio w Białogardzie, przy ul. Kochanowskiego 30.",
       "order": 1,
@@ -81,7 +81,7 @@
       "sessions": [
         {
           "slug": "fio-2025-07-02",
-          "dates": "02.07.2025 — środa",
+          "dates": "02.07.2025 - środa",
           "rows": [
             {
               "start": "17:00",
@@ -91,33 +91,33 @@
             {
               "start": "18:00",
               "end": "19:00",
-              "name": "Dla dorosłych — Ladies style"
+              "name": "Dla dorosłych - Ladies style"
             },
             {
               "start": "19:00",
               "end": "20:00",
-              "name": "Dla dorosłych — Power dance"
+              "name": "Dla dorosłych - Power dance"
             }
           ]
         },
         {
           "slug": "fio-2025-08-25",
-          "dates": "25–26.08.2025 — poniedziałek i wtorek",
+          "dates": "25–26.08.2025 - poniedziałek i wtorek",
           "rows": [
             {
               "start": "09:00",
               "end": "09:30",
-              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+              "name": "Dla dzieci w wieku przedszkolnym - Mix taneczny"
             },
             {
               "start": "09:30",
               "end": "12:00",
-              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+              "name": "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe"
             },
             {
               "start": "19:00",
               "end": "20:00",
-              "name": "Dla dorosłych — Power dance"
+              "name": "Dla dorosłych - Power dance"
             }
           ]
         }
@@ -125,7 +125,7 @@
     },
     {
       "slug": "spolecznik",
-      "title": "Roztańczony Białogard — warsztaty taneczno-sportowe",
+      "title": "Roztańczony Białogard - warsztaty taneczno-sportowe",
       "programme": "Społecznik na 5! Program wspierania inicjatyw oddolnych na lata 2025–2029",
       "summary": "Nieodpłatne warsztaty taneczno-sportowe dla dzieci i młodzieży ze szkół podstawowych i przedszkoli na terenie powiatu białogardzkiego.",
       "body": [
@@ -146,33 +146,33 @@
       "sessions": [
         {
           "slug": "spolecznik-2025-08-27",
-          "dates": "27–29.08.2025 — środa–piątek",
+          "dates": "27–29.08.2025 - środa–piątek",
           "rows": [
             {
               "start": "09:00",
               "end": "09:30",
-              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+              "name": "Dla dzieci w wieku przedszkolnym - Mix taneczny"
             },
             {
               "start": "09:30",
               "end": "12:00",
-              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+              "name": "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe"
             }
           ]
         },
         {
           "slug": "spolecznik-2025-09-12",
-          "dates": "12–14.09.2025 — piątek–niedziela",
+          "dates": "12–14.09.2025 - piątek–niedziela",
           "rows": [
             {
               "start": "09:00",
               "end": "09:30",
-              "name": "Dla dzieci w wieku przedszkolnym — Mix taneczny"
+              "name": "Dla dzieci w wieku przedszkolnym - Mix taneczny"
             },
             {
               "start": "09:30",
               "end": "12:00",
-              "name": "Dla dzieci w wieku szkolnym — Taniec towarzyski, taniec współczesny, zajęcia sportowe"
+              "name": "Dla dzieci w wieku szkolnym - Taniec towarzyski, taniec współczesny, zajęcia sportowe"
             }
           ]
         }

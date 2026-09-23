@@ -23,7 +23,7 @@ export async function Offer() {
   let counter = 0;
 
   return (
-    <section className="section" id="offer" aria-labelledby="offer-title">
+    <section className="section" aria-labelledby="offer-title">
       <div className="wrap">
         <SectionHead section={section} />
 

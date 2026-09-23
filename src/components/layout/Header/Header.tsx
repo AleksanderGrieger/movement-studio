@@ -19,7 +19,7 @@ export async function Header() {
   return (
     <StickyHeader>
       <div className="bar">
-        <a className="logo" href="#top" aria-label={copy.logoAriaLabel}>
+        <a className="logo" href="/#top" aria-label={copy.logoAriaLabel}>
           <LogoHorizontal />
         </a>
 

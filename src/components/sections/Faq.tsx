@@ -34,7 +34,7 @@ export async function Faq() {
   ]);
 
   return (
-    <section className="section" id="faq" aria-labelledby="faq-title">
+    <section className="section" aria-labelledby="faq-title">
       <div className="wrap">
         <SectionHead section={section} />
 

@@ -1134,6 +1134,21 @@
     will-change: transform;
   }
 
+  /* Below 768 the frame is sized off the phone's own height, which is the
+     scarce dimension there. From tablet up, width stops trailing height and
+     becomes scarce instead — the mobile ratio would keep drawing a phone-narrow
+     sliver with acres of unused gutter either side of it and cram the badge
+     into that same sliver. Sizing off width with a squarer ratio (matching
+     the one the desktop tier already uses) fills the column properly and
+     gives the badge room. */
+  @media (min-width: 768px) {
+    .media .frame {
+      aspect-ratio: 3/4;
+      width: min(60vw, 26rem);
+      height: auto;
+    }
+  }
+
   @media (min-width: 1280px) {
     .media .frame {
       width: 100%;

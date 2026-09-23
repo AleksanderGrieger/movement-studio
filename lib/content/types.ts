@@ -48,11 +48,12 @@ export interface ImageRef {
 /**
  * A video with a poster frame. Muted and decorative; carries no information.
  *
- * `poster` is nullable because the approved hero clip does not exist yet — the
- * supplied master is an unprocessed 13 MB QuickTime and §1.3's ffmpeg encode
- * has not been run. Null means the hero renders without a poster rather than
- * pointing at a missing file; it must not become a reason to block paint on
- * the video (§12).
+ * `poster` stays nullable so a clip can be wired up before its frame has been
+ * chosen: null means the hero renders without a poster rather than pointing at
+ * a missing file. It must not become a reason to block paint on the video
+ * (§12). The hero currently carries a placeholder encode — H.264 at the source
+ * 720×1042, heavier than §1.3's budget because ffmpeg will not build on the
+ * authoring machine; it is due to be replaced with the approved footage.
  */
 export interface VideoRef {
   src: string;

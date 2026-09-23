@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Movement Studio — szkoła tańca w Białogardzie i Kołobrzegu",
-    "description": "Zajęcia taneczne dla dzieci, młodzieży i dorosłych prowadzone przez zawodowe tancerki. Grafik, cennik i zapisy — Białogard i Kołobrzeg."
+    "title": "Movement Studio - szkoła tańca w Białogardzie i Kołobrzegu",
+    "description": "Zajęcia taneczne dla dzieci, młodzieży i dorosłych prowadzone przez zawodowe tancerki. Grafik, cennik i zapisy - Białogard i Kołobrzeg."
   },
   "navigation": [
     {
@@ -42,7 +42,7 @@
   ],
   "header": {
     "skipLink": "Przejdź do treści",
-    "logoAriaLabel": "Movement Studio — strona główna",
+    "logoAriaLabel": "Movement Studio - strona główna",
     "navAriaLabel": "Nawigacja główna",
     "cta": {
       "label": "Zadzwoń 577 437 237",
@@ -106,12 +106,17 @@
     ],
     "video": {
       "src": "/assets/video/hero-clip.mp4",
-      "poster": null,
-      "width": 440,
-      "height": 889,
+      "poster": {
+        "src": "/assets/images/hero-poster.jpg",
+        "width": 720,
+        "height": 1042,
+        "alt": "Uczennica Movement Studio w czerwonej sukience podczas występu na scenie"
+      },
+      "width": 720,
+      "height": 1042,
       "ariaLabel": "Nagranie z występu scenicznego uczennic Movement Studio"
     },
-    "badge": "Scena 2025"
+    "badge": "Scena 2026"
   },
   "marquee": [
     "Latino Solo",
@@ -155,7 +160,7 @@
       "number": "02",
       "eyebrow": "Grafik",
       "title": "Kiedy tańczymy",
-      "intro": "Grafik na sezon 2025/26. Wybierz lokalizację — cennik poniżej przełączy się razem z grafikiem."
+      "intro": "Grafik na sezon 2026/27. Wybierz lokalizację - cennik poniżej przełączy się razem z grafikiem."
     },
     {
       "id": "pricelist",
@@ -175,7 +180,7 @@
       "number": "05",
       "eyebrow": "FAQ",
       "title": "Zanim wejdziesz na parkiet",
-      "intro": "Sześć pytań, które słyszymy najczęściej przed pierwszymi zajęciami. Jeśli Twojego tu nie ma — zadzwoń, odpowiemy od ręki."
+      "intro": "Sześć pytań, które słyszymy najczęściej przed pierwszymi zajęciami. Jeśli Twojego tu nie ma - zadzwoń, odpowiemy od ręki."
     },
     {
       "id": "contact",
@@ -200,7 +205,7 @@
         "emphasis": true
       },
       {
-        "text": " to grupa początkująca — zaczynamy od zera. "
+        "text": " to grupa początkująca - zaczynamy od zera. "
       },
       {
         "text": "Gr. sportowa",

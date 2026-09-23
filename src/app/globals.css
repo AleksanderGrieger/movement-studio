@@ -326,12 +326,50 @@
 }
 
 /* ============================================================================
-   Type primitives (§5)
-   The public surface of the type system. Component styles set --display-step
-   rather than font-size, so every heading stays on the scale.
+   Custom variants
+
+   The state classes JavaScript toggles, plus the theme attribute, published
+   as Tailwind variants. Without them every element that answers to a state
+   would drop into arbitrary-variant syntax inline; with them the markup reads
+   `stuck:border-b-border`, and each class name JS depends on is declared in
+   exactly one place.
+   ============================================================================ */
+
+/* data-theme is written on <html> by ThemeScript before first paint, which is
+   why the theme toggle's label can be correct pre-hydration (§6.1). */
+@custom-variant theme-a ([data-theme="a"] &);
+/* .header.is-stuck — StickyHeader's sentinel observer. */
+@custom-variant stuck (&.is-stuck);
+/* .day li.is-dim — a schedule row the filter subtracted (§6.2). */
+@custom-variant dim (&.is-dim);
+/* A day column whose every row is filtered out. The empty state is an
+   attribute and not a class on purpose — see the note in ScheduleGrid. */
+@custom-variant emptied (.is-filtering &[data-empty]);
+/* ...and, for what sits inside such a column, its day rule. */
+@custom-variant emptied-day (.is-filtering [data-empty] &);
+
+/* ============================================================================
+   Primitives
+
+   Everything else that used to live in this file is now utilities in the
+   markup. What stays does so for one of three reasons:
+
+     - it encodes arithmetic the markup should not have to restate, and where
+       restating it would let a heading fall off the type scale (.display);
+     - it is a relationship no utility can express (.section + .section);
+     - its class name is a contract with JavaScript or with the check scripts
+       (.r / .is-in / .panel).
+
+   They sit in @layer components, below utilities, so a utility in the markup
+   always wins — .crew's mt-(--sp-4) over .display's negative margin, for one.
+   That is how the old file's source ordering behaved too, but by accident of
+   position rather than by design.
    ============================================================================ */
 
 @layer components {
+  /* The public surface of the type system (§5). Call sites set
+     --display-step rather than font-size, so every heading stays on the
+     scale and keeps the optical size-adjust and the accent overshoot. */
   .display {
     font-family: var(--font-display);
     font-weight: var(--weight-display);
@@ -342,12 +380,32 @@
     font-size: calc(
       var(--display-step, var(--s3)) * var(--size-adjust-display)
     );
-    /* see --display-overshoot */
+    /* see --display-overshoot. Call sites that need a step above this
+       heading set margin-top themselves and subtract the overshoot, so the
+       text lands the same distance below at every display size — see the
+       hero and the programs teaser. */
     padding-top: var(--display-overshoot);
     margin-top: calc(var(--display-overshoot) * -1);
     text-wrap: balance;
   }
 
+  /* The display face set flat: same optical size-adjust and the same
+     --display-step contract, without the overshoot padding. Used where the
+     heading is a grid item whose baseline has to line up with a sibling —
+     the offer index, the schedule day rules, the price amounts — and the
+     overshoot's padding/negative-margin pair would break that alignment. */
+  .display-flat {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-variation-settings: var(--display-variation);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    font-size: calc(
+      var(--display-step, var(--s1)) * var(--size-adjust-display)
+    );
+  }
+
+  /* §5's named eyebrow style, at eight call sites. */
   .eyebrow {
     font-size: var(--s-1);
     letter-spacing: 0.18em;
@@ -356,79 +414,11 @@
     font-weight: var(--weight-strong);
   }
 
-  /* The step from an eyebrow to the heading directly under it.
-     .display carries the overshoot as padding-top plus an equal negative
-     margin-top. That pair keeps the heading's baseline exactly where it would
-     fall without it, but the border box still climbs by the overshoot — so it
-     eats whatever sits above. Where a grid lays the two out, the container's
-     gap absorbs that; where they are plain flow siblings (the hero, the
-     programs teaser) nothing did and the two boxes touched. Measured in the
-     heading's own em, so the text lands the same --sp-3 below the eyebrow that
-     the grid-laid heads produce, at every display size. */
-  .eyebrow + .display {
-    margin-top: calc(var(--sp-3) - var(--display-overshoot));
-  }
-
-  .lead {
-    font-size: var(--s1);
-    color: var(--color-text-muted);
-    max-width: var(--measure);
-  }
-
-  .prose {
-    max-width: var(--measure);
-    color: var(--color-text-muted);
-  }
-
-  /* Prices and times (§10). */
-  .num {
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1;
-  }
-}
-
-/* ============================================================================
-   Motion primitives (§7)
-
-   Shared across both themes — motion is the one layer the theme toggle does
-   not touch.
-   ============================================================================ */
-
-@layer components {
-  /* Staggered reveal. `--i` sets the step within a group; the observer adds
-     .is-in once and never removes it, so reveals never replay (§7.3). */
-  .r {
-    opacity: 0;
-    transform: translateY(var(--reveal-y));
-    transition:
-      opacity var(--dur-reveal) var(--ease-momentum),
-      transform var(--dur-reveal) var(--ease-momentum);
-    transition-delay: calc(var(--i, 0) * var(--stagger));
-  }
-
-  .r.is-in {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Skip link — visible on focus (§10). */
-  .skip {
-    position: absolute;
-    left: var(--sp-3);
-    top: var(--sp-3);
-    z-index: 100;
-    background: var(--color-accent);
-    color: var(--color-on-accent);
-    padding: var(--sp-2) var(--sp-4);
-    transform: translateY(-200%);
-    transition: transform var(--dur-ui) var(--ease-momentum);
-  }
-
-  .skip:focus {
-    transform: none;
-  }
-
-  /* ---- buttons (§7.3) ---- */
+  /* ---- buttons (§7.3) ----
+     Four call sites across three files, and the hover/active choreography is
+     written against `transform` as one shorthand — Tailwind's translate and
+     scale utilities drive the separate `translate`/`scale` properties, so
+     porting this would mean rewriting the gesture, not just respelling it. */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -480,8 +470,46 @@
   .btn-ghost:active {
     transform: translateY(0) scale(0.985);
   }
-}
 
+  /* ---- staggered reveal (§7.3) ----
+     `--i` sets the step within a group; RevealObserver adds .is-in once and
+     never removes it, so reveals never replay. */
+  .r {
+    opacity: 0;
+    transform: translateY(var(--reveal-y));
+    transition:
+      opacity var(--dur-reveal) var(--ease-momentum),
+      transform var(--dur-reveal) var(--ease-momentum);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+  }
+
+  .r.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* A panel the visitor switched to after first render: its contents never
+     intersected anything while it was hidden, so the observer never fired
+     for them and without this they stay at opacity 0 and the panel looks
+     empty. See usePanelVisibility. */
+  .panel.is-revealed .r {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- section rhythm (§9) ----
+     The hairline between neighbours is a sibling relationship, which is the
+     one part of this no utility can state. The padding rides along rather
+     than being repeated at fifteen call sites. */
+  .section {
+    padding-block: var(--section-y);
+    position: relative;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--color-border);
+  }
+}
 /* ============================================================================
    Reduced motion (§7.4)
 
@@ -513,556 +541,26 @@
 }
 
 /* ============================================================================
-   Shell — header, nav, footer
+   Panels and the hero headline reveal
 
-   These are component classes rather than utility soup because almost all of
-   it is stateful or pseudo-element work: the nav underline is a ::after that
-   scales on hover, focus and aria-current; the burger animates three spans
-   into a cross off aria-expanded; the logo fills are driven by --logo-*. The
-   utility equivalents would be unreadable arbitrary variants, and this CSS is
-   already token-driven and verified against the approved prototype.
+   The two pieces of section-level CSS the markup could not take over.
    ============================================================================ */
 
 @layer components {
-  /* ---- logo (§1.2) — fills follow the theme, so it must be inline SVG ---- */
-  .logo svg {
-    width: 100%;
-    height: auto;
-  }
-
-  .lg-a,
-  .lgv-a {
-    fill: var(--logo-1);
-    transition: fill var(--dur-ui) var(--ease-swing);
-  }
-
-  .lg-b,
-  .lgv-b {
-    fill: var(--logo-2);
-    transition: fill var(--dur-ui) var(--ease-swing);
-  }
-
-  .lg-c,
-  .lgv-c {
-    fill: var(--logo-3);
-    transition: fill var(--dur-ui) var(--ease-swing);
-  }
-
-  /* ---- theme toggle (§6.1) ---- */
-  .theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: var(--tap-target);
-    /* No gap below 768px. The word is hidden there, but its wrapper stays in
-       the flex row so the sr-only name never leaves the accessibility tree.
-       That wrapper is zero width — sr-only is absolutely positioned — so a
-       gap would still be laid out beside it and push the icon off centre in
-       the round icon-only button. The gap returns with the word at 768px. */
-    gap: 0;
-    border: 1px solid var(--color-border-strong);
-    border-radius: 999px;
-    padding: var(--sp-2) var(--sp-3);
-    font-size: var(--s-2);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: var(--weight-strong);
-    white-space: nowrap;
-    transition:
-      border-color var(--dur-hover) var(--ease-swing),
-      background-color var(--dur-hover) var(--ease-swing),
-      transform var(--dur-hover) var(--ease-weight);
-  }
-
-  .theme-toggle:hover,
-  .theme-toggle:focus-visible {
-    border-color: var(--color-text);
-    background: var(--color-accent-soft);
-    transform: translateY(-1px);
-  }
-
-  .theme-toggle:active {
-    transform: translateY(0) scale(0.97);
-  }
-
-  .theme-toggle svg {
-    width: 1.05rem;
-    height: 1.05rem;
-    flex: none;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: transform var(--dur-ui) var(--ease-weight);
-  }
-
-  /* The tilt the header logo and the contact marks both echo. Keyboard gets
-     it too: the button's own border and lift already answer to :focus-visible,
-     and leaving the icon out of that made the focused state a partial version
-     of the hovered one. */
-  .theme-toggle:hover svg,
-  .theme-toggle:focus-visible svg {
-    transform: rotate(-18deg);
-  }
-
-  /* The control shows the icon and word of the mode it will switch TO.
-     Both variants are in the DOM and CSS picks one, so the label and the
-     accessible name are correct before hydration — display:none also removes
-     the inactive variant from the accessibility tree. */
-  .theme-toggle .i-sun,
-  .theme-toggle .to-light {
-    display: none;
-  }
-
-  [data-theme="a"] .theme-toggle .i-sun,
-  [data-theme="a"] .theme-toggle .to-light {
-    display: inline-flex;
-  }
-
-  [data-theme="a"] .theme-toggle .i-moon,
-  [data-theme="a"] .theme-toggle .to-dark {
-    display: none;
-  }
-
-  /* Icon-only below 768px; the accessible name is carried by sr-only text
-     that stays in the tree at every width (§6.1). */
-  .theme-toggle .tlabel {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .theme-toggle .tlabel {
-      display: inline;
-    }
-
-    .theme-toggle {
-      gap: var(--sp-2);
-    }
-  }
-
-  /* ---- header ---- */
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 60;
-    background: var(--header-bg);
-    border-bottom: 1px solid transparent;
-    transition:
-      border-color var(--dur-ui) var(--ease-swing),
-      background-color var(--dur-ui) var(--ease-swing);
-    backdrop-filter: saturate(1.2) blur(10px);
-  }
-
-  .header.is-stuck {
-    border-bottom-color: var(--color-border);
-  }
-
-  .header .bar {
-    width: var(--wrap);
-    margin-inline: auto;
-    min-height: var(--header-h);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-3);
-  }
-
-  .bar-end {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-  }
-
-  .header .logo {
-    width: clamp(9rem, 22vw, 12.5rem);
-    display: block;
-    transition: transform var(--dur-ui) var(--ease-weight);
-  }
-
-  /* The theme toggle's move, at wordmark scale. The toggle lifts its button
-     1px and spins its icon -18deg; -18deg across a 12.5rem lockup would read
-     as a broken layout rather than a flourish, so the mark takes the lift and
-     keeps the tilt to the -1deg the posters already use on hover. Same
-     duration and the same overshooting curve, so the three read as one
-     gesture. The footer lockup is a <div role="img">, not a link, and stays
-     still. */
-  .header .logo:hover,
-  .header .logo:focus-visible {
-    transform: translateY(-1px) rotate(-1deg);
-  }
-
-  .nav {
-    display: none;
-  }
-
-  @media (min-width: 1280px) {
-    .bar-end {
-      gap: var(--sp-3);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-4);
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .nav {
-      gap: var(--sp-5);
-    }
-  }
-
-  .nav a {
-    white-space: nowrap;
-    text-decoration: none;
-    font-size: var(--s-1);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: var(--weight-strong);
-    color: var(--color-text-muted);
-    position: relative;
-    padding-block: var(--sp-2);
-    transition: color var(--dur-hover) var(--ease-swing);
-  }
-
-  .nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur-ui) var(--ease-momentum);
-  }
-
-  .nav a:hover,
-  .nav a:focus-visible {
-    color: var(--color-text);
-  }
-
-  .nav a:hover::after,
-  .nav a:focus-visible::after,
-  .nav a[aria-current="true"]::after {
-    transform: scaleX(1);
-  }
-
-  .nav a[aria-current="true"] {
-    color: var(--color-text);
-  }
-
-  .nav .ext {
-    color: var(--color-accent-text);
-  }
-
-  .header .cta {
-    display: none;
-  }
-
-  @media (min-width: 1280px) {
-    .header .cta {
-      display: inline-flex;
-      font-size: var(--s-1);
-      padding-inline: var(--sp-4);
-    }
-  }
-
-  /* ---- burger + mobile nav ---- */
-  .burger {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: var(--tap-target);
-    gap: var(--sp-2);
-    font-size: var(--s-1);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: var(--weight-strong);
-    border: 1px solid var(--color-border-strong);
-    padding: var(--sp-2) var(--sp-3);
-    border-radius: var(--radius);
-  }
-
-  @media (min-width: 1280px) {
-    .burger {
-      display: none;
-    }
-  }
-
-  .burger .bars {
-    width: 1.1rem;
-    height: 0.7rem;
-    position: relative;
-  }
-
-  .burger .bars span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: currentColor;
-    transition:
-      transform var(--dur-ui) var(--ease-swing),
-      opacity var(--dur-tap) linear;
-  }
-
-  .burger .bars span:nth-child(1) {
-    top: 0;
-  }
-
-  .burger .bars span:nth-child(2) {
-    top: 50%;
-  }
-
-  .burger .bars span:nth-child(3) {
-    bottom: 0;
-  }
-
-  .burger[aria-expanded="true"] .bars span:nth-child(1) {
-    transform: translateY(0.29rem) rotate(45deg);
-  }
-
-  .burger[aria-expanded="true"] .bars span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .burger[aria-expanded="true"] .bars span:nth-child(3) {
-    transform: translateY(-0.29rem) rotate(-45deg);
-  }
-
-  .mobile-nav {
-    position: fixed;
-    inset: var(--header-h) 0 auto 0;
-    z-index: 55;
-    background: var(--color-surface-2);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--sp-5) 0 var(--sp-7);
-    transform: translateY(-102%);
-    visibility: hidden;
-    /* visibility is delayed to the full duration on close so the panel stays
-       in the accessibility tree until it has finished sliding away (§7.3). */
-    transition:
-      transform var(--dur-ui) var(--ease-momentum),
-      visibility 0s linear var(--dur-ui);
-  }
-
-  .mobile-nav.is-open {
-    transform: none;
-    visibility: visible;
-    transition-delay: 0s;
-  }
-
-  .mobile-nav ul {
-    width: var(--wrap);
-    margin-inline: auto;
-    display: grid;
-    gap: var(--sp-1);
-  }
-
-  .mobile-nav a {
-    --display-step: var(--s2);
-    display: block;
-    padding-block: var(--sp-2);
-    text-decoration: none;
-  }
-
-  @media (min-width: 1280px) {
-    .mobile-nav {
-      display: none;
-    }
-  }
-
-  /* ---- footer ---- */
-  .footer {
-    border-top: 1px solid var(--color-border);
-    padding-block: var(--sp-7) var(--sp-6);
-  }
-
-  .footer .inner {
-    display: grid;
-    gap: var(--sp-6);
-  }
-
-  @media (min-width: 768px) {
-    .footer .inner {
-      grid-template-columns: auto 1fr;
-      align-items: center;
-      gap: var(--sp-7);
-    }
-  }
-
-  .footer .logo {
-    width: clamp(7rem, 18vw, 10rem);
-  }
-
-  .footer nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3) var(--sp-5);
-  }
-
-  .footer a {
-    font-size: var(--s-1);
-    text-decoration: none;
-    color: var(--color-text-muted);
-    transition: color var(--dur-hover) var(--ease-swing);
-  }
-
-  .footer a:hover,
-  .footer a:focus-visible {
-    color: var(--color-text);
-  }
-
-  .footer .legal {
-    margin-top: var(--sp-6);
-    font-size: var(--s-2);
-    color: var(--color-text-muted);
-  }
-
-  /* ---- shared wrapper ---- */
-  .wrap {
-    width: var(--wrap);
-    margin-inline: auto;
-  }
-}
-
-/* ============================================================================
-   Section scaffolding (§9)
-   ============================================================================ */
-
-@layer components {
-  .section {
-    padding-block: var(--section-y);
-    position: relative;
-  }
-
-  .section + .section {
-    border-top: 1px solid var(--color-border);
-  }
-
-  .section-head {
-    display: grid;
-    gap: var(--sp-3);
-    margin-bottom: var(--sp-7);
-  }
-
-  .section-head .row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--sp-3);
-  }
-
-  /* The rule runs from the heading to the right margin — one of the section's
-     asymmetry devices (§9). */
-  .section-head .rule {
-    flex: 1;
-    height: 1px;
-    background: var(--color-border);
-  }
-
-  .section-head h2 {
-    --display-step: var(--s4);
-  }
-
-  @media (min-width: 768px) {
-    .section-head h2 {
-      --display-step: var(--s5);
-    }
-  }
-}
-
-/* ---- location toggle (§6.4) ---- */
-@layer components {
-  .toggle {
-    display: inline-flex;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius);
-    padding: 3px;
-    gap: 3px;
-    margin-bottom: var(--sp-6);
-  }
-
-  .toggle button {
-    min-height: var(--tap-target);
-    padding: var(--sp-2) var(--sp-4);
-    font-size: var(--s-1);
-    font-weight: var(--weight-strong);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: calc(var(--radius) - 1px);
-    transition:
-      background-color var(--dur-ui) var(--ease-swing),
-      color var(--dur-ui) var(--ease-swing);
-  }
-
-  .toggle button[aria-pressed="true"] {
-    background: var(--color-accent);
-    color: var(--color-on-accent);
-  }
-
+  /* A utility that sets `display` would beat the hidden attribute, and both
+     location panels stay in the DOM so switching town is instant (§6.4). */
   .panel[hidden] {
     display: none;
   }
-}
 
-/* ============================================================================
-   Hero, marquee, facts
-   ============================================================================ */
+  /* The hero headline's masked line reveal. It stays CSS, and stays written
+     against `transform` rather than Tailwind's `translate`, for two reasons:
+     the delay is per-line arithmetic off --i, and
+     scripts/check-interactions.mts proves the reduced-motion path by reading
+     the computed transform — a translate-based reveal would leave that
+     assertion passing without testing anything.
 
-@layer components {
-  .hero {
-    padding-top: var(--sp-6);
-    padding-bottom: var(--section-y);
-    overflow: clip;
-  }
-
-  .hero .grid {
-    display: grid;
-    gap: var(--sp-6);
-    align-items: end;
-  }
-
-  /* 12-col at 1280: copy 1/7, media 8/12 — the asymmetric split from §9. */
-  @media (min-width: 1280px) {
-    .hero .grid {
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--sp-6);
-      align-items: center;
-    }
-
-    .hero .copy {
-      grid-column: 1 / span 7;
-    }
-
-    .hero .media {
-      grid-column: 8 / span 5;
-    }
-  }
-
-  /* Ratio-driven but capped against the viewport, so it cannot overflow its
-     column at any width (§5.3). */
-  .hero h1 {
-    --display-step: min(var(--s6), 11.5vw);
-    margin-bottom: var(--sp-5);
-  }
-
-  @media (min-width: 768px) {
-    .hero h1 {
-      --display-step: min(var(--s7), 8vw);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero h1 {
-      --display-step: min(var(--s7), 5.6vw);
-    }
-  }
-
-  /* The mask is an overflow:hidden box, which is exactly what would clip
+     The mask is an overflow:hidden box, which is exactly what would clip
      Meringue's accented capitals — so the overshoot is repeated here. */
   .hero h1 .line {
     display: block;
@@ -1081,156 +579,6 @@
   .is-ready .hero h1 .line > span {
     transform: none;
   }
-
-  .hero h1 em {
-    font-style: normal;
-    color: var(--color-accent-text);
-  }
-
-  .hero .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-    margin-top: var(--sp-6);
-  }
-
-  .hero .meta {
-    margin-top: var(--sp-6);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2) var(--sp-4);
-    font-size: var(--s-1);
-    color: var(--color-text-muted);
-  }
-
-  .hero .meta span {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-  }
-
-  .hero .meta span::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: var(--color-secondary);
-    border-radius: 50%;
-  }
-
-  .media {
-    position: relative;
-  }
-
-  .media .frame {
-    position: relative;
-    border-radius: var(--arch);
-    overflow: hidden;
-    background: var(--color-surface-2);
-    aspect-ratio: 44/100;
-    height: min(62vh, 30rem);
-    width: auto;
-    margin-inline: auto;
-    border: 1px solid var(--color-border);
-    will-change: transform;
-  }
-
-  /* Below 768 the frame is sized off the phone's own height, which is the
-     scarce dimension there. From tablet up, width stops trailing height and
-     becomes scarce instead — the mobile ratio would keep drawing a phone-narrow
-     sliver with acres of unused gutter either side of it and cram the badge
-     into that same sliver. Sizing off width with a squarer ratio (matching
-     the one the desktop tier already uses) fills the column properly and
-     gives the badge room. */
-  @media (min-width: 768px) {
-    .media .frame {
-      aspect-ratio: 3/4;
-      width: min(60vw, 26rem);
-      height: auto;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .media .frame {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 3/4;
-      max-height: min(72vh, 40rem);
-    }
-  }
-
-  .media video,
-  .media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 20%;
-  }
-
-  .media .badge {
-    position: absolute;
-    left: 0;
-    bottom: var(--sp-5);
-    background: var(--color-secondary);
-    color: var(--color-on-secondary);
-    font-size: var(--s-2);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: var(--weight-strong);
-    padding: var(--sp-2) var(--sp-4);
-  }
-
-  /* ---- marquee ---- */
-  .marquee {
-    border-block: 1px solid var(--color-border);
-    padding-block: var(--sp-4);
-    overflow: hidden;
-    background: var(--color-surface-2);
-  }
-
-  .marquee .track {
-    display: flex;
-    gap: var(--sp-6);
-    width: max-content;
-    animation: slide 38s linear infinite;
-  }
-
-  .marquee span {
-    --display-step: var(--s3);
-    color: var(--color-text-muted);
-    white-space: nowrap;
-  }
-
-  .marquee b {
-    color: var(--color-accent-text);
-    font-weight: inherit;
-  }
-
-  /* ---- facts ---- */
-  .facts {
-    display: grid;
-    gap: var(--sp-5);
-    padding-block: var(--sp-7);
-  }
-
-  @media (min-width: 768px) {
-    .facts {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
-    }
-  }
-
-  .fact dt {
-    font-size: var(--s-1);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-text-muted);
-    margin-bottom: var(--sp-2);
-  }
-
-  .fact dd {
-    --display-step: var(--s2);
-    margin: 0;
-  }
 }
 
 @keyframes slide {
@@ -1243,969 +591,15 @@
 }
 
 /* Motion the global reduced-motion block cannot reach generically: the hero
-   lines are transform-based rather than animated, the marquee is a keyframe
-   loop, and the parallax writes an inline style that only !important beats. */
+   lines are transform-based rather than animated, and the parallax writes an
+   inline style that only !important beats. (The marquee is a keyframe loop and
+   turns itself off with motion-reduce:animate-none at its call site.) */
 @media (prefers-reduced-motion: reduce) {
   .hero h1 .line > span {
     transform: none;
   }
 
-  .marquee .track {
-    animation: none;
-  }
-
   .media .frame {
     transform: none !important;
-  }
-}
-
-/* ============================================================================
-   #offer
-   ============================================================================ */
-
-@layer components {
-  .offer-group + .offer-group {
-    margin-top: var(--sp-8);
-  }
-
-  .offer-group {
-    display: grid;
-    gap: var(--sp-4);
-  }
-
-  .offer-group h3 {
-    --display-step: var(--s3);
-  }
-
-  /* Sticky only at ≥1280, where the heading owns a column of its own.
-     Below that the heading and the list share one column, so a sticky
-     heading parks on top of the item text — two unreadable layers (§9). */
-  @media (min-width: 1280px) {
-    .offer-group {
-      grid-template-columns: 18rem 1fr;
-      gap: var(--sp-7);
-      align-items: start;
-    }
-
-    .offer-group h3 {
-      position: sticky;
-      top: calc(var(--header-h) + var(--sp-4));
-    }
-  }
-
-  .offer-cta {
-    margin-top: var(--sp-4);
-    display: flex;
-  }
-
-  .btn-sm {
-    padding: var(--sp-2) var(--sp-4);
-    font-size: var(--s-1);
-  }
-
-  .btn-sm .arrow {
-    transition: transform var(--dur-hover) var(--ease-momentum);
-  }
-
-  .btn-sm:hover .arrow,
-  .btn-sm:focus-visible .arrow {
-    transform: translateX(4px);
-  }
-
-  .offer-list li {
-    border-top: 1px solid var(--color-border);
-  }
-
-  .offer-list li:last-child {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .offer-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--sp-2) var(--sp-4);
-    padding: var(--sp-4) var(--sp-3);
-    position: relative;
-    width: 100%;
-    text-align: left;
-    transition:
-      background-color var(--dur-hover) var(--ease-swing),
-      padding-left var(--dur-hover) var(--ease-momentum);
-  }
-
-  .offer-item:hover,
-  .offer-item:focus-within {
-    background: var(--color-accent-soft);
-    padding-left: var(--sp-5);
-  }
-
-  .offer-item .idx {
-    font-size: var(--s-1);
-    color: var(--color-accent-text);
-    padding-top: 0.35em;
-  }
-
-  /* Display face at a fixed step rather than .display, because the overshoot
-     padding would break the two-column grid alignment with the index. */
-  .offer-item h4 {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
-    font-variation-settings: var(--display-variation);
-    letter-spacing: var(--tracking-display);
-    font-size: calc(var(--s1) * var(--size-adjust-display));
-    line-height: var(--leading-display);
-  }
-
-  .offer-item p {
-    grid-column: 2;
-    color: var(--color-text-muted);
-    max-width: var(--measure);
-    font-size: var(--s-1);
-  }
-}
-
-/* ============================================================================
-   #schedule
-   ============================================================================ */
-
-@layer components {
-  .days {
-    display: grid;
-    gap: var(--sp-5);
-  }
-
-  @media (min-width: 768px) {
-    .days {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-6);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .days {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .day h3,
-  .day h4 {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
-    font-variation-settings: var(--display-variation);
-    letter-spacing: var(--tracking-display);
-    font-size: calc(var(--s2) * var(--size-adjust-display));
-    line-height: var(--leading-display);
-    padding-bottom: var(--sp-3);
-    border-bottom: 2px solid var(--color-accent);
-    margin-bottom: var(--sp-3);
-  }
-
-  /* ---- filter chips ---- */
-  .filter {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--sp-2) var(--sp-4);
-    margin-bottom: var(--sp-6);
-  }
-
-  .filter .flabel {
-    font-size: var(--s-2);
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--color-text-muted);
-  }
-
-  .filter .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2);
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: var(--tap-target);
-    gap: var(--sp-2);
-    border: 1px solid var(--color-border-strong);
-    border-radius: 999px;
-    padding: var(--sp-2) var(--sp-4);
-    font-size: var(--s-2);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: var(--weight-strong);
-    white-space: nowrap;
-    transition:
-      border-color var(--dur-hover) var(--ease-swing),
-      background-color var(--dur-hover) var(--ease-swing),
-      transform var(--dur-hover) var(--ease-weight);
-  }
-
-  .chip::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    flex: none;
-    background: var(--chip-color, var(--color-border-strong));
-  }
-
-  .chip.chip-reset::before {
-    display: none;
-  }
-
-  .chip:hover,
-  .chip:focus-visible {
-    border-color: var(--chip-color, var(--color-text));
-    transform: translateY(-1px);
-  }
-
-  /* The selected chip is FILLED, not merely tinted. The chip row is where
-     filter state is stated, which is why the grid itself does not have to
-     shout it and there is no result-count line (§6.2). */
-  .chip[aria-checked="true"] {
-    background: var(--chip-color, var(--color-text));
-    border-color: var(--chip-color, var(--color-text));
-    color: var(--on-label);
-  }
-
-  .chip[aria-checked="true"]::before {
-    background: currentColor;
-  }
-
-  .chip.chip-reset[aria-checked="true"] {
-    background: var(--color-text);
-    color: var(--color-bg);
-    border-color: var(--color-text);
-  }
-
-  /* ---- rows ---- */
-  .day li {
-    display: grid;
-    grid-template-columns: var(--time-col, 4.6em) 1fr;
-    gap: var(--sp-3);
-    padding: var(--sp-3);
-    border-bottom: 1px solid var(--color-border);
-    border-left: 3px solid transparent;
-    align-items: baseline;
-    transition:
-      background-color var(--dur-hover) var(--ease-swing),
-      border-left-color var(--dur-hover) var(--ease-swing),
-      opacity var(--dur-ui) var(--ease-swing),
-      filter var(--dur-ui) var(--ease-swing),
-      transform var(--dur-ui) var(--ease-swing);
-  }
-
-  .day li:hover,
-  .day li:focus-within {
-    background: var(--color-accent-soft);
-    border-left-color: var(--color-accent);
-    transform: translateX(3px);
-  }
-
-  /* Filtering by subtraction: non-matches recede. transform does not affect
-     layout, so the rows shrink while the grid holds its geometry. */
-  .day li.is-dim {
-    opacity: 0.16;
-    filter: grayscale(0.95);
-    transform: scale(0.92);
-    transform-origin: left center;
-  }
-
-  /* Dimmed rows lose their hover response, so a pointer passing over them
-     cannot make them jump back to full size. */
-  .day li.is-dim:hover,
-  .day li.is-dim:focus-within {
-    background: none;
-    border-left-color: transparent;
-    transform: scale(0.92);
-  }
-
-  .day {
-    transition: opacity var(--dur-ui) var(--ease-swing);
-  }
-
-  /* An attribute, not a class — see the note in ScheduleGrid. A class here is
-     wiped by React's className reconciliation together with the observer's
-     .is-in, and the day never reappears. */
-  .days.is-filtering .day[data-empty] {
-    opacity: 0.45;
-  }
-
-  .days.is-filtering .day[data-empty] h3,
-  .days.is-filtering .day[data-empty] h4 {
-    border-bottom-color: var(--color-border);
-  }
-
-  .day time {
-    color: var(--color-accent-text);
-    font-weight: var(--weight-strong);
-    font-size: var(--s0);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .day .what {
-    font-size: var(--s-1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--sp-1);
-  }
-
-  .day .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-1);
-  }
-
-  .day .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-1);
-    font-size: var(--s-2);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--tag-color, var(--color-text-muted));
-    border: 1px solid var(--tag-color, var(--color-border-strong));
-    padding: 1px var(--sp-2);
-    border-radius: 999px;
-  }
-
-  .day .tag::before {
-    content: "";
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  .day .tag.tag-plain {
-    color: var(--color-text-muted);
-    border-color: var(--color-border-strong);
-  }
-
-  .day .tag.tag-plain::before {
-    display: none;
-  }
-
-  .note {
-    margin-top: var(--sp-5);
-    font-size: var(--s-1);
-    color: var(--color-text-muted);
-    max-width: var(--measure);
-  }
-}
-
-/* ============================================================================
-   #pricelist
-   ============================================================================ */
-
-@layer components {
-  .price-block + .price-block {
-    margin-top: var(--sp-7);
-  }
-
-  .price-block h3 {
-    font-size: var(--s-1);
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--color-text-muted);
-    margin-bottom: var(--sp-3);
-  }
-
-  .price-row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--sp-3);
-    padding-block: var(--sp-3);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .price-row .name {
-    flex: 0 1 auto;
-  }
-
-  .price-row .name small {
-    display: block;
-    color: var(--color-text-muted);
-    font-size: var(--s-2);
-  }
-
-  .price-row .dots {
-    flex: 1 1 auto;
-    border-bottom: 1px dotted var(--color-border-strong);
-    transform: translateY(-0.25em);
-    min-width: var(--sp-5);
-  }
-
-  .price-row .amt {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
-    font-variation-settings: var(--display-variation);
-    font-size: calc(var(--s1) * var(--size-adjust-display));
-    color: var(--color-secondary-text);
-    white-space: nowrap;
-  }
-}
-
-/* ============================================================================
-   #about-us
-   ============================================================================ */
-
-@layer components {
-  .founders {
-    display: grid;
-    gap: var(--sp-5);
-    margin-bottom: var(--sp-8);
-  }
-
-  @media (min-width: 1280px) {
-    .founders {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-7);
-    }
-  }
-
-  .founders p {
-    color: var(--color-text-muted);
-  }
-
-  /* A paragraph of display type, not a two-line headline: denser, and carrying
-     a diacritic on nearly every line, so it wants more air than the token
-     gives. The bump is additive rather than the ×1.2 it used to be — a
-     multiplier compounds every time the base moves, and when --leading-display
-     went to 1.34 it landed this block at 1.61. */
-  .founders .big {
-    --display-step: var(--s3);
-    color: var(--color-text);
-    max-width: none;
-    line-height: calc(var(--leading-display) + 0.12);
-  }
-
-  .crew {
-    display: grid;
-    gap: var(--sp-6);
-  }
-
-  @media (min-width: 768px) {
-    .crew {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-7);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .crew {
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--sp-5);
-      /* The stagger translates even cards down by --sp-7. Without matching
-         padding the lowest card overhangs the section boundary, which shows
-         up as soon as the crew is not an exact multiple of four. Reserving
-         the space here keeps the grid correct at any count from 1 to 10. */
-      padding-bottom: var(--sp-7);
-    }
-
-    .crew li:nth-child(even) figure {
-      transform: translateY(var(--sp-7));
-    }
-  }
-
-  .crew figure {
-    margin: 0;
-  }
-
-  .crew .shot {
-    background: #1e1e1c;
-    border: 1px solid var(--color-border);
-    overflow: hidden;
-    aspect-ratio: 1;
-  }
-
-  .crew img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--dur-ui) var(--ease-momentum);
-  }
-
-  .crew li:hover img,
-  .crew li:focus-within img {
-    transform: scale(1.03);
-  }
-
-  .crew h3 {
-    --display-step: var(--s2);
-    margin-top: var(--sp-4);
-  }
-
-  .crew .role {
-    font-size: var(--s-2);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-accent-text);
-    margin-top: var(--sp-2);
-  }
-
-  .crew figcaption > p:last-child {
-    font-size: var(--s-1);
-    color: var(--color-text-muted);
-    margin-top: var(--sp-3);
-  }
-}
-
-/* ============================================================================
-   Programs band
-   ============================================================================ */
-
-@layer components {
-  .programs {
-    background: var(--color-surface-2);
-    border-block: 1px solid var(--color-border);
-  }
-
-  .programs .inner {
-    display: grid;
-    gap: var(--sp-6);
-    padding-block: var(--section-y);
-  }
-
-  @media (min-width: 1280px) {
-    .programs .inner {
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: var(--sp-8);
-    }
-  }
-
-  .programs h2 {
-    --display-step: var(--s4);
-    margin-bottom: var(--sp-4);
-  }
-
-  .programs-cta {
-    margin-top: var(--sp-5);
-  }
-
-  .posters {
-    display: flex;
-    gap: var(--sp-3);
-  }
-
-  .posters img {
-    width: clamp(5.5rem, 20vw, 10.5rem);
-    height: auto;
-    border: 1px solid var(--color-border);
-    transition: transform var(--dur-ui) var(--ease-weight);
-  }
-
-  .posters a:hover img,
-  .posters a:focus-visible img {
-    transform: translateY(-6px) rotate(-1deg);
-  }
-}
-
-/* ============================================================================
-   #faq
-
-   Built from the schedule row's vocabulary rather than a new one: hairline
-   rules, a left edge that takes the accent, and a 3px shift on the way in.
-   A reader who has already used the grid recognises the shape.
-   ============================================================================ */
-
-@layer components {
-  .faq {
-    border-top: 1px solid var(--color-border);
-    max-width: 58rem;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid var(--color-border);
-    border-left: 3px solid transparent;
-    transition:
-      background-color var(--dur-hover) var(--ease-swing),
-      border-left-color var(--dur-hover) var(--ease-swing);
-  }
-
-  .faq-item:hover,
-  .faq-item:focus-within,
-  .faq-item[open] {
-    border-left-color: var(--color-accent);
-  }
-
-  .faq-item[open] {
-    background: var(--color-accent-soft);
-  }
-
-  .faq-item summary {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--sp-4);
-    /* min-height rather than padding alone, so the row clears §10's 44px even
-       when a question fits on one line. */
-    min-height: var(--tap-target);
-    padding: var(--sp-3);
-    cursor: pointer;
-    list-style: none;
-  }
-
-  /* Safari draws its own disclosure triangle through a pseudo-element that
-     `list-style: none` alone does not remove. */
-  .faq-item summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-q {
-    font-size: var(--s1);
-    font-weight: var(--weight-strong);
-  }
-
-  /* The mark is drawn, not typed: a glyph would inherit the body face's
-     metrics and sit off the question's baseline at every step. Two rules that
-     cross, with the vertical one folding away when the panel opens. */
-  .faq-mark {
-    position: relative;
-    flex: none;
-    width: 0.85em;
-    height: 0.85em;
-    align-self: center;
-    color: var(--color-accent-text);
-  }
-
-  .faq-mark::before,
-  .faq-mark::after {
-    content: "";
-    position: absolute;
-    inset: 50% 0 auto 0;
-    height: 2px;
-    border-radius: 2px;
-    background: currentColor;
-    transform: translateY(-50%);
-    transition: transform var(--dur-ui) var(--ease-swing);
-  }
-
-  .faq-mark::after {
-    transform: translateY(-50%) rotate(90deg);
-  }
-
-  .faq-item[open] .faq-mark::after {
-    transform: translateY(-50%) rotate(0deg);
-  }
-
-  .faq-a {
-    display: grid;
-    gap: var(--sp-3);
-    padding: 0 var(--sp-3) var(--sp-4);
-  }
-
-  .faq-link a {
-    font-size: var(--s-1);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: var(--weight-strong);
-    color: var(--color-accent-text);
-    text-underline-offset: 0.35em;
-  }
-
-  @media (min-width: 768px) {
-    .faq-item summary,
-    .faq-a {
-      padding-inline: var(--sp-4);
-    }
-
-    .faq-a {
-      /* Align the answer under the question rather than under the row edge. */
-      padding-bottom: var(--sp-5);
-    }
-  }
-}
-
-/* ============================================================================
-   #contact
-   ============================================================================ */
-
-@layer components {
-  .contact-grid {
-    display: grid;
-    gap: var(--sp-6);
-  }
-
-  @media (min-width: 768px) {
-    .contact-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-7);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .contact-grid {
-      grid-template-columns: 1fr 1.5fr;
-    }
-  }
-
-  .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    padding: var(--sp-5);
-  }
-
-  .card h3 {
-    --display-step: var(--s2);
-    margin-bottom: var(--sp-3);
-  }
-
-  .card address {
-    font-style: normal;
-    color: var(--color-text-muted);
-    display: grid;
-  }
-
-  .card dl {
-    margin-top: var(--sp-4);
-    display: grid;
-    gap: var(--sp-2);
-    font-size: var(--s-1);
-  }
-
-  .card .hours-row {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--sp-4);
-  }
-
-  .card dt {
-    color: var(--color-text-muted);
-  }
-
-  .card dd {
-    margin: 0;
-  }
-
-  .map {
-    min-height: 16rem;
-    height: 100%;
-    border: 1px solid var(--color-border);
-    overflow: hidden;
-  }
-
-  .map iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 16rem;
-    border: 0;
-    display: block;
-  }
-
-  .contact-links {
-    display: grid;
-    gap: var(--sp-3);
-    margin-top: var(--sp-7);
-  }
-
-  @media (min-width: 768px) {
-    .contact-links {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 64rem;
-      gap: var(--sp-4) var(--sp-6);
-    }
-  }
-
-  .contact-links a {
-    --display-step: var(--s2);
-    text-decoration: none;
-    word-break: break-word;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-3);
-    transition:
-      color var(--dur-hover) var(--ease-swing),
-      transform var(--dur-hover) var(--ease-momentum);
-  }
-
-  .contact-links a:hover,
-  .contact-links a:focus-visible {
-    color: var(--color-accent-text);
-    transform: translateX(4px);
-  }
-
-  .contact-links a.plain {
-    font-family: var(--font-body);
-    font-size: var(--s1);
-    font-weight: var(--weight-strong);
-    letter-spacing: var(--tracking-body);
-  }
-
-  /* Decorative (§10) — the label beside it carries the meaning. Sized in em so
-     it tracks whichever type step its link is set at, and given flex: none so
-     a long address wrapping cannot squeeze it. */
-  .contact-icon {
-    width: 1.1em;
-    height: 1.1em;
-    flex: none;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    color: var(--color-accent-text);
-    transition:
-      color var(--dur-hover) var(--ease-swing),
-      transform var(--dur-ui) var(--ease-weight);
-  }
-
-  /* Glyph shapes, not line drawings: stroking their outline renders them
-     visibly lighter than the envelope and the Instagram frame beside them. */
-  .contact-icon[data-channel="phone"],
-  .contact-icon[data-channel="facebook"] {
-    fill: currentColor;
-    stroke: none;
-  }
-
-  /* The theme toggle's spin, unchanged — these are icons at the same size, so
-     the angle carries over as-is. The link's own translateX(4px) is on the
-     <a>; this rides on the mark inside it. */
-  .contact-links a:hover .contact-icon,
-  .contact-links a:focus-visible .contact-icon {
-    color: currentColor;
-    transform: rotate(-18deg);
-  }
-
-  /* The phone link is set in the display face, where 1.1em would tower over
-     the others. Held to the body scale so the four marks line up as a set. */
-  .contact-links a.display .contact-icon {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
-}
-
-/* A panel the visitor switched to after first render. Its contents never
-   intersected anything while it was hidden, so the reveal observer never
-   fired for them — without this they stay at opacity 0 and the panel looks
-   empty. See usePanelVisibility. */
-@layer components {
-  .panel.is-revealed .r {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ============================================================================
-   /programs
-
-   No prototype exists for this route (§11.6), so it is built from the
-   vocabulary the home page already established rather than a second one.
-   ============================================================================ */
-
-@layer components {
-  .program-head {
-    margin-bottom: var(--sp-6);
-    display: grid;
-    gap: var(--sp-3);
-  }
-
-  /* This head lays the pair out with a grid gap, which already absorbs the
-     overshoot's negative margin — so it opts out of the flow-sibling step the
-     type layer adds, which would otherwise double it. */
-  .program-head .eyebrow + .display {
-    margin-top: calc(var(--display-overshoot) * -1);
-  }
-
-  .program-head h2 {
-    --display-step: var(--s3);
-  }
-
-  @media (min-width: 768px) {
-    .program-head h2 {
-      --display-step: var(--s4);
-    }
-  }
-
-  .program-body {
-    display: grid;
-    gap: var(--sp-6);
-    margin-bottom: var(--sp-7);
-  }
-
-  /* On the home teaser a poster is a thumbnail — a link affordance standing in
-     for the route. Here it IS the document: the grant logos, dates and
-     conditions are printed on it, and at the teaser's 10.5rem none of that
-     resolves. Sized to the column instead of to a thumb, capped so two still
-     sit side by side. The img `sizes` on /programs tracks these widths; it is
-     inert while next.config sets images.unoptimized, and correct the moment
-     that is lifted. */
-  .program-body .posters img {
-    width: min(42vw, 16rem);
-  }
-
-  @media (min-width: 768px) {
-    .program-body .posters img {
-      width: min(34vw, 19rem);
-    }
-  }
-
-  /* Copy against posters, echoing the home teaser's 1fr auto split. */
-  @media (min-width: 1280px) {
-    .program-body {
-      grid-template-columns: 1fr auto;
-      gap: var(--sp-8);
-      align-items: start;
-    }
-  }
-
-  .program-copy {
-    display: grid;
-    gap: var(--sp-4);
-  }
-
-  .program-subhead {
-    font-size: var(--s-1);
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--color-text-muted);
-    margin-bottom: var(--sp-3);
-  }
-
-  .program-copy .program-subhead {
-    margin-top: var(--sp-3);
-    margin-bottom: 0;
-  }
-
-  /* Session times print a range ("09:30 – 12:00") where the weekly grid
-     prints a start time, so the shared day-column grid needs a wider first
-     column. Below 768 that column would leave the class name only about a
-     third of the row, so the two stack instead. */
-  .sessions .day li {
-    grid-template-columns: 1fr;
-    gap: var(--sp-1);
-  }
-
-  @media (min-width: 768px) {
-    .sessions .day li {
-      grid-template-columns: 9.5em 1fr;
-      gap: var(--sp-3);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .sessions {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .sessions .day h4 {
-    font-size: calc(var(--s1) * var(--size-adjust-display));
-  }
-
-  .sessions .day time {
-    white-space: nowrap;
-  }
-}
-
-/* A section-head that is the whole section — the /programs standfirst — has
-   nothing beneath it to space away from, so it drops the trailing margin. */
-@layer components {
-  .section-head--solo {
-    margin-bottom: 0;
   }
 }

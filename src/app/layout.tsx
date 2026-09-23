@@ -7,6 +7,7 @@ import { Footer } from "../components/layout/Footer/Footer";
 import { RevealObserver } from "../components/layout/RevealObserver";
 import { NoScriptReveal } from "../components/layout/NoScriptReveal";
 import { ThemeScript } from "../components/layout/ThemeScript";
+import { DEFAULT_THEME } from "../components/layout/theme";
 
 /* Search results and share cards are user-visible copy, so the title and
    description come from the content layer like everything else. */
@@ -27,11 +28,11 @@ export default async function RootLayout({
 
   return (
     /* suppressHydrationWarning: ThemeScript rewrites data-theme before React
-       hydrates, so the server's "a" and the client's stored value can differ
-       by design. */
+       hydrates, so the server-rendered DEFAULT_THEME and the client's stored
+       value can differ by design. */
     <html
       lang="pl"
-      data-theme="a"
+      data-theme={DEFAULT_THEME}
       className={fontVariables}
       suppressHydrationWarning
     >
@@ -40,7 +41,11 @@ export default async function RootLayout({
         <NoScriptReveal />
       </head>
       <body>
-        <a className="skip" href="#main">
+        {/* Skip link — visible on focus (§10). */}
+        <a
+          className="absolute top-(--sp-3) left-(--sp-3) z-[100] bg-accent px-(--sp-4) py-(--sp-2) text-on-accent -translate-y-[200%] transition-[translate] duration-(--dur-ui) ease-(--ease-momentum) focus:translate-y-0"
+          href="#main"
+        >
           {headerCopy.skipLink}
         </a>
         <span id="top" />

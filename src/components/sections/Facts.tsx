@@ -11,16 +11,20 @@ export async function Facts() {
   const facts = await getFacts();
 
   return (
-    <div className="wrap">
-      <dl className="facts">
+    <div className="mx-auto w-(--wrap)">
+      <dl className="grid gap-(--sp-5) py-(--sp-7) md:grid-cols-[repeat(3,1fr)] md:gap-(--sp-6)">
         {facts.map((fact, index) => (
           <div
             key={fact.term}
-            className="fact r"
+            className="r"
             style={{ "--i": index } as React.CSSProperties}
           >
-            <dt>{fact.term}</dt>
-            <dd className="display num">{fact.value}</dd>
+            <dt className="mb-(--sp-2) text-(length:--s-1) tracking-[0.14em] text-text-muted uppercase">
+              {fact.term}
+            </dt>
+            <dd className="display m-0 tabular-nums [--display-step:var(--s2)]">
+              {fact.value}
+            </dd>
           </div>
         ))}
       </dl>

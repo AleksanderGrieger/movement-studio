@@ -74,10 +74,13 @@ const adults = await rows(page);
 check("filter dorośli: rows still in the DOM", adults?.total, 13);
 check("filter dorośli: non-matches dimmed", adults?.dim, 10);
 check("filter dorośli: grid marked filtering", adults?.filtering, true);
+/* Was an exact-match on the class attribute, which only held while the chip
+   carried a single class. The thing it was checking is that the filled chip
+   is a label chip and not "Wszystkie". */
 check(
   "filter dorośli: chip filled",
-  await page.getAttribute('[role="radio"][aria-checked="true"]', "class"),
-  "chip",
+  await page.locator('[role="radio"][aria-checked="true"]:not(.chip-reset)').count(),
+  1,
 );
 
 // Białogard has one adults class on Thursday-less days; Czwartek is all-kids,

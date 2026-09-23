@@ -14,6 +14,23 @@ import type { NavItem } from "@/lib/content/types";
  * viewport. Only anchor items take part; /programs is a separate route and is
  * excluded (§2).
  */
+/* The underline is a ::after that scales from its left edge on hover, on
+   focus and for the section the spy reports as current — one rule, three
+   states, which is why the three share a declaration here rather than each
+   carrying its own. Colour is the only thing an external link changes, so it
+   is passed in at the call site instead of being a fourth state. */
+const LINK = [
+  "relative py-(--sp-2) whitespace-nowrap no-underline uppercase",
+  "text-(length:--s-1) tracking-[0.1em] font-(--weight-strong)",
+  "transition-[color] duration-(--dur-hover) ease-(--ease-swing)",
+  "hover:text-text focus-visible:text-text aria-[current=true]:text-text",
+  'after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:content-[""]',
+  "after:bg-accent after:origin-left after:scale-x-0",
+  "after:transition-[scale] after:duration-(--dur-ui) after:ease-(--ease-momentum)",
+  "hover:after:scale-x-100 focus-visible:after:scale-x-100",
+  "aria-[current=true]:after:scale-x-100",
+].join(" ");
+
 export function SiteNav({
   items,
   ariaLabel,
@@ -72,12 +89,17 @@ export function SiteNav({
   }, [items]);
 
   return (
-    <nav className="nav" aria-label={ariaLabel}>
+    <nav
+      className="nav hidden lg:flex lg:items-center lg:gap-(--sp-4) xl:gap-(--sp-5)"
+      aria-label={ariaLabel}
+    >
       {items.map((item) => (
         <a
           key={item.href}
           href={item.href}
-          className={item.scrollSpy ? undefined : "ext"}
+          className={`${LINK} ${
+            item.scrollSpy ? "text-text-muted" : "text-accent-text"
+          }`}
           aria-current={
             item.scrollSpy && item.href.split("#")[1] === currentId
               ? "true"

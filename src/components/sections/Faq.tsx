@@ -27,6 +27,38 @@ import { SectionHead } from "./SectionHead";
  * Answers carry their link after the prose instead of inside it: no HTML in
  * the data (types.ts rule 1), and a destination someone scanning can see.
  */
+/* Built from the schedule row's vocabulary rather than a new one: hairline
+   rules, a left edge that takes the accent, and the same hover response. A
+   reader who has already used the grid recognises the shape. */
+const ITEM = [
+  "border-b border-b-border border-l-[3px] border-l-transparent",
+  "transition-[background-color,border-left-color] duration-(--dur-hover) ease-(--ease-swing)",
+  "hover:border-l-accent focus-within:border-l-accent",
+  "open:border-l-accent open:bg-accent-soft",
+].join(" ");
+
+/* min-height rather than padding alone, so the row clears §10's 44px even
+   when a question fits on one line. Safari draws its own disclosure triangle
+   through a pseudo-element that `list-style: none` alone does not remove. */
+const SUMMARY = [
+  "flex min-h-(--tap-target) cursor-pointer list-none items-baseline",
+  "justify-between gap-(--sp-4) p-(--sp-3) md:px-(--sp-4)",
+  "[&::-webkit-details-marker]:hidden",
+].join(" ");
+
+/* The mark is drawn, not typed: a glyph would inherit the body face's metrics
+   and sit off the question's baseline at every step. Two rules that cross,
+   with the vertical one folding away when the panel opens. */
+const MARK = [
+  "relative size-[0.85em] flex-none self-center text-accent-text",
+  'before:absolute before:inset-x-0 before:top-1/2 before:h-[2px] before:content-[""]',
+  "before:-translate-y-1/2 before:rounded-[2px] before:bg-current",
+  'after:absolute after:inset-x-0 after:top-1/2 after:h-[2px] after:content-[""]',
+  "after:-translate-y-1/2 after:rotate-90 after:rounded-[2px] after:bg-current",
+  "after:transition-[rotate] after:duration-(--dur-ui) after:ease-(--ease-swing)",
+  "group-open:after:rotate-0",
+].join(" ");
+
 export async function Faq() {
   const [section, items] = await Promise.all([
     getSectionIntro("faq"),
@@ -35,31 +67,38 @@ export async function Faq() {
 
   return (
     <section className="section" aria-labelledby="faq-title">
-      <div className="wrap">
+      <div className="mx-auto w-(--wrap)">
         <SectionHead section={section} />
 
-        <div className="faq">
+        <div className="max-w-[58rem] border-t border-t-border">
           {items.map((item, index) => (
             <details
               key={item.slug}
-              className="faq-item r"
+              className={`faq-item group r ${ITEM}`}
               name="faq"
               open={index === 0}
               style={{ "--i": index } as React.CSSProperties}
             >
-              <summary>
-                <span className="faq-q">{item.question}</span>
-                <span className="faq-mark" aria-hidden />
+              <summary className={SUMMARY}>
+                <span className="text-(length:--s1) font-(--weight-strong)">
+                  {item.question}
+                </span>
+                <span className={MARK} aria-hidden />
               </summary>
-              <div className="faq-a">
+              {/* Align the answer under the question rather than under the row
+                  edge, from 768 up. */}
+              <div className="faq-a grid gap-(--sp-3) px-(--sp-3) pt-0 pb-(--sp-4) md:px-(--sp-4) md:pb-(--sp-5)">
                 {item.answer.map((paragraph) => (
-                  <p className="prose" key={paragraph}>
+                  <p className="max-w-(--measure) text-text-muted" key={paragraph}>
                     {paragraph}
                   </p>
                 ))}
                 {item.link ? (
-                  <p className="faq-link">
-                    <a href={item.link.href}>
+                  <p>
+                    <a
+                      className="text-(length:--s-1) font-(--weight-strong) tracking-[0.12em] text-accent-text uppercase [text-underline-offset:0.35em]"
+                      href={item.link.href}
+                    >
                       {item.link.label}
                       {item.link.context ? (
                         <span className="sr-only">{item.link.context}</span>

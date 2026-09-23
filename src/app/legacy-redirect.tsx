@@ -38,8 +38,8 @@ export function LegacyRedirect({
     <>
       <meta httpEquiv="refresh" content={`0; url=${target}`} />
       <section className="section">
-        <div className="wrap">
-          <p className="prose">
+        <div className="mx-auto w-(--wrap)">
+          <p className="max-w-(--measure) text-text-muted">
             <a className="btn btn-primary" href={target}>
               {label}
             </a>

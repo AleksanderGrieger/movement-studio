@@ -348,6 +348,15 @@ export interface ProgramSessionRow {
  * without leaving the page with no top-level heading of its own (§10).
  */
 export interface ProgramsPageCopy {
+  /**
+   * Document title and meta description for the route.
+   *
+   * Separate from `title` below: that one is the visible <h1>, this one is
+   * what search results and share cards show, and the two are written
+   * differently — the <h1> can lean on the page around it, the meta title
+   * cannot. Reuses SiteMeta so both routes describe themselves the same way.
+   */
+  meta: SiteMeta;
   eyebrow: string;
   title: string;
   intro: string;

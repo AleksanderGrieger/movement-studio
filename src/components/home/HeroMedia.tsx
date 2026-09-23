@@ -124,8 +124,25 @@ export function HeroMedia({
   }, []);
 
   return (
-    <div className="media r" style={{ "--i": 5 } as React.CSSProperties}>
-      <div className="frame" ref={frameRef}>
+    <div
+      className="media r relative lg:col-[8/span_5]"
+      style={{ "--i": 5 } as React.CSSProperties}
+    >
+      {/* Below 768 the frame is sized off the phone's own height, which is the
+          scarce dimension there. From tablet up, width stops trailing height
+          and becomes scarce instead — the mobile ratio would keep drawing a
+          phone-narrow sliver with acres of unused gutter either side of it and
+          cram the badge into that same sliver. Sizing off width with a squarer
+          ratio (matching the one the desktop tier already uses) fills the
+          column properly and gives the badge room.
+
+          `media` / `frame` carry no style; the reduced-motion block needs a
+          selector to beat the inline transform this component writes, and
+          scripts/check-interactions.mts reads the same pair. */}
+      <div
+        className="frame relative mx-auto h-[min(62vh,30rem)] w-auto aspect-[44/100] overflow-hidden rounded-(--arch) border border-border bg-surface-2 will-change-transform md:h-auto md:w-[min(60vw,26rem)] md:aspect-[3/4] lg:h-auto lg:max-h-[min(72vh,40rem)] lg:w-full lg:aspect-[3/4]"
+        ref={frameRef}
+      >
         {src ? (
           <video
             ref={videoRef}
@@ -138,9 +155,12 @@ export function HeroMedia({
             loop
             playsInline
             preload="none"
+            className="h-full w-full object-cover object-[50%_20%]"
           />
         ) : null}
-        <p className="badge">{badge}</p>
+        <p className="absolute bottom-(--sp-5) left-0 bg-secondary px-(--sp-4) py-(--sp-2) text-(length:--s-2) font-(--weight-strong) tracking-[0.14em] text-on-secondary uppercase">
+          {badge}
+        </p>
       </div>
     </div>
   );

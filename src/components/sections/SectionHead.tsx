@@ -16,17 +16,27 @@ import type { SectionIntro } from "@/lib/content/types";
  */
 export function SectionHead({ section }: { section: SectionIntro }) {
   return (
-    <div className="section-head r" id={section.id}>
-      <p className="eyebrow num">
+    <div
+      className="r grid gap-(--sp-3) mb-(--sp-7)"
+      id={section.id}
+    >
+      <p className="eyebrow tabular-nums">
         {section.number} — {section.eyebrow}
       </p>
-      <div className="row">
-        <h2 className="display" id={`${section.id}-title`}>
+      <div className="flex items-baseline gap-(--sp-3)">
+        <h2
+          className="display [--display-step:var(--s4)] md:[--display-step:var(--s5)]"
+          id={`${section.id}-title`}
+        >
           {section.title}
         </h2>
-        <span className="rule" aria-hidden />
+        {/* The rule runs from the heading to the right margin — one of the
+            section's asymmetry devices (§9). */}
+        <span className="h-px flex-1 bg-border" aria-hidden />
       </div>
-      {section.intro ? <p className="prose">{section.intro}</p> : null}
+      {section.intro ? (
+        <p className="max-w-(--measure) text-text-muted">{section.intro}</p>
+      ) : null}
     </div>
   );
 }

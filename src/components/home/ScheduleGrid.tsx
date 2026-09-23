@@ -1,6 +1,16 @@
 "use client";
 
 import type { ScheduleGrid as Grid, ScheduleLabel } from "@/lib/content/types";
+import {
+  DAY,
+  DAYS,
+  DAY_HEAD,
+  ROW,
+  ROW_COLUMNS,
+  TAG,
+  TIME,
+  WHAT,
+} from "../dayGrid";
 import { useHomeState } from "./HomeState";
 import { usePanelVisibility } from "./usePanelVisibility";
 
@@ -45,7 +55,11 @@ export function ScheduleGrid({
 
   return (
     <div className={className} hidden={hidden}>
-      <ul className={`days${filter ? " is-filtering" : ""}`}>
+      <ul
+        className={`${DAYS} lg:grid-cols-[repeat(4,1fr)] ${
+          filter ? "is-filtering" : ""
+        }`}
+      >
         {grid.days.map((group, index) => {
           const dimmed = group.entries.filter(
             (entry) => filter !== null && !entry.labels.includes(filter),
@@ -55,29 +69,39 @@ export function ScheduleGrid({
           return (
             <li
               key={group.day.slug}
-              className="day r"
+              className={`${DAY} r`}
               data-empty={isEmpty ? "" : undefined}
               style={{ "--i": index } as React.CSSProperties}
             >
-              <h3>{group.day.name}</h3>
+              <h3 className={`${DAY_HEAD} [--display-step:var(--s2)]`}>
+                {group.day.name}
+              </h3>
               <ul>
                 {group.entries.map((entry) => {
                   const isDim =
                     filter !== null && !entry.labels.includes(filter);
 
                   return (
-                    <li key={entry.slug} className={isDim ? "is-dim" : ""}>
-                      <time dateTime={entry.start}>{entry.start}</time>
-                      <span className="what">
+                    <li
+                      key={entry.slug}
+                      className={`${ROW} ${ROW_COLUMNS} ${isDim ? "is-dim" : ""}`}
+                    >
+                      <time
+                        className={TIME}
+                        dateTime={entry.start}
+                      >
+                        {entry.start}
+                      </time>
+                      <span className={WHAT}>
                         {entry.name}
-                        <span className="tags">
+                        <span className="flex flex-wrap gap-(--sp-1)">
                           {entry.labels.map((slug) => {
                             const label = bySlug.get(slug);
                             if (!label) return null;
                             return (
                               <span
                                 key={slug}
-                                className="tag"
+                                className={`${TAG} text-(--tag-color) border-(--tag-color) before:size-[0.4rem] before:rounded-[50%] before:bg-current before:content-[""]`}
                                 style={
                                   {
                                     "--tag-color": `var(${label.colorToken})`,
@@ -89,7 +113,11 @@ export function ScheduleGrid({
                             );
                           })}
                           {entry.note ? (
-                            <span className="tag tag-plain">{entry.note}</span>
+                            <span
+                              className={`${TAG} border-border-strong text-text-muted`}
+                            >
+                              {entry.note}
+                            </span>
                           ) : null}
                         </span>
                       </span>

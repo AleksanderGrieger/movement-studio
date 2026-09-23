@@ -21,6 +21,42 @@ import { useHomeState } from "./HomeState";
  * Keyboard behaviour matches the native radio-group pattern: both arrow axes,
  * Home and End move and select, and only the checked chip is tabbable.
  */
+/* The chip row is where filter state is stated, which is why the grid itself
+   does not have to shout it and there is no result-count line (§6.2). The
+   selected chip is FILLED, not merely tinted.
+
+   Border and fill take §7.1's symmetric curve while the lift takes the
+   overshooting one, so the transition is written out rather than assembled
+   from a duration/ease pair. */
+const CHIP = [
+  /* `chip` / `chip-reset` carry no style; scripts/check-interactions.mts
+     addresses them. */
+  "chip inline-flex min-h-(--tap-target) items-center justify-center gap-(--sp-2)",
+  "rounded-full border border-border-strong px-(--sp-4) py-(--sp-2)",
+  "text-(length:--s-2) tracking-[0.1em] font-(--weight-strong) uppercase whitespace-nowrap",
+  "[transition:border-color_var(--dur-hover)_var(--ease-swing),background-color_var(--dur-hover)_var(--ease-swing),translate_var(--dur-hover)_var(--ease-weight)]",
+  "hover:-translate-y-px focus-visible:-translate-y-px",
+].join(" ");
+
+/* A label chip carries its label's colour in --chip-color: a dot before the
+   word, the border it takes on hover, and the fill it takes when checked. */
+const CHIP_LABEL = [
+  'before:size-2 before:flex-none before:rounded-[50%] before:content-[""]',
+  "before:bg-[var(--chip-color,var(--color-border-strong))]",
+  "hover:border-[var(--chip-color,var(--color-text))]",
+  "focus-visible:border-[var(--chip-color,var(--color-text))]",
+  "aria-checked:bg-[var(--chip-color,var(--color-text))]",
+  "aria-checked:border-[var(--chip-color,var(--color-text))]",
+  "aria-checked:text-(--on-label) aria-checked:before:bg-current",
+].join(" ");
+
+/* "Wszystkie" has no colour and no dot, and reverses to the page ground
+   rather than to a label's ink. */
+const CHIP_RESET = [
+  "chip-reset hover:border-text focus-visible:border-text",
+  "aria-checked:bg-text aria-checked:border-text aria-checked:text-bg",
+].join(" ");
+
 export function ScheduleFilter({
   labels,
   legend,
@@ -57,11 +93,18 @@ export function ScheduleFilter({
   }
 
   return (
-    <div className="filter">
-      <span className="flabel" id="filter-label">
+    <div className="mb-(--sp-6) flex flex-wrap items-center gap-x-(--sp-4) gap-y-(--sp-2)">
+      <span
+        className="text-(length:--s-2) tracking-[0.16em] text-text-muted uppercase"
+        id="filter-label"
+      >
         {legend}
       </span>
-      <div className="chips" role="radiogroup" aria-labelledby="filter-label">
+      <div
+        className="flex flex-wrap gap-(--sp-2)"
+        role="radiogroup"
+        aria-labelledby="filter-label"
+      >
         {values.map((value, index) => {
           const label = value
             ? labels.find((candidate) => candidate.slug === value)
@@ -78,7 +121,7 @@ export function ScheduleFilter({
               role="radio"
               aria-checked={checked}
               tabIndex={checked ? 0 : -1}
-              className={`chip${value ? "" : " chip-reset"}`}
+              className={`${CHIP} ${value ? CHIP_LABEL : CHIP_RESET}`}
               style={
                 label
                   ? ({

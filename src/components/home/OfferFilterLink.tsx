@@ -23,14 +23,17 @@ export function OfferFilterLink({
   const setFilter = useSetFilter();
 
   return (
-    <p className="offer-cta">
+    <p className="mt-(--sp-4) flex">
       <a
-        className="btn btn-ghost btn-sm"
+        className="btn btn-ghost group px-(--sp-4) py-(--sp-2) text-(length:--s-1)"
         href={href}
         onClick={() => setFilter(filter)}
       >
         {label}{" "}
-        <span className="arrow" aria-hidden>
+        <span
+          className="transition-[translate] duration-(--dur-hover) ease-(--ease-momentum) group-hover:translate-x-[4px] group-focus-visible:translate-x-[4px]"
+          aria-hidden
+        >
           →
         </span>
       </a>

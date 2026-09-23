@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export",
+    "deploy": "next build",
     "check:content": "tsx scripts/check-content.mts",
     "shoot": "tsx scripts/shoot.mts",
     "check:ui": "tsx scripts/check-interactions.mts",

@@ -1,12 +1,31 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getPrograms, getProgramsPageCopy } from "@/lib/content/programs";
+import {
+  DAY,
+  DAYS,
+  DAY_HEAD,
+  ROW,
+  SESSION_COLUMNS,
+  TIME,
+  WHAT,
+} from "@/src/components/dayGrid";
 
-export const metadata: Metadata = {
-  title: "Programy | Movement Studio",
-  description:
-    "Nieodpłatne warsztaty taneczno-sportowe Movement Studio realizowane ze środków programów NOWEFIO i Społecznik na 5!",
-};
+/* A head that is the whole section has nothing beneath it to space away
+   from, so unlike SectionHead it drops the trailing margin. */
+const SUBHEAD =
+  "text-(length:--s-1) tracking-[0.16em] text-text-muted uppercase";
+
+/* Search results and share cards are user-visible copy, so they come from the
+   content layer like every other string — same as the root layout does for
+   the home page. */
+export async function generateMetadata(): Promise<Metadata> {
+  const { meta } = await getProgramsPageCopy();
+  return {
+    title: meta.title,
+    description: meta.description,
+  };
+}
 
 /**
  * /programs.
@@ -43,48 +62,57 @@ export default async function Programs() {
   return (
     <>
       <section className="section" aria-labelledby="programs-page-title">
-        <div className="wrap">
-          <div className="section-head section-head--solo r">
+        <div className="mx-auto w-(--wrap)">
+          <div className="r grid gap-(--sp-3)">
             <p className="eyebrow">{copy.eyebrow}</p>
-            <div className="row">
+            <div className="flex items-baseline gap-(--sp-3)">
+              {/* No step override: unlike SectionHead's <h2> this standfirst
+                  sits at .display's own default. */}
               <h1 className="display" id="programs-page-title">
                 {copy.title}
               </h1>
-              <span className="rule" aria-hidden />
+              <span className="h-px flex-1 bg-border" aria-hidden />
             </div>
-            <p className="prose">{copy.intro}</p>
+            <p className="max-w-(--measure) text-text-muted">{copy.intro}</p>
           </div>
         </div>
       </section>
 
       {programs.map((program) => (
         <section
-          className="section program"
+          className="section"
           key={program.slug}
           aria-labelledby={`program-${program.slug}`}
         >
-          <div className="wrap">
-            <div className="program-head r">
+          <div className="mx-auto w-(--wrap)">
+            {/* This head lays the pair out with a grid gap, which already
+                absorbs the overshoot's negative margin — so unlike the hero it
+                adds no step of its own, which would double it. */}
+            <div className="r mb-(--sp-6) grid gap-(--sp-3)">
               <p className="eyebrow">{program.programme}</p>
-              <h2 className="display" id={`program-${program.slug}`}>
+              <h2
+                className="display [--display-step:var(--s3)] md:[--display-step:var(--s4)]"
+                id={`program-${program.slug}`}
+              >
                 {program.title}
               </h2>
-              <p className="lead">{program.summary}</p>
+              <p className="max-w-(--measure) text-(length:--s1) text-text-muted">{program.summary}</p>
             </div>
 
-            <div className="program-body">
-              <div className="program-copy r">
+            {/* Copy against posters, echoing the home teaser's 1fr auto split. */}
+            <div className="grid gap-(--sp-6) mb-(--sp-7) lg:grid-cols-[1fr_auto] lg:items-start lg:gap-(--sp-8)">
+              <div className="r grid gap-(--sp-4)">
                 {program.body.map((paragraph) => (
-                  <p className="prose" key={paragraph}>
+                  <p className="max-w-(--measure) text-text-muted" key={paragraph}>
                     {paragraph}
                   </p>
                 ))}
-                <h3 className="program-subhead">{copy.venueHeading}</h3>
-                <p className="prose">{program.venue}</p>
+                <h3 className={`${SUBHEAD} mt-(--sp-3)`}>{copy.venueHeading}</h3>
+                <p className="max-w-(--measure) text-text-muted">{program.venue}</p>
               </div>
 
               <div
-                className="posters r"
+                className="flex gap-(--sp-3) r"
                 style={{ "--i": 1 } as React.CSSProperties}
               >
                 {program.posters.map((poster) => (
@@ -96,27 +124,36 @@ export default async function Programs() {
                     alt={poster.alt}
                     sizes="(min-width: 768px) 19rem, 42vw"
                     loading="lazy"
+                    className="h-auto w-[min(42vw,16rem)] border border-border md:w-[min(34vw,19rem)]"
                   />
                 ))}
               </div>
             </div>
 
-            <h3 className="program-subhead">{copy.sessionsHeading}</h3>
-            <ul className="days sessions">
+            <h3 className={`${SUBHEAD} mb-(--sp-3)`}>{copy.sessionsHeading}</h3>
+            <ul className={`${DAYS} lg:grid-cols-[repeat(2,1fr)]`}>
               {program.sessions.map((session, index) => (
                 <li
-                  className="day r"
+                  className={`${DAY} r`}
                   key={session.slug}
                   style={{ "--i": index } as React.CSSProperties}
                 >
-                  <h4>{session.dates}</h4>
+                  <h4 className={`${DAY_HEAD} [--display-step:var(--s1)]`}>
+                    {session.dates}
+                  </h4>
                   <ul>
                     {session.rows.map((row) => (
-                      <li key={`${row.start}-${row.name}`}>
-                        <time dateTime={row.start}>
+                      <li
+                        className={`${ROW} ${SESSION_COLUMNS}`}
+                        key={`${row.start}-${row.name}`}
+                      >
+                        <time
+                          className={`${TIME} whitespace-nowrap`}
+                          dateTime={row.start}
+                        >
                           {row.end ? `${row.start} – ${row.end}` : row.start}
                         </time>
-                        <span className="what">{row.name}</span>
+                        <span className={WHAT}>{row.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -128,7 +165,7 @@ export default async function Programs() {
       ))}
 
       <section className="section">
-        <div className="wrap">
+        <div className="mx-auto w-(--wrap)">
           <a className="btn btn-ghost" href={copy.backLink.href}>
             {copy.backLink.label}
           </a>

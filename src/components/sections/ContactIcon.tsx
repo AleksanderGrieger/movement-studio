@@ -18,8 +18,13 @@
  * caps and joins) so the two sets read as one family. Two of the marks —
  * the handset and the Facebook f — are glyph shapes rather than line
  * drawings, and stroking their outline renders them noticeably lighter than
- * the envelope and the Instagram frame beside them. They are filled instead,
- * which `data-channel` drives from the stylesheet.
+ * the envelope and the Instagram frame beside them, so those two are filled
+ * instead. data-channel stays on the element as a debugging handle; the
+ * choice itself is made here.
+ *
+ * `large` is for the one link set in the display face, where 1.1em would
+ * tower over the others. It is held to the body scale so the four marks line
+ * up as a set.
  */
 
 type Channel = "phone" | "mail" | "instagram" | "facebook" | "link";
@@ -78,14 +83,37 @@ const PATHS: Record<Channel, React.ReactNode> = {
   ),
 };
 
-export function ContactIcon({ href }: { href: string }) {
+/* The theme toggle's spin, unchanged — these are icons at the same size, so
+   the angle carries over as-is. The link's own nudge is on the <a>; this
+   rides on the mark inside it. Colour and rotation take different curves,
+   so the transition is written out rather than assembled from a pair. */
+const ICON = [
+  "flex-none text-accent-text",
+  "[transition:color_var(--dur-hover)_var(--ease-swing),rotate_var(--dur-ui)_var(--ease-weight)]",
+  "group-hover:text-current group-hover:-rotate-[18deg]",
+  "group-focus-visible:text-current group-focus-visible:-rotate-[18deg]",
+].join(" ");
+
+export function ContactIcon({
+  href,
+  large = false,
+}: {
+  href: string;
+  large?: boolean;
+}) {
   const channel = channelOf(href);
+  const isGlyph = channel === "phone" || channel === "facebook";
 
   return (
     <svg
-      className="contact-icon"
+      className={`${ICON} ${large ? "size-[1.4rem]" : "size-[1.1em]"} ${
+        isGlyph ? "fill-current stroke-none" : "fill-none stroke-current"
+      }`}
       data-channel={channel}
       viewBox="0 0 24 24"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden
       focusable="false"
     >

@@ -31,7 +31,7 @@ export async function Pricelist() {
 
   return (
     <section className="section" aria-labelledby="pricelist-title">
-      <div className="wrap">
+      <div className="mx-auto w-(--wrap)">
         <SectionHead section={section} />
 
         <LocationToggle
@@ -41,17 +41,39 @@ export async function Pricelist() {
 
         {blocksByLocation.map(({ location, blocks }) => (
           <LocationPanel key={location.slug} location={location.slug}>
-            {blocks.map((block) => (
-              <div className="price-block r" key={block.slug}>
-                <h3>{block.title}</h3>
+            {blocks.map((block, blockIndex) => (
+              <div
+                className={`r ${blockIndex > 0 ? "mt-(--sp-7)" : ""}`}
+                key={block.slug}
+              >
+                <h3 className="mb-(--sp-3) text-(length:--s-1) tracking-[0.16em] text-text-muted uppercase">
+                  {block.title}
+                </h3>
                 {block.rows.map((row) => (
-                  <div className="price-row" key={row.slug}>
-                    <span className="name">
+                  <div
+                    className="flex items-baseline gap-(--sp-3) border-b border-b-border py-(--sp-3)"
+                    key={row.slug}
+                  >
+                    <span className="flex-[0_1_auto]">
                       {row.name}
-                      {row.cadence ? <small>{row.cadence}</small> : null}
+                      {row.cadence ? (
+                        <small className="block text-(length:--s-2) text-text-muted">
+                          {row.cadence}
+                        </small>
+                      ) : null}
                     </span>
-                    <span className="dots" aria-hidden />
-                    <span className="amt num">{money.format(row.price)}</span>
+                    {/* The leader rides up a quarter em so it sits on the
+                        baseline rather than under it. */}
+                    <span
+                      className="min-w-(--sp-5) flex-[1_1_auto] -translate-y-[0.25em] border-b border-dotted border-b-border-strong"
+                      aria-hidden
+                    />
+                    {/* The display face, but without display-flat's leading: this span is a
+                        baseline-aligned flex item and the tighter line-height
+                        would change the row's height. */}
+                    <span className="font-display font-(--weight-display) [font-variation-settings:var(--display-variation)] text-[calc(var(--s1)*var(--size-adjust-display))] text-secondary-text whitespace-nowrap tabular-nums">
+                      {money.format(row.price)}
+                    </span>
                   </div>
                 ))}
               </div>

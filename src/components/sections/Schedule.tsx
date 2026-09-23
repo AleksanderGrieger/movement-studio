@@ -25,7 +25,7 @@ export async function Schedule() {
 
   return (
     <section className="section" aria-labelledby="schedule-title">
-      <div className="wrap">
+      <div className="mx-auto w-(--wrap)">
         <SectionHead section={section} />
 
         <LocationToggle
@@ -43,7 +43,7 @@ export async function Schedule() {
           <ScheduleGrid key={grid.location.slug} grid={grid} labels={labels} />
         ))}
 
-        <p className="note">
+        <p className="mt-(--sp-5) max-w-(--measure) text-(length:--s-1) text-text-muted">
           {ui.scheduleNote.map((run, index) =>
             run.emphasis ? (
               <strong key={index}>{run.text}</strong>

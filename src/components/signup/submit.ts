@@ -19,13 +19,18 @@ import type { SignUpValues } from "./values";
  */
 
 /**
- * NOT YET WIRED.
+ * The kill switch for both submit paths.
  *
- * The section is built and the payload below is the real one, but nothing is
- * transmitted until this is flipped and submitSignUp's fetch is uncommented.
- * Until then submitting exercises the whole flow — validation, the pending
- * state, the confirmation — without putting a test response into the studio's
- * live sheet.
+ * True — the live setting — gives the <form> its real `action` (so a visitor
+ * without scripting posts natively) and lets submitSignUp send. Responses
+ * reach the studio's forms and their linked sheets.
+ *
+ * Setting it to false takes the section off the air without removing it: the
+ * action attribute is dropped, no request is made, and submitting still walks
+ * the whole flow — validation, the pending state, the confirmation — so the
+ * section stays reviewable while nothing lands in a live sheet. That is what
+ * it was built for, and it is the switch to reach for if a form is ever
+ * retired mid-season or a season's intake closes.
  */
 export const SENDING_ENABLED = true;
 

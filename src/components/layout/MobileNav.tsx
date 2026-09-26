@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import type { MenuButtonCopy, NavItem } from "@/lib/content/types";
+import type { LinkRef, MenuButtonCopy, NavItem } from "@/lib/content/types";
 
 /**
  * Burger button and the panel it controls.
@@ -24,6 +24,12 @@ import type { MenuButtonCopy, NavItem } from "@/lib/content/types";
  * [aria-expanded="true"] selector: the state is already here, and the open
  * shape reads better as two classes on the span than as a rule keyed off an
  * attribute somewhere else.
+ *
+ * The panel ends with the header's own CTA. The button in the header bar is
+ * hidden below 1280, so without this the site's primary action — sign up —
+ * would be reachable from the navigation on desktop only, which is the
+ * opposite of where it is needed. Same link and same label as the bar's, read
+ * from the same content; it is one CTA shown in whichever place is visible.
  */
 
 /* visibility is delayed to the full duration on close so the panel stays in
@@ -40,9 +46,11 @@ const BAR_MOVE =
 
 export function MobileNav({
   items,
+  cta,
   copy,
 }: {
   items: NavItem[];
+  cta: LinkRef;
   copy: MenuButtonCopy;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,6 +123,15 @@ export function MobileNav({
             </li>
           ))}
         </ul>
+        <div className="mx-auto mt-(--sp-5) w-(--wrap)">
+          <a
+            className="btn btn-primary w-full"
+            href={cta.href}
+            onClick={() => setIsOpen(false)}
+          >
+            {cta.label}
+          </a>
+        </div>
       </nav>
     </>
   );

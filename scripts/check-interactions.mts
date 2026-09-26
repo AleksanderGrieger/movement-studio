@@ -118,17 +118,22 @@ check(
 );
 check("Home clears the filter", (await rows(page))?.dim, 0);
 
-/* ---------- location: one state, three sections ---------- */
+/* ---------- location: one state, four sections ---------- */
 await page.getByRole("button", { name: "Kołobrzeg" }).first().click();
 check("location: Kołobrzeg schedule rows", (await rows(page))?.total, 12);
+/* Scoped to .toggle-location. #signup's audience switch is the same control
+   with the same pressed state, and an unscoped selector would report it here
+   as a location toggle that failed to follow. */
 check(
-  "location: all three toggles follow",
+  "location: all four toggles follow",
   await page.evaluate(() =>
-    [...document.querySelectorAll('.toggle button[aria-pressed="true"]')].map(
-      (b) => b.textContent,
-    ),
+    [
+      ...document.querySelectorAll(
+        '.toggle-location button[aria-pressed="true"]',
+      ),
+    ].map((b) => b.textContent),
   ),
-  ["Kołobrzeg", "Kołobrzeg", "Kołobrzeg"],
+  ["Kołobrzeg", "Kołobrzeg", "Kołobrzeg", "Kołobrzeg"],
 );
 check(
   "location: exactly one panel visible per group",

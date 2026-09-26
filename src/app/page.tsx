@@ -10,6 +10,7 @@ import { About } from "@/src/components/sections/About";
 import { ProgramsTeaser } from "@/src/components/sections/ProgramsTeaser";
 import { Faq } from "@/src/components/sections/Faq";
 import { Contact } from "@/src/components/sections/Contact";
+import { SignUp } from "@/src/components/sections/SignUp";
 
 /**
  * The home page is the whole site: the approved IA collapses the old
@@ -34,6 +35,7 @@ export default async function Home() {
       <ProgramsTeaser />
       <Faq />
       <Contact />
+      <SignUp />
     </HomeStateProvider>
   );
 }

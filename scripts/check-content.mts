@@ -15,6 +15,7 @@ import { getPriceBlocks } from "@/lib/content/pricing";
 import { getInstructors } from "@/lib/content/instructors";
 import { getPrograms, getProgramsTeaser } from "@/lib/content/programs";
 import { getFaqItems } from "@/lib/content/faq";
+import { getAudiences, getSignUpForms, getSignUpCopy } from "@/lib/content/forms";
 import { getNavigation, getSectionIntros, getFacts, getMarqueeItems, getUiCopy, getContactCopy, getHeroCopy } from "@/lib/content/site";
 
 const fail: string[] = [];
@@ -25,6 +26,7 @@ const eq = (label: string, got: unknown, want: unknown) => {
 };
 
 const locations = await getLocations();
+const locationSlugs = new Set(locations.map((l) => l.slug));
 eq("locations", locations.length, 2);
 eq("default location", (await getDefaultLocation()).slug, "bialogard");
 
@@ -50,7 +52,7 @@ eq("program sessions", programs.reduce((n, p) => n + p.sessions.length, 0), 4);
 eq("program session rows", programs.reduce((n, p) => n + p.sessions.reduce((m, s) => m + s.rows.length, 0), 0), 10);
 eq("teaser posters", (await getProgramsTeaser()).posters.length, 3);
 eq("nav items", (await getNavigation()).length, 7);
-eq("section intros", (await getSectionIntros()).length, 6);
+eq("section intros", (await getSectionIntros()).length, 7);
 eq("facts", (await getFacts()).length, 3);
 eq("marquee items", (await getMarqueeItems()).length, 10);
 const faq = await getFaqItems();
@@ -60,9 +62,57 @@ eq("duplicate faq slugs", faq.length - new Set(faq.map((f) => f.slug)).size, 0);
 eq("contact links", (await getContactCopy()).links.length, 4);
 eq("hero headline lines", (await getHeroCopy()).headline.length, 3);
 
+const audiences = await getAudiences();
+const signUpForms = await getSignUpForms();
+eq("audiences", audiences.length, 2);
+eq("sign-up forms", signUpForms.length, 4);
+eq("sign-up fields", signUpForms.reduce((n, f) => n + f.fields.length, 0), 20);
+
+/* One form per location per audience: the two toggles are independent, so a
+   missing pair is a combination a visitor can reach by clicking. */
+const audienceSlugs = new Set(audiences.map((a) => a.slug));
+const pairs = new Set(signUpForms.map((f) => `${f.location}/${f.audience}`));
+eq("sign-up: every location x audience pair", pairs.size, locations.length * audiences.length);
+eq(
+  "sign-up -> unknown locations",
+  signUpForms.filter((f) => !locationSlugs.has(f.location)).length,
+  0,
+);
+eq(
+  "sign-up -> unknown audiences",
+  signUpForms.filter((f) => !audienceSlugs.has(f.audience)).length,
+  0,
+);
+
+/* Every field must carry the entry id its form's endpoint expects, and a
+   choice field must offer something to choose. A typo in either is a
+   submission Google silently drops, which nothing else would catch. */
+const signUpFields = signUpForms.flatMap((f) => f.fields.map((x) => ({ form: f.slug, ...x })));
+eq(
+  "sign-up: malformed entry ids",
+  signUpFields.filter((f) => !/^entry\.\d+$/.test(f.entryId)).length,
+  0,
+);
+eq(
+  "sign-up: duplicate entry ids within a form",
+  signUpForms.filter((f) => new Set(f.fields.map((x) => x.entryId)).size !== f.fields.length).length,
+  0,
+);
+eq(
+  "sign-up: choice fields with no options",
+  signUpFields.filter((f) => f.kind === "choice" && f.options.length === 0).length,
+  0,
+);
+eq(
+  "sign-up: consent fields with no posted value",
+  signUpFields.filter((f) => f.kind === "consent" && !f.value).length,
+  0,
+);
+eq("sign-up: consent field per form", signUpFields.filter((f) => f.kind === "consent").length, 4);
+eq("sign-up copy: submit label", !!(await getSignUpCopy()).submitLabel, true);
+
 // referential integrity
 const labelSlugs = new Set((await getScheduleLabels()).map((l) => l.slug));
-const locationSlugs = new Set(locations.map((l) => l.slug));
 const badLabels = entries.flatMap((e) => e.labels.filter((l) => !labelSlugs.has(l)));
 const badLocs = [...entries.map((e) => e.location), ...blocks.map((b) => b.location)].filter((l) => !locationSlugs.has(l));
 const badFilters = groups.map((g) => g.scheduleFilter).filter((f): f is string => !!f && !labelSlugs.has(f));

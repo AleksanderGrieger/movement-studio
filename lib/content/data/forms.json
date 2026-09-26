@@ -1,0 +1,346 @@
+{
+  "audiences": [
+    {
+      "slug": "dorosli",
+      "name": "Dorośli",
+      "order": 1
+    },
+    {
+      "slug": "dzieci",
+      "name": "Dzieci",
+      "order": 2
+    }
+  ],
+  "ui": {
+    "locationToggleAriaLabel": "Wybór lokalizacji dla zapisów",
+    "audienceToggleAriaLabel": "Wybór grupy wiekowej",
+    "formAriaLabel": "Formularz zapisu na zajęcia",
+    "unavailable": "Na razie nie prowadzimy zapisów dla tej grupy w tej lokalizacji. Zadzwoń albo napisz — znajdziemy coś odpowiedniego.",
+    "requiredNote": "Pola oznaczone gwiazdką są wymagane.",
+    "optionalNote": "nieobowiązkowe",
+    "submitLabel": "Wyślij zgłoszenie",
+    "submittingLabel": "Wysyłamy zgłoszenie…",
+    "errorSummaryTitle": "Zanim wyślemy — popraw te pola:",
+    "success": {
+      "title": "Zgłoszenie przyjęte.",
+      "body": "Odezwiemy się telefonicznie lub mailowo, żeby potwierdzić grupę i termin pierwszych zajęć.",
+      "againLabel": "Wyślij kolejne zgłoszenie"
+    },
+    "failure": {
+      "title": "Nie udało się wysłać zgłoszenia.",
+      "body": "Sprawdź połączenie i spróbuj ponownie. Jeśli to nie pomoże, zadzwoń — zapiszemy Cię od ręki.",
+      "retryLabel": "Spróbuj ponownie"
+    },
+    "errors": {
+      "required": "Uzupełnij to pole.",
+      "email": "Podaj adres e-mail w formacie nazwa@domena.pl.",
+      "phone": "Podaj numer telefonu — co najmniej dziewięć cyfr.",
+      "choice": "Zaznacz przynajmniej jedne zajęcia.",
+      "consent": "Bez tej zgody nie możemy przyjąć zgłoszenia."
+    }
+  },
+  "forms": [
+    {
+      "slug": "bialogard-dorosli",
+      "location": "bialogard",
+      "audience": "dorosli",
+      "formId": "1FAIpQLScKBHupQAj8v-b2-KbCWePUoBsW7uFwG-YFF4NfGSacjbdmFA",
+      "fields": [
+        {
+          "slug": "name",
+          "kind": "text",
+          "entryId": "entry.2005620554",
+          "required": true,
+          "order": 1,
+          "label": "Imię i nazwisko",
+          "autoComplete": "name"
+        },
+        {
+          "slug": "email",
+          "kind": "email",
+          "entryId": "entry.1045781291",
+          "required": true,
+          "order": 2,
+          "label": "Adres e-mail",
+          "autoComplete": "email"
+        },
+        {
+          "slug": "phone",
+          "kind": "tel",
+          "entryId": "entry.1065046570",
+          "required": true,
+          "order": 3,
+          "label": "Numer telefonu",
+          "autoComplete": "tel"
+        },
+        {
+          "slug": "classes",
+          "kind": "choice",
+          "entryId": "entry.1166974658",
+          "required": false,
+          "order": 4,
+          "label": "Rodzaj zajęć",
+          "options": [
+            {
+              "value": "Latino solo",
+              "label": "Latino solo",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "slug": "consent",
+          "kind": "consent",
+          "entryId": "entry.839337160",
+          "required": true,
+          "order": 5,
+          "label": "Akceptuję",
+          "description": "Administratorem danych osobowych jest Stowarzyszenie Movement Studio, z siedzibą w Kołobrzegu, ul. Wylotowa 87D/3. Dane osobowe, takie jak imię i nazwisko, numer telefonu, adres e-mail, rok urodzenia oraz informacje o uczestnictwie w zajęciach, będą przetwarzane w celu organizacji i realizacji zajęć, zgodnie z przepisami Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).",
+          "value": "Akceptuję"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "slug": "bialogard-dzieci",
+      "location": "bialogard",
+      "audience": "dzieci",
+      "formId": "1FAIpQLSeDHyGTfA26XbtjNHE7z95z4TsRgJQCNPtP8EdqpywTHhTrlQ",
+      "fields": [
+        {
+          "slug": "name",
+          "kind": "text",
+          "entryId": "entry.2005620554",
+          "required": true,
+          "order": 1,
+          "label": "Imię i nazwisko dziecka"
+        },
+        {
+          "slug": "email",
+          "kind": "email",
+          "entryId": "entry.1045781291",
+          "required": true,
+          "order": 2,
+          "label": "Adres e-mail",
+          "autoComplete": "email"
+        },
+        {
+          "slug": "phone",
+          "kind": "tel",
+          "entryId": "entry.1065046570",
+          "required": true,
+          "order": 3,
+          "label": "Numer telefonu",
+          "autoComplete": "tel"
+        },
+        {
+          "slug": "classes",
+          "kind": "choice",
+          "entryId": "entry.1166974658",
+          "required": true,
+          "order": 4,
+          "label": "Rodzaj zajęć",
+          "options": [
+            {
+              "value": "Taniec towarzyski nabór (6+ lat)",
+              "label": "Taniec towarzyski nabór (6+ lat)",
+              "order": 1
+            },
+            {
+              "value": "Taniec towarzyski grupa sport (8+ lat)",
+              "label": "Taniec towarzyski grupa sport (8+ lat)",
+              "order": 2
+            },
+            {
+              "value": "Taniec współczesny nabór (3-6 lat)",
+              "label": "Taniec współczesny nabór (3-6 lat)",
+              "order": 3
+            },
+            {
+              "value": "MTeam 3 - taniec współczesny grupa sport",
+              "label": "MTeam 3 - taniec współczesny grupa sport",
+              "order": 4
+            }
+          ]
+        },
+        {
+          "slug": "consent",
+          "kind": "consent",
+          "entryId": "entry.839337160",
+          "required": true,
+          "order": 5,
+          "label": "Akceptuję",
+          "description": "Administratorem danych osobowych jest Stowarzyszenie Movement Studio, z siedzibą w Kołobrzegu, ul. Wylotowa 87D/3. Dane osobowe, takie jak imię i nazwisko, numer telefonu, adres e-mail, rok urodzenia oraz informacje o uczestnictwie w zajęciach, będą przetwarzane w celu organizacji i realizacji zajęć, zgodnie z przepisami Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).",
+          "value": "Akceptuję"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "slug": "kolobrzeg-dorosli",
+      "location": "kolobrzeg",
+      "audience": "dorosli",
+      "formId": "1FAIpQLScvM2-hoDwTMUhhJI6RIcDNWYPrHBf-iJ89zsFYTXSbgOWfCQ",
+      "fields": [
+        {
+          "slug": "name",
+          "kind": "text",
+          "entryId": "entry.2005620554",
+          "required": true,
+          "order": 1,
+          "label": "Imię i nazwisko",
+          "autoComplete": "name"
+        },
+        {
+          "slug": "email",
+          "kind": "email",
+          "entryId": "entry.1045781291",
+          "required": true,
+          "order": 2,
+          "label": "Adres e-mail",
+          "autoComplete": "email"
+        },
+        {
+          "slug": "phone",
+          "kind": "tel",
+          "entryId": "entry.1065046570",
+          "required": true,
+          "order": 3,
+          "label": "Numer telefonu",
+          "autoComplete": "tel"
+        },
+        {
+          "slug": "classes",
+          "kind": "choice",
+          "entryId": "entry.1166974658",
+          "required": true,
+          "order": 4,
+          "label": "Rodzaj zajęć",
+          "options": [
+            {
+              "value": "Latino solo masters",
+              "label": "Latino solo masters",
+              "order": 1
+            },
+            {
+              "value": "Salsa solo",
+              "label": "Salsa solo",
+              "order": 2
+            },
+            {
+              "value": "Stretching z elementami baletu",
+              "label": "Stretching z elementami baletu",
+              "order": 3
+            },
+            {
+              "value": "Modern/ jazz",
+              "label": "Modern/ jazz",
+              "order": 4
+            }
+          ]
+        },
+        {
+          "slug": "consent",
+          "kind": "consent",
+          "entryId": "entry.839337160",
+          "required": true,
+          "order": 5,
+          "label": "Akceptuję",
+          "description": "Administratorem danych osobowych jest Stowarzyszenie Movement Studio, z siedzibą w Kołobrzegu, ul. Wylotowa 87D/3. Dane osobowe, takie jak imię i nazwisko, numer telefonu, adres e-mail, rok urodzenia oraz informacje o uczestnictwie w zajęciach, będą przetwarzane w celu organizacji i realizacji zajęć, zgodnie z przepisami Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).",
+          "value": "Akceptuję"
+        }
+      ],
+      "order": 3
+    },
+    {
+      "slug": "kolobrzeg-dzieci",
+      "location": "kolobrzeg",
+      "audience": "dzieci",
+      "formId": "1FAIpQLSfuzyBL0mqin-3mIK0IwxjrqRQ9K4Vpbw-N-979vScKbGqB7A",
+      "fields": [
+        {
+          "slug": "name",
+          "kind": "text",
+          "entryId": "entry.2005620554",
+          "required": true,
+          "order": 1,
+          "label": "Imię i nazwisko dziecka"
+        },
+        {
+          "slug": "email",
+          "kind": "email",
+          "entryId": "entry.1045781291",
+          "required": true,
+          "order": 2,
+          "label": "Adres e-mail",
+          "autoComplete": "email"
+        },
+        {
+          "slug": "phone",
+          "kind": "tel",
+          "entryId": "entry.1065046570",
+          "required": true,
+          "order": 3,
+          "label": "Numer telefonu",
+          "autoComplete": "tel"
+        },
+        {
+          "slug": "classes",
+          "kind": "choice",
+          "entryId": "entry.1166974658",
+          "required": true,
+          "order": 4,
+          "label": "Rodzaj zajęć",
+          "options": [
+            {
+              "value": "Nabór taniec współczesny (3-6 lat)",
+              "label": "Nabór taniec współczesny (3-6 lat)",
+              "order": 1
+            },
+            {
+              "value": "Latino solo kids (6+ lat)",
+              "label": "Latino solo kids (6+ lat)",
+              "order": 2
+            },
+            {
+              "value": "Akrobatyka open (3-5 lat)",
+              "label": "Akrobatyka open (3-5 lat)",
+              "order": 3
+            },
+            {
+              "value": "Mała baletnica i baletmistrz (3-5 lat)",
+              "label": "Mała baletnica i baletmistrz (3-5 lat)",
+              "order": 4
+            },
+            {
+              "value": "Salsa solo TEENS (12+ lat)",
+              "label": "Salsa solo TEENS (12+ lat)",
+              "order": 5
+            },
+            {
+              "value": "MTeam 2 - taniec współczesny gr sport (7-12 lat)",
+              "label": "MTeam 2 - taniec współczesny gr sport (7-12 lat)",
+              "order": 6
+            },
+            {
+              "value": "MTeam 1 - taniec współczesny gr sport (13+)",
+              "label": "MTeam 1 - taniec współczesny gr sport (13+)",
+              "order": 7
+            }
+          ]
+        },
+        {
+          "slug": "consent",
+          "kind": "consent",
+          "entryId": "entry.839337160",
+          "required": true,
+          "order": 5,
+          "label": "Akceptuję",
+          "description": "Administratorem danych osobowych jest Stowarzyszenie Movement Studio, z siedzibą w Kołobrzegu, ul. Wylotowa 87D/3. Dane osobowe, takie jak imię i nazwisko, numer telefonu, adres e-mail, rok urodzenia oraz informacje o uczestnictwie w zajęciach, będą przetwarzane w celu organizacji i realizacji zajęć, zgodnie z przepisami Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).",
+          "value": "Akceptuję"
+        }
+      ],
+      "order": 4
+    }
+  ]
+}

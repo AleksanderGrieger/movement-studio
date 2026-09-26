@@ -285,6 +285,154 @@ export interface PriceRow {
 }
 
 /* ========================================================================
+   Sign-up (#signup)
+
+   The studio takes registrations on four Google Forms — one per location per
+   audience. The section reproduces whichever of the four the visitor's two
+   toggles select, and posts to that form's own endpoint.
+
+   Everything here is transcribed from each form's published definition, which
+   is why the shape leans on Google's: `entryId` is the wire name Google
+   expects for that question and is the one value in this file that is neither
+   copy nor structure. It is stored rather than derived because there is
+   nothing to derive it from — Google assigns it, and it is stable for the life
+   of the question.
+
+   The forms are NOT collapsed into one shared definition even though three of
+   the five questions are identical across all four. They are four separate
+   documents owned by the studio, and an editor changing the Kołobrzeg class
+   list must not silently change Białogard's.
+   ======================================================================== */
+
+/** Which of the two audience forms a location offers. */
+export interface Audience {
+  slug: Slug;
+  /** Toggle button label, e.g. "Dorośli". */
+  name: string;
+  order: number;
+}
+
+export interface SignUpForm {
+  slug: Slug;
+  /** A Location slug. */
+  location: Slug;
+  /** An Audience slug. */
+  audience: Slug;
+  /**
+   * The id from the form's public URL — the `/forms/d/e/<id>/viewform` part.
+   * The POST endpoint is derived from it, so the two can never disagree.
+   */
+  formId: string;
+  fields: SignUpField[];
+  order: number;
+}
+
+/**
+ * One question.
+ *
+ * A discriminated union on `kind`, so the renderer cannot reach for `options`
+ * on a text field or forget them on a choice one.
+ */
+export type SignUpField =
+  | SignUpTextField
+  | SignUpChoiceField
+  | SignUpConsentField;
+
+interface SignUpFieldBase {
+  slug: Slug;
+  /** Google's wire name for this question, e.g. "entry.2005620554". */
+  entryId: string;
+  required: boolean;
+  order: number;
+}
+
+export interface SignUpTextField extends SignUpFieldBase {
+  /** `email` and `tel` pick the input type, the keyboard and the validation. */
+  kind: "text" | "email" | "tel";
+  label: string;
+  /**
+   * An HTML autocomplete token. Absent means the field must NOT be
+   * autofilled — the children's forms ask for the child's name, and offering
+   * the visitor's own saved profile there would be wrong rather than helpful.
+   */
+  autoComplete?: string;
+}
+
+/** Google checkboxes: multi-select, and each selection posts its own value. */
+export interface SignUpChoiceField extends SignUpFieldBase {
+  kind: "choice";
+  label: string;
+  options: SignUpOption[];
+}
+
+export interface SignUpOption {
+  /** Posted verbatim — it must match Google's option text exactly. */
+  value: string;
+  label: string;
+  order: number;
+}
+
+/**
+ * The RODO consent.
+ *
+ * Google models it as a radio group with a single option and the whole
+ * notice as its question title. Rendered here as a checkbox with the notice
+ * as its description, which is the same choice expressed in the control that
+ * actually means it — and posts the identical value, so a response reads the
+ * same whichever way it was filled in.
+ */
+export interface SignUpConsentField extends SignUpFieldBase {
+  kind: "consent";
+  /** The checkbox's own label, e.g. "Akceptuję". */
+  label: string;
+  /** The full notice, shown above the checkbox. */
+  description: string;
+  /** Posted when checked. Google's option text. */
+  value: string;
+}
+
+/** Labels, validation messages and the three post-submit states. */
+export interface SignUpCopy {
+  locationToggleAriaLabel: string;
+  audienceToggleAriaLabel: string;
+  formAriaLabel: string;
+  /**
+   * Shown when the two toggles land on a pair with no form. All four
+   * pairs are currently filled in, so this is what a third location — or
+   * a season with only the adult groups open — degrades to.
+   */
+  unavailable: string;
+  /** Explains the asterisk, once, above the fields. */
+  requiredNote: string;
+  /** Printed next to the one field that is optional. */
+  optionalNote: string;
+  submitLabel: string;
+  submittingLabel: string;
+  /** Heading of the error summary that focus moves to on a failed submit. */
+  errorSummaryTitle: string;
+  success: SignUpOutcomeCopy & { againLabel: string };
+  failure: SignUpOutcomeCopy & { retryLabel: string };
+  errors: SignUpErrorCopy;
+}
+
+interface SignUpOutcomeCopy {
+  title: string;
+  body: string;
+}
+
+/**
+ * Per-rule validation messages, keyed by the rule rather than by the field,
+ * so adding a field to a form stays a content edit.
+ */
+export interface SignUpErrorCopy {
+  required: string;
+  email: string;
+  phone: string;
+  choice: string;
+  consent: string;
+}
+
+/* ========================================================================
    Instructors (#about-us)
    ======================================================================== */
 
@@ -395,7 +543,8 @@ export type SectionId =
   | "pricelist"
   | "about-us"
   | "faq"
-  | "contact";
+  | "contact"
+  | "signup";
 
 /** The numbered heading block that opens each section. */
 export interface SectionIntro {

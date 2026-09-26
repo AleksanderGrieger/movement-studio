@@ -45,8 +45,8 @@
     "logoAriaLabel": "Movement Studio - strona główna",
     "navAriaLabel": "Nawigacja główna",
     "cta": {
-      "label": "Zadzwoń 577 437 237",
-      "href": "tel:+48577437237"
+      "label": "Zapisz się",
+      "href": "/#signup"
     },
     "menuButton": {
       "label": "Menu",
@@ -90,6 +90,10 @@
     ],
     "lead": "Studio tańca prowadzone przez zawodowe tancerki i trenerki. Zajęcia dla dorosłych, par oraz dzieci - od pierwszych kroków po grupy turniejowe.",
     "actions": [
+      {
+        "label": "Zapisz się",
+        "href": "#signup"
+      },
       {
         "label": "Sprawdź grafik",
         "href": "#schedule"
@@ -187,6 +191,13 @@
       "number": "06",
       "eyebrow": "Kontakt",
       "title": "Zapraszamy"
+    },
+    {
+      "id": "signup",
+      "number": "07",
+      "eyebrow": "Zapisy",
+      "title": "Zapisz się na zajęcia",
+      "intro": "Wybierz lokalizację i grupę, a potem wypełnij formularz. Zgłoszenie nie jest jeszcze zapisem - oddzwonimy, żeby potwierdzić grupę i termin pierwszych zajęć."
     }
   ],
   "ui": {

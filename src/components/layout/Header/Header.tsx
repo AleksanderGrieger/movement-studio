@@ -51,7 +51,11 @@ export async function Header() {
           >
             {copy.cta.label}
           </a>
-          <MobileNav items={navigation} copy={copy.menuButton} />
+          <MobileNav
+            items={navigation}
+            cta={copy.cta}
+            copy={copy.menuButton}
+          />
         </div>
       </div>
     </StickyHeader>

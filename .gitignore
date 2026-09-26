@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large source media — kept out of git; see assets-source/README.md
+assets-source/video/
+
+# verification artefacts
+.shots/
+
+# macOS
+.DS_Store

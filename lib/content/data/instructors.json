@@ -1,0 +1,73 @@
+{
+  "founders": {
+    "statement": "Hania i Karolina - założycielki Movement Studio. Z miłości do tańca stworzyły przestrzeń dla dzieci, młodzieży i dorosłych.",
+    "body": "Chcą przekazywać swoją wiedzę i umiejętności, zarażać entuzjazmem i rozbudzać miłość do tańca wśród mieszkańców Białogardu i Kołobrzegu. Kadrę tworzą tancerki z wieloletnim stażem zawodowym, medalistki mistrzostw Polski i trenerki, które wychowały kolejne pokolenia tancerzy."
+  },
+  "instructors": [
+    {
+      "slug": "karolina-bobryk-kopcinska",
+      "name": "Karolina Bobryk-Kopcińska",
+      "role": "Tańce latynoamerykańskie · klasa „S”",
+      "bio": "Mistrzyni Polski w formacji tanecznej, półfinalistka mistrzostw świata, wielokrotna mistrzyni Pomorza. Wytrenowała mistrzynie Polski, Europy i świata federacji WADF. Magister fizjoterapii.",
+      "photo": {
+        "src": "/assets/images/karolina.png",
+        "width": 1080,
+        "height": 1080,
+        "alt": "Karolina Bobryk-Kopcińska, instruktorka Movement Studio, na zdjęciu w kadrze w kształcie logo studia"
+      },
+      "order": 1
+    },
+    {
+      "slug": "hanna-maciejewska",
+      "name": "Hanna Maciejewska",
+      "role": "Tańce standardowe i latynoamerykańskie · klasa „S”",
+      "bio": "Mistrzyni Polski w tańcach standardowych, II wicemistrzyni Polski w 10 tańcach, półfinalistka Pucharu Europy. Instruktorka sportu tanecznego i trenerka personalna.",
+      "photo": {
+        "src": "/assets/images/hania.png",
+        "width": 1080,
+        "height": 1080,
+        "alt": "Hanna Maciejewska, instruktorka Movement Studio, na zdjęciu w kadrze w kształcie logo studia"
+      },
+      "order": 2
+    },
+    {
+      "slug": "magdalena-lopucka",
+      "name": "Magdalena Łopucka",
+      "role": "Taniec współczesny · Power Dance",
+      "bio": "25 lat stażu, choreografka i nauczycielka. Wyszkoliła kilka pokoleń polskich tancerzy. Autorka programu Power Dance - połączenia tańca z treningiem fitness.",
+      "photo": {
+        "src": "/assets/images/magda.png",
+        "width": 1080,
+        "height": 1080,
+        "alt": "Magdalena Łopucka, instruktorka Movement Studio, na zdjęciu w kadrze w kształcie logo studia"
+      },
+      "order": 3
+    },
+    {
+      "slug": "maria-murek",
+      "name": "Maria Murek",
+      "role": "Modern i jazz · improwizacja",
+      "bio": "Tańczy od czwartego roku życia, wielokrotna zwyciężczyni turniejów ogólnopolskich i międzynarodowych. Czterokrotna laureatka stypendium artystycznego Prezydenta Miasta Kołobrzeg.",
+      "photo": {
+        "src": "/assets/images/maria.png",
+        "width": 480,
+        "height": 480,
+        "alt": "Maria Murek, instruktorka Movement Studio, na zdjęciu w kadrze w kształcie logo studia"
+      },
+      "order": 4
+    },
+    {
+      "slug": "weronika-wajda",
+      "name": "Weronika Wajda",
+      "role": "Taniec współczesny · improwizacja",
+      "bio": "Tańczy od piątego roku życia, nagradzana w turniejach ogólnopolskich i międzynarodowych. Doskonali warsztat u choreografów światowej klasy; laureatka stypendium artystycznego Prezydenta Miasta Kołobrzeg.",
+      "photo": {
+        "src": "/assets/images/weronika.png",
+        "width": 480,
+        "height": 480,
+        "alt": "Weronika Wajda, instruktorka Movement Studio, na zdjęciu w kadrze w kształcie logo studia"
+      },
+      "order": 5
+    }
+  ]
+}

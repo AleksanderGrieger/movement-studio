@@ -1,19 +1,10 @@
-import { OfferItem } from "@/src/components/contents/OfferItem/OfferItem";
-import { offers } from "@/lib/content/content-objects";
+import { LegacyRedirect, legacyMetadata } from "../legacy-redirect";
+import { getSectionIntro } from "@/lib/content/site";
 
-export default function Offer() {
-  return (
-    <>
-      {offers.map((offer, index) => (
-        <OfferItem
-          key={index}
-          image={offer.image}
-          imgOnLeft={offer.imgOnLeft}
-          title={offer.title}
-          description={offer.description}
-          list={offer.list}
-        />
-      ))}
-    </>
-  );
+export const metadata = legacyMetadata("offer");
+
+/** Retired route — now the #offer section of the home page. */
+export default async function Page() {
+  const section = await getSectionIntro("offer");
+  return <LegacyRedirect anchor="offer" label={section.eyebrow} />;
 }

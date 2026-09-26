@@ -1,17 +1,10 @@
-import Table from "@/src/components/contents/Table/Table";
-import { scheduleList } from "@/lib/content/content-objects";
+import { LegacyRedirect, legacyMetadata } from "../legacy-redirect";
+import { getSectionIntro } from "@/lib/content/site";
 
-export default function Schedule() {
-  return (
-    <>
-      {scheduleList.map((schedule, index) => (
-        <Table
-          key={index}
-          title={schedule.title}
-          rows={schedule.rows}
-          dividerOnLeft={true}
-        />
-      ))}
-    </>
-  );
+export const metadata = legacyMetadata("schedule");
+
+/** Retired route — now the #schedule section of the home page. */
+export default async function Page() {
+  const section = await getSectionIntro("schedule");
+  return <LegacyRedirect anchor="schedule" label={section.eyebrow} />;
 }

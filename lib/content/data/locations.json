@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "bialogard",
+    "name": "Białogard",
+    "address": ["ul. Kochanowskiego 30", "78-200 Białogard", "woj. zachodniopomorskie"],
+    "hours": [
+      { "term": "biuro, wt–śr", "value": "16:00 – 21:00" },
+      { "term": "biuro, pt", "value": "16:00 – 19:00" },
+      { "term": "zajęcia", "value": "pon – czw" }
+    ],
+    "map": {
+      "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2344.4418370314265!2d15.9879377!3d54.012682299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47004b091c81c699%3A0x45b614452e11519d!2sMovement%20Studio!5e0!3m2!1spl!2spl!4v1725317833784!5m2!1spl!2spl",
+      "title": "Mapa dojazdu do Movement Studio w Białogardzie, ul. Kochanowskiego 30"
+    },
+    "order": 1,
+    "isDefault": true
+  },
+  {
+    "slug": "kolobrzeg",
+    "name": "Kołobrzeg",
+    "address": ["ul. Mazowiecka 29, klatka B", "wejście od ul. Wielkopolskiej", "78-100 Kołobrzeg"],
+    "hours": [
+      { "term": "zajęcia", "value": "pon – czw" },
+      { "term": "godziny", "value": "9:00 – 21:30" }
+    ],
+    "map": {
+      "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2335.70967191149!2d15.558190876590368!3d54.16750641296671!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4700157426645019%3A0x40f936b462143053!2sMazowiecka%2029%2C%2078-100%20Ko%C5%82obrzeg!5e0!3m2!1spl!2spl!4v1790028504559!5m2!1spl!2spl",
+      "title": "Mapa dojazdu do Movement Studio w Kołobrzegu, ul. Mazowiecka 29"
+    },
+
+    "order": 2,
+    "isDefault": false
+  }
+]

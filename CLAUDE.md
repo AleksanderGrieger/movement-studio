@@ -1,0 +1,6 @@
+- Stack target: Next.js App Router + Tailwind v4 + Payload (in-app, /admin)
+- Design tokens live in @theme; names are fixed — see docs/design-decisions.md
+- No .json imported outside lib/content/
+- Server Components by default; justify every 'use client'
+- One logical change per commit
+- Polish content; no hardcoded strings in JSX

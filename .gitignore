@@ -41,5 +41,11 @@ assets-source/video/
 # verification artefacts
 .shots/
 
+# build-time content snapshot — fetched from the CMS by npm run content:fetch.
+# Not committed on purpose: a stale copy in git is a copy someone will ship
+# without noticing it no longer matches what editors have published.
+/lib/content/.snapshot/
+/public/assets/cms/
+
 # macOS
 .DS_Store

@@ -55,7 +55,7 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 | offer items | **20** | numbered 01–20 at render time, not stored |
 | schedule labels | **4** | dorosli, dzieci, nabor, sportowa |
 | weekdays | **7** | Monday = order 1; Fri/Sat/Sun currently carry no classes |
-| schedule entries | **25** | Białogard 13 (Pn 5, Wt 1, Śr 4, Cz 3), Kołobrzeg 12 (Wt 4, Śr 4, Cz 4) |
+| schedule entries | **30** | Białogard 11 (Pn 4, Wt 2, Śr 4, Cz 1), Kołobrzeg 19 (Pn 4, Wt 6, Śr 4, Cz 5) |
 | price blocks | **6** | 3 per location: Dorośli, Dzieci, Inne |
 | price rows | **24** | BG 3+7+3, KG 3+5+3 |
 | instructors | **5** | |
@@ -64,11 +64,21 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 | program session rows | **10** | 3+3, 2+2 |
 | teaser posters | **3** | |
 | nav items | **7** | 6 anchors + /programs |
-| section intros | **6** | offer, schedule, pricelist, about-us, faq, contact |
+| section intros | **7** | offer, schedule, pricelist, about-us, faq, contact, signup |
 | faq items | **6** | partner, wiek-dzieci, bez-doswiadczenia, koszt, zajecia-probne, stroj |
 | facts | **3** | |
 | marquee items | **10** | |
 | contact links | **4** | phone, email, Instagram, Facebook |
+| audiences | **2** | dorośli, dzieci |
+| sign-up forms | **4** | one per location per audience |
+| sign-up fields | **20** | 5 per form |
+
+The schedule row was **25** until the 2026-season grid landed in `6e389ce`,
+which rewrote every entry and added end times and cadence notes without
+updating this table or `check:content`. The gate was red for five checks from
+that commit until Phase 2.2 corrected the expectations to the shipped data.
+The lesson is in the counts themselves: a record-count baseline is only a gate
+while someone moves it with the content.
 
 ---
 
@@ -125,6 +135,20 @@ getPrograms(): Promise<Program[]>
 getProgramsTeaser(): Promise<ProgramsTeaser>
 getProgramsPageCopy(): Promise<ProgramsPageCopy>
 ```
+
+### `lib/content/forms.ts` — backed by `data/forms.json`
+
+```ts
+getAudiences(): Promise<Audience[]>          // sorted by order
+getSignUpForms(): Promise<SignUpForm[]>      // forms and fields both sorted
+getSignUpCopy(): Promise<SignUpCopy>
+```
+
+The four forms are stored separately rather than folded into one definition
+with a varying class list — they are four documents the studio owns, and an
+editor changing Kołobrzeg's list must not touch Białogard's. `entryId` is
+Google's wire name for a question and is the one value here that is neither
+copy nor structure; `check:forms` is what keeps it honest.
 
 ### `lib/content/faq.ts` — backed by `data/faq.json`
 

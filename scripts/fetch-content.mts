@@ -1004,6 +1004,8 @@ function canonical(value: unknown): unknown {
 function compareWithLegacy(snapshot: Json): void {
   if (!fs.existsSync(LEGACY_DIR)) return;
 
+  console.log("\nComparing against lib/content/data/");
+
   const legacy = (name: string) =>
     JSON.parse(fs.readFileSync(path.join(LEGACY_DIR, `${name}.json`), "utf8"));
 
@@ -1067,8 +1069,6 @@ console.log(`Fetching content from ${BASE}`);
 
 const snapshot = await build();
 validate(snapshot);
-
-console.log("\nComparing against lib/content/data/");
 compareWithLegacy(snapshot);
 
 fs.mkdirSync(SNAPSHOT_DIR, { recursive: true });

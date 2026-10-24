@@ -1593,7 +1593,7 @@ export interface ProgramsTeaser {
   posters: {
     image: number | Media;
     /**
-     * Zostaw puste, żeby użyć opisu zapisanego przy pliku. Wypełnij, gdy to miejsce wymaga więcej kontekstu niż strona projektu — tutaj nad plakatem nie ma nagłówka z nazwą programu, więc opis musi ją zawierać sam.
+     * Zostaw puste, żeby użyć opisu zapisanego przy pliku. Wypełnij, gdy w tym miejscu pełny opis byłby powtórzeniem: tutaj plakat jest linkiem, który sam ogłasza nazwę programu, więc opis obrazka nie musi jej powtarzać.
      */
     alt?: string | null;
     /**

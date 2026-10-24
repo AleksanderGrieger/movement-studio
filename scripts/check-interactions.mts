@@ -61,7 +61,7 @@ await page.goto(url, { waitUntil: "networkidle" });
 
 /* ---------- schedule filter ---------- */
 const initial = await rows(page);
-check("schedule: Białogard rows shown by default", initial?.total, 13);
+check("schedule: Białogard rows shown by default", initial?.total, 11);
 check("schedule: nothing dimmed initially", initial?.dim, 0);
 check(
   "schedule: 'Wszystkie' checked when no filter",
@@ -71,7 +71,7 @@ check(
 
 await page.getByRole("radio", { name: "Dorośli" }).click();
 const adults = await rows(page);
-check("filter dorośli: rows still in the DOM", adults?.total, 13);
+check("filter dorośli: rows still in the DOM", adults?.total, 11);
 check("filter dorośli: non-matches dimmed", adults?.dim, 10);
 check("filter dorośli: grid marked filtering", adults?.filtering, true);
 /* Was an exact-match on the class attribute, which only held while the chip
@@ -83,14 +83,19 @@ check(
   1,
 );
 
-// Białogard has one adults class on Thursday-less days; Czwartek is all-kids,
-// so it should read as empty rather than unfiltered.
-check("filter dorośli: fully-dimmed day marked empty", adults?.emptyDays, 1);
+/* Białogard runs a single adults class across its four days, so filtering to
+   dorośli empties the other three. They must read as empty rather than as
+   unfiltered — and as data-empty rather than a class, because the day <li> is
+   also a reveal target and React rewriting its className would drop is-in. */
+check("filter dorośli: fully-dimmed day marked empty", adults?.emptyDays, 3);
 
 /* ---------- single-select ---------- */
 await page.getByRole("radio", { name: "Dzieci" }).click();
 const kids = await rows(page);
-check("filter dzieci replaces dorośli (single-select)", kids?.dim, 3);
+/* Ten of Białogard's eleven classes are for children, so switching the
+   filter leaves exactly one row dimmed — a different count from dorośli,
+   which is what proves the chips replace rather than accumulate. */
+check("filter dzieci replaces dorośli (single-select)", kids?.dim, 1);
 check(
   "only one chip checked",
   await page.locator('[role="radio"][aria-checked="true"]').count(),
@@ -120,7 +125,7 @@ check("Home clears the filter", (await rows(page))?.dim, 0);
 
 /* ---------- location: one state, four sections ---------- */
 await page.getByRole("button", { name: "Kołobrzeg" }).first().click();
-check("location: Kołobrzeg schedule rows", (await rows(page))?.total, 12);
+check("location: Kołobrzeg schedule rows", (await rows(page))?.total, 19);
 /* Scoped to .toggle-location. #signup's audience switch is the same control
    with the same pressed state, and an unscoped selector would report it here
    as a location toggle that failed to follow. */
@@ -152,7 +157,7 @@ const kgAdults = await rows(page);
 await page.getByRole("button", { name: "Białogard" }).first().click();
 const bgAdults = await rows(page);
 check("filter persists across location switch", bgAdults?.dim, 10);
-check("Kołobrzeg dimmed count differs from Białogard", kgAdults?.dim, 9);
+check("Kołobrzeg dimmed count differs from Białogard", kgAdults?.dim, 14);
 
 /* ---------- offer deep link ---------- */
 await page.getByRole("radio", { name: "Wszystkie" }).click();
@@ -295,7 +300,7 @@ await reduced.waitForTimeout(250);
 check(
   "reduced motion: filter still works",
   // Scoped to the visible panel: the hidden Kołobrzeg grid is filtered too,
-  // which is correct, but counting both would assert 19 rather than 13-3.
+  // which is correct, but counting both would assert 30 rather than 11-10.
   await reduced.evaluate(`(function(){
     var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
     for (var i = 0; i < panels.length; i++) {

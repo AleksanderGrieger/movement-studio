@@ -1,0 +1,26 @@
+# Postgres for local CMS work. Nothing else runs in Docker: `npm run dev`
+# starts Payload on the host so the admin reloads like any other Next app.
+#
+#   npm run db:up     # start it
+#   npm run db:down   # stop it, keeping the volume
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: movement
+      POSTGRES_PASSWORD: movement
+      POSTGRES_DB: movement_studio
+    ports:
+      # 5433 on the host, so a Postgres already running on 5432 is left alone.
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U movement -d movement_studio']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

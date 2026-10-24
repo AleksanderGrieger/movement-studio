@@ -20,9 +20,11 @@ runtime and no `redirects()` support — see `src/app/legacy-redirect.tsx`.
 ## Layout
 
 ```
-lib/content/          the content layer — the only place .json is read
+lib/content/          the content layer — the only place content is read
   types.ts            the contract; see docs/content-layer.md
-  data/*.json         content
+  snapshot.ts         reads the build-time snapshot of the CMS
+  .snapshot/          generated, gitignored — npm run content:fetch
+cms/                  Payload, out of process; own deps — see docs/cms.md
 src/app/              routes, and globals.css with the whole token system
 src/components/
   sections/           home-page sections, Server Components
@@ -32,10 +34,17 @@ src/components/
 src/fonts/            subsetted woff2 the site ships
 assets-source/        originals that are NOT served (see its README)
 scripts/              the verification gates
-docs/                 design-decisions.md (authoritative) + content-layer.md
+docs/                 design-decisions.md (authoritative), content-layer.md,
+                      cms.md
 ```
 
 ## Checks
+
+Content comes from the CMS, so every check needs a snapshot first:
+
+```bash
+npm run content:fetch   # pulls from PAYLOAD_URL (default http://localhost:3100)
+```
 
 ```bash
 npm run check:content   # record counts and referential integrity
@@ -59,7 +68,8 @@ Override with `CHROME_PATH`.
 
 See `CLAUDE.md`. The ones that bite if ignored:
 
-- **Nothing outside `lib/content/` imports a `.json` file.**
+- **Nothing outside `lib/content/` imports a `.json` file.** Content lives
+  in the CMS; `lib/content/` reads one generated snapshot of it.
 - **Design token names are fixed** by `docs/design-decisions.md`.
 - Server Components by default; every `'use client'` is justified in its file
   header and listed in `docs/content-layer.md`.

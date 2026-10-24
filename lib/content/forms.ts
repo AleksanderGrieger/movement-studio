@@ -1,5 +1,5 @@
 import type { Audience, SignUpCopy, SignUpForm } from "./types";
-import data from "./data/forms.json";
+import { snapshot } from "./snapshot";
 
 /**
  * The four sign-up forms (#signup).
@@ -17,15 +17,15 @@ import data from "./data/forms.json";
 
 /** Both audiences, in toggle order. */
 export async function getAudiences(): Promise<Audience[]> {
-  return (data.audiences as Audience[])
-    .slice()
+  return snapshot()
+    .forms.audiences.slice()
     .sort((a, b) => a.order - b.order);
 }
 
 /** Every form, in presentation order, each with its fields ordered. */
 export async function getSignUpForms(): Promise<SignUpForm[]> {
-  return (data.forms as SignUpForm[])
-    .slice()
+  return snapshot()
+    .forms.forms.slice()
     .sort((a, b) => a.order - b.order)
     .map((form) => ({
       ...form,
@@ -35,5 +35,5 @@ export async function getSignUpForms(): Promise<SignUpForm[]> {
 
 /** Labels, validation messages and the post-submit states. */
 export async function getSignUpCopy(): Promise<SignUpCopy> {
-  return data.ui as SignUpCopy;
+  return snapshot().forms.ui;
 }

@@ -1,5 +1,5 @@
 import type { FoundersIntro, Instructor } from "./types";
-import data from "./data/instructors.json";
+import { snapshot } from "./snapshot";
 
 /**
  * The crew, in presentation order.
@@ -9,12 +9,12 @@ import data from "./data/instructors.json";
  * without a layout change.
  */
 export async function getInstructors(): Promise<Instructor[]> {
-  return (data.instructors as Instructor[])
-    .slice()
+  return snapshot()
+    .instructors.instructors.slice()
     .sort((a, b) => a.order - b.order);
 }
 
 /** The founders' statement that opens #about-us. */
 export async function getFoundersIntro(): Promise<FoundersIntro> {
-  return data.founders as FoundersIntro;
+  return snapshot().instructors.founders;
 }

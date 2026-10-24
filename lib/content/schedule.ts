@@ -6,7 +6,7 @@ import type {
   Weekday,
 } from "./types";
 import { getLocations } from "./locations";
-import data from "./data/schedule.json";
+import { snapshot } from "./snapshot";
 
 /**
  * The filter chips, in order.
@@ -16,14 +16,12 @@ import data from "./data/schedule.json";
  * unconfirmed with the client.
  */
 export async function getScheduleLabels(): Promise<ScheduleLabel[]> {
-  return (data.labels as ScheduleLabel[])
-    .slice()
-    .sort((a, b) => a.order - b.order);
+  return snapshot().schedule.labels.slice().sort((a, b) => a.order - b.order);
 }
 
 /** All seven weekdays, Monday first. Days with no classes are still returned. */
 export async function getWeekdays(): Promise<Weekday[]> {
-  return (data.weekdays as Weekday[]).slice().sort((a, b) => a.order - b.order);
+  return snapshot().schedule.weekdays.slice().sort((a, b) => a.order - b.order);
 }
 
 /**
@@ -33,8 +31,8 @@ export async function getWeekdays(): Promise<Weekday[]> {
  * Sorted by start time so any grouping built on top inherits the order.
  */
 export async function getScheduleEntries(): Promise<ScheduleEntry[]> {
-  return (data.entries as ScheduleEntry[])
-    .slice()
+  return snapshot()
+    .schedule.entries.slice()
     .sort((a, b) => a.start.localeCompare(b.start));
 }
 

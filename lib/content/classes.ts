@@ -1,5 +1,5 @@
 import type { OfferGroup } from "./types";
-import data from "./data/offer.json";
+import { snapshot } from "./snapshot";
 
 /**
  * Offer groups, in presentation order, each with its items ordered.
@@ -14,8 +14,8 @@ import data from "./data/offer.json";
  * reordering stays a content edit.
  */
 export async function getOfferGroups(): Promise<OfferGroup[]> {
-  return (data as OfferGroup[])
-    .slice()
+  return snapshot()
+    .offer.slice()
     .sort((a, b) => a.order - b.order)
     .map((group) => ({
       ...group,

@@ -1,9 +1,9 @@
 import type { PriceBlock } from "./types";
-import data from "./data/pricing.json";
+import { snapshot } from "./snapshot";
 
 /** Every price block, ordered by location then block order. */
 export async function getPriceBlocks(): Promise<PriceBlock[]> {
-  return (data as PriceBlock[]).slice().sort((a, b) => a.order - b.order);
+  return snapshot().pricing.slice().sort((a, b) => a.order - b.order);
 }
 
 /**

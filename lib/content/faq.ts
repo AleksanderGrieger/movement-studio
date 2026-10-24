@@ -1,5 +1,5 @@
 import type { FaqItem } from "./types";
-import data from "./data/faq.json";
+import { snapshot } from "./snapshot";
 
 /**
  * The questions in #faq, in presentation order.
@@ -13,5 +13,5 @@ import data from "./data/faq.json";
  * to, and the section renders however many come back.
  */
 export async function getFaqItems(): Promise<FaqItem[]> {
-  return (data as FaqItem[]).slice().sort((a, b) => a.order - b.order);
+  return snapshot().faq.slice().sort((a, b) => a.order - b.order);
 }

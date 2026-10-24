@@ -11,7 +11,7 @@ import type {
   SiteMeta,
   UiCopy,
 } from "./types";
-import data from "./data/site.json";
+import { snapshot } from "./snapshot";
 
 /**
  * Page copy.
@@ -23,29 +23,29 @@ import data from "./data/site.json";
 
 /** Document title and meta description. */
 export async function getSiteMeta(): Promise<SiteMeta> {
-  return data.meta as SiteMeta;
+  return snapshot().site.meta;
 }
 
 /** Main navigation. Anchors take part in scroll-spy; /programs does not (§2). */
 export async function getNavigation(): Promise<NavItem[]> {
-  return data.navigation as NavItem[];
+  return snapshot().site.navigation;
 }
 
 export async function getHeaderCopy(): Promise<HeaderCopy> {
-  return data.header as HeaderCopy;
+  return snapshot().site.header;
 }
 
 export async function getFooterCopy(): Promise<FooterCopy> {
-  return data.footer as FooterCopy;
+  return snapshot().site.footer;
 }
 
 export async function getHeroCopy(): Promise<HeroCopy> {
-  return data.hero as HeroCopy;
+  return snapshot().site.hero;
 }
 
 /** The numbered heading blocks, in IA order. */
 export async function getSectionIntros(): Promise<SectionIntro[]> {
-  return data.sections as SectionIntro[];
+  return snapshot().site.sections;
 }
 
 /**
@@ -59,25 +59,28 @@ export async function getSectionIntro(id: SectionId): Promise<SectionIntro> {
   const sections = await getSectionIntros();
   const section = sections.find((candidate) => candidate.id === id);
   if (!section) {
-    throw new Error(`Missing section copy for "${id}" in data/site.json`);
+    throw new Error(
+      `Missing section copy for "${id}" in the content snapshot. ` +
+        `Add a Nagłówki sekcji entry for it in the CMS and refetch.`,
+    );
   }
   return section;
 }
 
 export async function getFacts(): Promise<Fact[]> {
-  return (data.facts as Fact[]).slice().sort((a, b) => a.order - b.order);
+  return snapshot().site.facts.slice().sort((a, b) => a.order - b.order);
 }
 
 /** Decorative style-name ticker. Rendered aria-hidden (§10). */
 export async function getMarqueeItems(): Promise<MarqueeItems> {
-  return data.marquee as MarqueeItems;
+  return snapshot().site.marquee;
 }
 
 /** Labels for the interactive controls: location toggles, filter, footnote. */
 export async function getUiCopy(): Promise<UiCopy> {
-  return data.ui as UiCopy;
+  return snapshot().site.ui;
 }
 
 export async function getContactCopy(): Promise<ContactCopy> {
-  return data.contact as ContactCopy;
+  return snapshot().site.contact;
 }

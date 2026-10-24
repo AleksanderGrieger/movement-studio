@@ -28,6 +28,15 @@ export const ProgramsTeaser: GlobalConfig = {
       },
       fields: [
         { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Obrazek' },
+        {
+          name: 'alt',
+          type: 'text',
+          label: 'Opis obrazka w tym miejscu',
+          admin: {
+            description:
+              'Zostaw puste, żeby użyć opisu zapisanego przy pliku. Wypełnij, gdy w tym miejscu pełny opis byłby powtórzeniem: tutaj plakat jest linkiem, który sam ogłasza nazwę programu, więc opis obrazka nie musi jej powtarzać.',
+          },
+        },
         { name: 'href', type: 'text', required: true, label: 'Adres', admin: { description: 'Zwykle /programs/.' } },
         { name: 'ariaLabel', type: 'text', required: true, label: 'Opis linku dla czytników ekranu' },
       ],

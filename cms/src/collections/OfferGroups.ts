@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { editorsOnly, publicRead } from '../fields/access'
-import { orderField, slugField } from '../fields/common'
+import { nestedSlugField, orderField, slugField } from '../fields/common'
 
 /**
  * The offer, grouped by audience.
@@ -37,7 +37,7 @@ export const OfferGroups: CollectionConfig = {
       labels: { singular: 'Pozycja', plural: 'Pozycje' },
       admin: { description: 'Kolejność na liście = kolejność na stronie. Przeciągnij, żeby zmienić.' },
       fields: [
-        slugField('Unikalny w obrębie grupy.'),
+        nestedSlugField('Unikalny w obrębie grupy.'),
         { name: 'title', type: 'text', required: true, label: 'Nazwa', admin: { description: 'Np. „Latino Solo”.' } },
         { name: 'body', type: 'textarea', required: true, label: 'Opis' },
       ],

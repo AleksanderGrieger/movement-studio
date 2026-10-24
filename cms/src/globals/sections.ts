@@ -29,7 +29,9 @@ export const SectionIntros: GlobalConfig = {
       labels: { singular: 'Sekcja', plural: 'Sekcje' },
       fields: [
         {
-          name: 'id',
+          /* Not `id`: an array row already has one, and Payload stores it as
+             an integer. The site's SectionIntro.id is rebuilt from this. */
+          name: 'sectionId',
           type: 'select',
           required: true,
           label: 'Sekcja',

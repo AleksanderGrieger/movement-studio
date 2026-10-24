@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { editorsOnly, publicRead } from '../fields/access'
-import { orderField, paragraphsField, slugField, timeField } from '../fields/common'
+import { nestedSlugField, orderField, paragraphsField, slugField, timeField } from '../fields/common'
 
 /** Grant-funded programmes. Backs the /programs route. */
 export const Programs: CollectionConfig = {
@@ -41,7 +41,7 @@ export const Programs: CollectionConfig = {
       label: 'Terminy',
       labels: { singular: 'Termin', plural: 'Terminy' },
       fields: [
-        slugField('Unikalny w obrębie projektu.'),
+        nestedSlugField('Unikalny w obrębie projektu.'),
         {
           name: 'dates',
           type: 'text',

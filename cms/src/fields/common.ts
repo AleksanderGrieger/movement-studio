@@ -23,6 +23,24 @@ export const slugField = (description: string): TextField => ({
   },
 })
 
+/**
+ * A slug on a nested row.
+ *
+ * Same idea as slugField, without the unique index: uniqueness here is
+ * within the parent document, not across the table. The four sign-up forms
+ * ask the same five questions and their fields carry the same slugs by
+ * design — they are four separate documents, not one shared definition.
+ */
+export const nestedSlugField = (description: string): TextField => ({
+  name: 'slug',
+  type: 'text',
+  required: true,
+  label: 'Identyfikator (slug)',
+  admin: {
+    description: `${description} Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.`,
+  },
+})
+
 /** Presentation order. Lower numbers come first. */
 export const orderField = (description = 'Kolejność wyświetlania.'): NumberField => ({
   name: 'order',

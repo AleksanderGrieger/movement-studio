@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { editorsOnly, publicRead } from '../fields/access'
-import { orderField, slugField } from '../fields/common'
+import { nestedSlugField, orderField, slugField } from '../fields/common'
 
 /**
  * The pricelist, three blocks per location.
@@ -34,7 +34,7 @@ export const PriceBlocks: CollectionConfig = {
       labels: { singular: 'Pozycja', plural: 'Pozycje' },
       admin: { description: 'Kolejność na liście = kolejność w cenniku.' },
       fields: [
-        slugField('Unikalny w obrębie bloku.'),
+        nestedSlugField('Unikalny w obrębie bloku.'),
         {
           name: 'name',
           type: 'text',

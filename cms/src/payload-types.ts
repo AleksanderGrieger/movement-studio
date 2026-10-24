@@ -245,7 +245,7 @@ export interface OfferGroup {
    */
   items: {
     /**
-     * Unikalny w obrębie grupy. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+     * Unikalny w obrębie grupy. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
      */
     slug: string;
     /**
@@ -383,7 +383,7 @@ export interface PriceBlock {
    */
   rows: {
     /**
-     * Unikalny w obrębie bloku. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+     * Unikalny w obrębie bloku. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
      */
     slug: string;
     /**
@@ -492,7 +492,7 @@ export interface Program {
   posters: (number | Media)[];
   sessions: {
     /**
-     * Unikalny w obrębie projektu. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+     * Unikalny w obrębie projektu. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
      */
     slug: string;
     /**
@@ -623,7 +623,7 @@ export interface Form {
   fields: (
     | {
         /**
-         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
          */
         slug: string;
         /**
@@ -649,7 +649,7 @@ export interface Form {
       }
     | {
         /**
-         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
          */
         slug: string;
         /**
@@ -678,7 +678,7 @@ export interface Form {
       }
     | {
         /**
-         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji — inne rekordy i linki opierają się na nim. Małe litery, bez polskich znaków, myślniki zamiast spacji.
+         * Unikalny w obrębie formularza. Nie zmieniaj go po publikacji. Małe litery, bez polskich znaków, myślniki zamiast spacji.
          */
         slug: string;
         /**
@@ -1414,7 +1414,7 @@ export interface SectionIntro {
     /**
      * Lista jest zamknięta — to struktura strony, nie treść.
      */
-    id: 'offer' | 'schedule' | 'pricelist' | 'about-us' | 'faq' | 'contact' | 'signup';
+    sectionId: 'offer' | 'schedule' | 'pricelist' | 'about-us' | 'faq' | 'contact' | 'signup';
     /**
      * „01”, „02”… Wpisywany, a nie liczony, żeby zmiana kolejności była edycją treści.
      */
@@ -1428,6 +1428,7 @@ export interface SectionIntro {
      * Opcjonalne.
      */
     intro?: string | null;
+    id?: string | null;
   }[];
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1591,6 +1592,10 @@ export interface ProgramsTeaser {
    */
   posters: {
     image: number | Media;
+    /**
+     * Zostaw puste, żeby użyć opisu zapisanego przy pliku. Wypełnij, gdy to miejsce wymaga więcej kontekstu niż strona projektu — tutaj nad plakatem nie ma nagłówka z nazwą programu, więc opis musi ją zawierać sam.
+     */
+    alt?: string | null;
     /**
      * Zwykle /programs/.
      */
@@ -1845,11 +1850,12 @@ export interface SectionIntrosSelect<T extends boolean = true> {
   sections?:
     | T
     | {
-        id?: T;
+        sectionId?: T;
         number?: T;
         eyebrow?: T;
         title?: T;
         intro?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1966,6 +1972,7 @@ export interface ProgramsTeaserSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        alt?: T;
         href?: T;
         ariaLabel?: T;
         id?: T;

@@ -1,6 +1,6 @@
 import type { Block, CollectionConfig, Field } from 'payload'
 import { editorsOnly, publicRead } from '../fields/access'
-import { orderField, slugField } from '../fields/common'
+import { nestedSlugField, orderField, slugField } from '../fields/common'
 
 /**
  * The sign-up forms.
@@ -48,7 +48,7 @@ const textField: Block = {
   slug: 'textField',
   labels: { singular: 'Pole tekstowe', plural: 'Pola tekstowe' },
   fields: [
-    slugField('Unikalny w obrębie formularza.'),
+    nestedSlugField('Unikalny w obrębie formularza.'),
     entryIdField,
     {
       name: 'kind',
@@ -81,7 +81,7 @@ const choiceField: Block = {
   slug: 'choiceField',
   labels: { singular: 'Pole wyboru', plural: 'Pola wyboru' },
   fields: [
-    slugField('Unikalny w obrębie formularza.'),
+    nestedSlugField('Unikalny w obrębie formularza.'),
     entryIdField,
     { name: 'label', type: 'text', required: true, label: 'Etykieta' },
     {
@@ -114,7 +114,7 @@ const consentField: Block = {
   slug: 'consentField',
   labels: { singular: 'Zgoda (RODO)', plural: 'Zgody (RODO)' },
   fields: [
-    slugField('Unikalny w obrębie formularza.'),
+    nestedSlugField('Unikalny w obrębie formularza.'),
     entryIdField,
     {
       name: 'label',

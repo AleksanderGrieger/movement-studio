@@ -1,6 +1,11 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
+# Build and deploy movement-studio to GitHub Pages.
 #
-# To get started with Next.js see: https://nextjs.org/docs/getting-started
+# Content does not live in this repository. It lives in Payload (see cms/ and
+# docs/cms.md) and is pulled into a snapshot by the "Fetch content" step below,
+# just before the build. Two secrets drive that:
+#
+#   PAYLOAD_URL      where the CMS is reachable — required
+#   PAYLOAD_API_KEY  optional; only needed if the CMS read API is not public
 #
 name: Deploy Next.js site to Pages
 
@@ -11,6 +16,13 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # Content published in the CMS. Payload POSTs this when an editor saves,
+  # debounced, so a run of edits is one deploy. Re-running the workflow by
+  # hand publishes whatever is in the CMS right now — there is nothing to
+  # commit, because the content is not in this repository.
+  repository_dispatch:
+    types: [content-publish]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -73,6 +85,22 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      # The site is a static export: it has no runtime to query the CMS from,
+      # so the whole content layer is fetched here, once, into a snapshot the
+      # build reads. A failure stops the run — shipping a half-empty site is
+      # worse than not shipping.
+      - name: Fetch content from the CMS
+        env:
+          PAYLOAD_URL: ${{ secrets.PAYLOAD_URL }}
+          PAYLOAD_API_KEY: ${{ secrets.PAYLOAD_API_KEY }}
+        run: |
+          if [ -z "$PAYLOAD_URL" ]; then
+            echo "::error::PAYLOAD_URL is not set. Add it as a repository secret —" \
+                 "it is where the Payload instance lives, e.g. https://cms.movement-studio.pl."
+            exit 1
+          fi
+          npm run content:fetch
+
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact

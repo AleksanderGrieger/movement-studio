@@ -1,5 +1,5 @@
 import type { Location } from "./types";
-import data from "./data/locations.json";
+import { snapshot } from "./snapshot";
 
 /**
  * Locations, in presentation order.
@@ -9,7 +9,7 @@ import data from "./data/locations.json";
  * list.
  */
 export async function getLocations(): Promise<Location[]> {
-  return (data as Location[]).slice().sort((a, b) => a.order - b.order);
+  return snapshot().locations.slice().sort((a, b) => a.order - b.order);
 }
 
 /**

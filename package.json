@@ -13,7 +13,8 @@
     "shoot": "tsx scripts/shoot.mts",
     "check:ui": "tsx scripts/check-interactions.mts",
     "check:a11y": "tsx scripts/check-a11y.mts",
-    "check:lh": "tsx scripts/check-lighthouse.mts"
+    "check:lh": "tsx scripts/check-lighthouse.mts",
+    "content:fetch": "tsx scripts/fetch-content.mts"
   },
   "dependencies": {
     "next": "^15.5.25",

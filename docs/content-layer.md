@@ -1,5 +1,11 @@
 # Content layer — handoff to Phase 2.2
 
+> **Phase 2.2 has landed.** The JSON files are gone; content lives in Payload,
+> in `cms/`, and the site builds from a snapshot of it. How to run the CMS,
+> publish a change and read a build failure is in [cms.md](cms.md). This
+> document stays as the contract and the reasoning behind it — §4, §5 and §6
+> describe decisions the schema still carries.
+
 Phase 2.2 replaces the JSON files under `lib/content/data/` with Payload CMS.
 This document is written for a session with no memory of the one that built
 this, and should be enough to swap the data source without reading any
@@ -55,7 +61,7 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 | offer items | **20** | numbered 01–20 at render time, not stored |
 | schedule labels | **4** | dorosli, dzieci, nabor, sportowa |
 | weekdays | **7** | Monday = order 1; Fri/Sat/Sun currently carry no classes |
-| schedule entries | **25** | Białogard 13 (Pn 5, Wt 1, Śr 4, Cz 3), Kołobrzeg 12 (Wt 4, Śr 4, Cz 4) |
+| schedule entries | **30** | Białogard 11 (Pn 4, Wt 2, Śr 4, Cz 1), Kołobrzeg 19 (Pn 4, Wt 6, Śr 4, Cz 5) |
 | price blocks | **6** | 3 per location: Dorośli, Dzieci, Inne |
 | price rows | **24** | BG 3+7+3, KG 3+5+3 |
 | instructors | **5** | |
@@ -64,11 +70,21 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 | program session rows | **10** | 3+3, 2+2 |
 | teaser posters | **3** | |
 | nav items | **7** | 6 anchors + /programs |
-| section intros | **6** | offer, schedule, pricelist, about-us, faq, contact |
+| section intros | **7** | offer, schedule, pricelist, about-us, faq, contact, signup |
 | faq items | **6** | partner, wiek-dzieci, bez-doswiadczenia, koszt, zajecia-probne, stroj |
 | facts | **3** | |
 | marquee items | **10** | |
 | contact links | **4** | phone, email, Instagram, Facebook |
+| audiences | **2** | dorośli, dzieci |
+| sign-up forms | **4** | one per location per audience |
+| sign-up fields | **20** | 5 per form |
+
+The schedule row was **25** until the 2026-season grid landed in `6e389ce`,
+which rewrote every entry and added end times and cadence notes without
+updating this table or `check:content`. The gate was red for five checks from
+that commit until Phase 2.2 corrected the expectations to the shipped data.
+The lesson is in the counts themselves: a record-count baseline is only a gate
+while someone moves it with the content.
 
 ---
 
@@ -77,20 +93,20 @@ mac12-arm64. `CHROME_PATH` overrides the binary.
 All are `async` even though the JSON reads are synchronous — the signatures
 were shaped for Payload from the start.
 
-### `lib/content/locations.ts` — backed by `data/locations.json`
+### `lib/content/locations.ts` — backed by the `locations` collection
 
 ```ts
 getLocations(): Promise<Location[]>          // sorted by order
 getDefaultLocation(): Promise<Location>      // isDefault, falling back to first
 ```
 
-### `lib/content/classes.ts` — backed by `data/offer.json`
+### `lib/content/classes.ts` — backed by the `offer-groups` collection
 
 ```ts
 getOfferGroups(): Promise<OfferGroup[]>      // groups and items both sorted
 ```
 
-### `lib/content/schedule.ts` — backed by `data/schedule.json`
+### `lib/content/schedule.ts` — backed by the `schedule-labels`, `weekdays` and `schedule-entries` collections
 
 ```ts
 getScheduleLabels(): Promise<ScheduleLabel[]>
@@ -104,21 +120,21 @@ no classes at that location**. An empty Friday column would read as a loading
 failure; the design's `.is-empty` state is for a day emptied by the *filter*,
 not one that never had classes.
 
-### `lib/content/pricing.ts` — backed by `data/pricing.json`
+### `lib/content/pricing.ts` — backed by the `price-blocks` collection
 
 ```ts
 getPriceBlocks(): Promise<PriceBlock[]>
 getPriceBlocksByLocation(location: string): Promise<PriceBlock[]>
 ```
 
-### `lib/content/instructors.ts` — backed by `data/instructors.json`
+### `lib/content/instructors.ts` — backed by the `instructors` collection and the Founders' statement global
 
 ```ts
 getInstructors(): Promise<Instructor[]>
 getFoundersIntro(): Promise<FoundersIntro>
 ```
 
-### `lib/content/programs.ts` — backed by `data/programs.json`
+### `lib/content/programs.ts` — backed by the `programs` collection and the two programme globals
 
 ```ts
 getPrograms(): Promise<Program[]>
@@ -126,7 +142,21 @@ getProgramsTeaser(): Promise<ProgramsTeaser>
 getProgramsPageCopy(): Promise<ProgramsPageCopy>
 ```
 
-### `lib/content/faq.ts` — backed by `data/faq.json`
+### `lib/content/forms.ts` — backed by the `forms` and `audiences` collections and the sign-up copy global
+
+```ts
+getAudiences(): Promise<Audience[]>          // sorted by order
+getSignUpForms(): Promise<SignUpForm[]>      // forms and fields both sorted
+getSignUpCopy(): Promise<SignUpCopy>
+```
+
+The four forms are stored separately rather than folded into one definition
+with a varying class list — they are four documents the studio owns, and an
+editor changing Kołobrzeg's list must not touch Białogard's. `entryId` is
+Google's wire name for a question and is the one value here that is neither
+copy nor structure; `check:forms` is what keeps it honest.
+
+### `lib/content/faq.ts` — backed by the `faq-items` collection
 
 ```ts
 getFaqItems(): Promise<FaqItem[]>            // sorted by order
@@ -137,7 +167,7 @@ section opens whichever item sorts first, so `order` decides what a visitor
 reads without clicking. The count is not fixed — the section renders however
 many come back.
 
-### `lib/content/site.ts` — backed by `data/site.json`
+### `lib/content/site.ts` — backed by the site globals
 
 ```ts
 getSiteMeta(): Promise<SiteMeta>
@@ -271,15 +301,22 @@ a real defect found and fixed during this phase.
 
 ## 7. Known gaps carried into Phase 2.2
 
-1. **The hero clip.** `HeroCopy.video.src` points at
-   `/assets/video/hero-clip.mp4`. See §10 below for its current state.
-   `VideoRef.poster` is nullable for this reason.
+1. **The hero clip.** ~~`HeroCopy.video.src` points at a missing file.~~
+   **Resolved before Phase 2.2**: a clip and a poster frame are both
+   committed and now live in the CMS as media records. §11's editorial
+   objections to the footage itself — the third-party watermark and the
+   audio track — still stand; what is shipping is a placeholder encode.
+   `VideoRef.poster` stays nullable, because the next clip will arrive
+   before its frame is chosen.
 2. **Season is stale.** The hero eyebrow and schedule intro say
    "sezon 2025/26", matching the schedule data. §11.1 flags this; the 2026/27
    grid must replace it before launch. The label was deliberately *not* changed
    without a new grid.
-3. **Kołobrzeg has no map.** `Location.map` is `null` there. The section
-   renders without a map rather than showing a placeholder.
+3. **Kołobrzeg has no map.** ~~`Location.map` is `null` there.~~ **Resolved
+   before Phase 2.2**: both locations carry a real embed. The null path is
+   still the behaviour — a location with no map renders without one rather
+   than showing a placeholder — and the CMS leaves the field empty to mean
+   exactly that.
 4. **No sponsor-logo strip on /programs.** §11.6 asks for one; no sponsor
    marks were supplied. Funding attribution is carried in body copy.
 5. **Office hours contradict the schedule** (§11.2) — unresolved, awaiting the
@@ -367,19 +404,23 @@ Both acceptance gates pass:
 
 - **axe**: 0 issues of any severity across 16 combinations (2 routes × 4
   breakpoints × 2 themes).
-- **Lighthouse** (median of 3):
+- **Lighthouse** (median of 3), measured after the Payload migration and
+  identical to a build of the commit before it:
 
   | route | performance | accessibility | best practices | SEO |
   |---|---|---|---|---|
-  | `/` | **99** | **100** | 96 | 100 |
-  | `/programs/` | **99** | **100** | 100 | 100 |
+  | `/` | **97** | **100** | **100** | 100 |
+  | `/programs/` | **94** | **100** | **100** | 100 |
 
-  CLS is 0 on both. The home page's best-practices 96 is entirely the hero
-  clip 404 (§11) — it clears the moment that asset exists.
-- Zero `*.module.scss` files. Zero hydration warnings. The only console error
-  anywhere is the hero clip 404.
+  CLS is 0 on both. The 99/96 and 99/100 recorded here earlier predate the
+  hero clip being committed: best practices rose to 100 once the 404 went
+  away, and performance fell because a 6 MB video and ~5 MB of posters are
+  now actually downloaded. What is left on both routes is payload size and
+  cache lifetime, neither of which the content layer can fix — see §11.
+- Zero `*.module.scss` files. Zero hydration warnings. Zero console errors —
+  the hero clip 404 is gone, the asset is committed.
 - No horizontal overflow at 360 / 768 / 1280 / 1920.
-- 32 interaction checks pass, including the seven covering the reduced-motion
+- 36 interaction checks pass, including the seven covering the reduced-motion
   fallback.
 - Build output is 7.3 MB. Anything `public/` holds is deployed, so assets no
   page references live in `assets-source/` instead.

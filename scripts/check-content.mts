@@ -36,9 +36,9 @@ eq("offer items", groups.reduce((n, g) => n + g.items.length, 0), 20);
 eq("offer CTAs", groups.filter((g) => g.scheduleFilter).length, 2);
 
 const entries = await getScheduleEntries();
-eq("schedule entries", entries.length, 25);
-eq("schedule Białogard", entries.filter((e) => e.location === "bialogard").length, 13);
-eq("schedule Kołobrzeg", entries.filter((e) => e.location === "kolobrzeg").length, 12);
+eq("schedule entries", entries.length, 30);
+eq("schedule Białogard", entries.filter((e) => e.location === "bialogard").length, 11);
+eq("schedule Kołobrzeg", entries.filter((e) => e.location === "kolobrzeg").length, 19);
 eq("schedule labels", (await getScheduleLabels()).length, 4);
 
 const blocks = await getPriceBlocks();
@@ -132,8 +132,8 @@ eq("faq links -> unknown sections", badFaqLinks.length, 0);
 
 const grid = await getScheduleGrid();
 eq("grid locations", grid.length, 2);
-eq("grid entries total", grid.reduce((n, g) => n + g.days.reduce((m, d) => m + d.entries.length, 0), 0), 25);
-eq("grid day columns", grid.map((g) => g.days.length).join("/"), "4/3");
+eq("grid entries total", grid.reduce((n, g) => n + g.days.reduce((m, d) => m + d.entries.length, 0), 0), 30);
+eq("grid day columns", grid.map((g) => g.days.length).join("/"), "4/4");
 const untagged = entries.filter((e) => e.labels.length === 0);
 eq("entries with no label", untagged.length, 0);
 
